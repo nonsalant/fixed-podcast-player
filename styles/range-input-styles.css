@@ -1,0 +1,95 @@
+/* ? todo: further customization from https://blog.logrocket.com/creating-custom-css-range-slider-javascript-upgrades/ */
+
+:host {
+    --range-color-base: #aabbaa;
+    --range-color-base:  hsl(var(--clr-hue) 100% 12.5% / 100%);
+    --range-color-base: hsl(var(--clr-hue) 30% 15% / .75);
+    --range-color-base: hsl(var(--clr-hue) 15% 15% / .75);
+    --range-color-accent: hsl(var(--clr-hue) 90% 95% / 100%);
+    --range-height: 1rem;
+    --range-thumb-size: calc(var(--range-height) + 6px);
+}
+
+input[type="range"] {
+    /* filter: invert(1) hue-rotate(180deg); */
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    /* min-width: 100px; */
+    /* width: 15rem; */
+    /* width: 100%; */
+    /* overflow: hidden; */
+
+    /* focus */
+    &:focus::-webkit-slider-thumb {   
+        border: 1px solid var(--range-color-base);
+        /* outline: 1px solid #dfdfdf80; */
+        /* outline-offset: 0.125rem; */
+    }
+    &:focus::-moz-range-thumb {
+        border: 1px solid var(--range-color-base);
+        /* outline: 1px solid #dfdfdf80; */
+        /* outline-offset: 0.125rem; */
+    }
+
+}
+
+input[type="range"]::-moz-range-track {
+    background-color: var(--range-color-base);
+    background-image: var(--grain-pattern);
+    border-radius: 0.5rem;
+    height: var(--range-height);
+    /* box-shadow: -407px 0 0 400px #f50; */
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background-color: var(--range-color-base);
+    background-image: var(--grain-pattern);
+    border-radius: 0.5rem;
+    height: var(--range-height);
+    /* box-shadow: -407px 0 0 400px #f50; */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    margin-top: -3px; /* Centers thumb on the track */
+    margin-top: calc( (var(--range-thumb-size) - var(--range-height)) / -2 );
+    border-radius: 1rem;
+    /*custom styles*/
+    background-color: var(--range-color-accent);
+    border-radius: 0.5rem;
+    height: var(--range-thumb-size);
+    width: var(--range-thumb-width, var( --range-thumb-size));
+}
+
+input[type="range"]::-moz-range-thumb {
+    border: none; /*Removes extra border that FF applies*/
+    border-radius: 1rem;
+    /*custom styles*/
+    background-color: var(--range-color-accent);
+    height: var(--range-thumb-size);
+    width: var(--range-thumb-width, var( --range-thumb-size));
+    /* aspect-ratio: 1/2; */
+}
+
+
+
+
+/***/
+
+
+
+input[type=range][data-size=small] {
+    --range-height: .25rem; 
+    --range-thumb-width: calc(var(--range-height) * 2);
+    min-width: unset;
+    /* cursor: default !important; */
+    &::-webkit-slider-runnable-track { margin-block: .5rem; }
+    &::-moz-range-track              { margin-block: .5rem; }
+    &:focus::-webkit-slider-thumb { border: none; }
+    &:focus::-moz-range-thumb     { border: none; }
+}
+input[type=range][data-size=small]::-webkit-slider-thumb  { background-image: var(--grain-pattern); box-shadow: inset 0px 1px #11111120, inset 0px 2px #ffffff80; border-radius: 3px; 	height: calc(1.5rem + 2px); margin-top: calc(-.5rem - 3px); }
+input[type=range][data-size=small]::-moz-range-thumb      { background-image: var(--grain-pattern); box-shadow: inset 0px 1px #11111120, inset 0px 2px #ffffff80; border-radius: 3px; 	height: calc(1.5rem + 2px); margin-top: calc(-.5rem - 3px); }

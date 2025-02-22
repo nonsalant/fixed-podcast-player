@@ -1,0 +1,131 @@
+/* 1. imperative logic */
+
+/* when playing, or when "Play" buttons are hovered -> show ::before */
+.pp-wrapper:where(
+	.audio-playing, 
+	:has(:where(.show-and-play, .play-pause):hover)
+) .podcast-player::before { 
+	opacity: 1; 
+}
+
+/* safari bug */
+/* .show-and-play:hover + .podcast-player::before { opacity: 1; } */
+/* .pp-wrapper.audio-playing .podcast-player::before { opacity: 1; } */
+.podcast-player:has(.play-pause:hover)::before { opacity: 1; }
+
+/* When trigger btn is hovered change .play-pause */
+.pp-wrapper:has(.show-and-play:hover) .play-pause {
+	background-color: hsl(var(--clr-hue) 30% 90% / 100%);
+	color: #000;
+	transform: scale(1.075);
+}
+
+/* When "Close" (icon) btn is hovered -> show ::after */
+.podcast-player:has(.icon-close:hover) {
+	&::after { opacity: 1; }
+	header { filter: grayscale(.5); }
+	.main { opacity: .85; }
+}
+
+/* When "Move" (icon) btn is hovered */
+.podcast-player:has(.icon-move:hover) {
+	box-shadow: 
+		var(--inset-shadow),
+		inset 0 0 4em 2em rgba(28, 23, 23, 0.3), 
+		var(--shadow-2);
+	transform: translatey(-3px);
+	transform: translatey(0);
+	@media (pointer: fine) { .icon-move { translate: 0 3px; } }
+}
+
+
+/* 2. possible states */
+
+.podcast-player {
+	/* border: solid 1px rgba(255, 255, 255, .25); */
+	/* background: #2c5b1a; */
+	background-image: var(--podcast-bg-medium);
+	
+	/** backdrop-filter: blur(1em); /**/
+	box-shadow: 
+		var(--inset-shadow),
+		inset 0 0 4em 2em rgba(28, 23, 23, 0.3),
+		var(--shadow-3);
+	margin: auto;
+	margin-bottom: 0;
+	border-radius: 1em 1em 0 0;
+	border-radius: var(--player-border-radius) var(--player-border-radius) 0 0;
+	/*  */
+	border-radius: var(--player-border-radius);
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	/*  */
+	transition: width .6s var(--back-out), 
+		margin .6s var(--back-out),
+		transform .6s var(--back-out), 
+		opacity .4s var(--back-out),
+		box-shadow .6s var(--back-out),
+		width .3s var(--back-out),
+		translate .6s var(--back-out),
+		padding .3s var(--back-out);
+	transform: translateY(100%);
+	opacity: 0;
+	/* padding-block: 0 0 env(safe-area-inset-bottom) env(safe-area-inset-bottom); */
+	/* https://x.com/alirdev/status/1831679191227756588 */
+}
+.podcast-player.show {
+	transform: translateY(3px);
+	opacity: 1;
+	/* border: solid 1px #ffffff60; */
+	border-bottom: none;
+}
+.podcast-player::before,
+.podcast-player::after {
+	opacity: 0;
+	content: "";
+	display: block;
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	transition: opacity .3s var(--back-out);
+}
+.podcast-player::before {
+	/* active state: When playing audio or Play btns are hovered */
+	box-shadow: 
+		var(--inset-shadow), 
+		inset 0 0 4em 2em rgba(28, 23, 23, 0.3);
+	background-image: var(--podcast-bg-active);
+	z-index: -2;
+}
+.podcast-player::after {
+	/* muted state: When Close btn is hovered */
+	box-shadow: 
+		var(--inset-shadow),
+		inset 0 0 4em 2em rgba(28, 23, 23, 0.075);
+	background-image: var(--podcast-bg-muted);
+	z-index: -1;
+}
+
+
+/* 3. responsivity */
+/* @media (width < 800px) { */
+@media (--lg-n-below) {
+	.podcast-player {
+		/* opacity: .1 !important; */
+		padding: .75rem 0 0rem 0;
+		padding: 0;
+		margin-bottom: 0;
+		border-radius: 3px;
+	}
+	.podcast-player.show {
+		width: 100%;
+		border: none;
+		border-radius: 0;
+	}
+	/* @media (pointer: fine) { */
+		.podcast-player:has(.icon-move:hover) {
+			transform: translatey(0);
+			padding-block: 0 .25rem;
+		}
+	/* } */
+}

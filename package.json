@@ -1,0 +1,23 @@
+{
+    "author": "Stefan Matei",
+    "type": "module",
+    "scripts": {
+        "postcss:watch": "node config/postcss-runner.js --watch",
+        "postcss:build": "node config/postcss-runner.js",
+        "esbuild:watch": "node config/esbuild.config.js --watch",
+        "esbuild:build": "node config/esbuild.config.js",
+        "dev": "npm-run-all --parallel postcss:watch esbuild:watch",
+        "build": "npm-run-all postcss:build esbuild:build"
+    },
+    "devDependencies": {
+        "chokidar": "^3.6.0",
+        "cssnano": "^7.0.6",
+        "esbuild": "^0.25.0",
+        "npm-run-all": "^4.1.5",
+        "postcss": "^8.5.1",
+        "postcss-custom-media": "^11.0.5",
+        "postcss-import": "^16.1.0",
+        "postcss-load-config": "^3.1.4",
+        "postcss-preset-env": "^10.1.3"
+    }
+}

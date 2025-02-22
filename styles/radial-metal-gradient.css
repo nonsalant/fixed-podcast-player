@@ -1,0 +1,50 @@
+/* https://codepen.io/frankcastro/details/gPPqVa */
+/* https://codepen.io/nonsalant/pen/NWQPPdj/941b1b92bc262d8ab08b3394232a04c5 */
+
+.metal,
+input[type="range"]:not([data-size=small])::-webkit-slider-thumb {
+  /* filter: sepia(.05) hue-rotate(70deg); */
+  /* filter: sepia(.25) hue-rotate(70deg); */
+  --metal-1: 
+    -webkit-radial-gradient(  50%   0%,  8% 50%, hsla(0,0%,100%,.5) 0%, hsla(0,0%,100%,0) 100%),
+    -webkit-radial-gradient(  50% 100%, 12% 50%, hsla(0,0%,100%,.6) 0%, hsla(0,0%,100%,0) 100%),
+    -webkit-radial-gradient(   0%  50%, 50%  7%, hsla(0,0%,100%,.5) 0%, hsla(0,0%,100%,0) 100%),
+    -webkit-radial-gradient( 100%  50%, 50%  5%, hsla(0,0%,100%,.5) 0%, hsla(0,0%,100%,0) 100%),
+    -webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0,0%,  0%,0) 0%, hsla(0,0%,  0%,0)   3%, hsla(0,0%,  0%,.1) 3.5%),
+    -webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0)   6%, hsla(0,0%,100%,.1) 7.5%),
+    -webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0) 1.2%, hsla(0,0%,100%,.2) 2.2%),
+    -webkit-radial-gradient( 50% 50%, 200% 50%, hsla(0,0%,90%,1) 5%, hsla(0,0%,85%,1) 30%, hsla(0,0%,60%,1) 100%);
+  --metal-2: 
+    -webkit-radial-gradient(  50%   0%, 10% 50%, hsla(0,0%,0%,.3) 0%, hsla(0,0%,0%,0) 100%),
+    -webkit-radial-gradient(  50% 100%, 10% 50%, hsla(0,0%,0%,.3) 0%, hsla(0,0%,0%,0) 100%),
+    -webkit-radial-gradient(   0%  50%, 50% 10%, hsla(0,0%,0%,.2) 0%, hsla(0,0%,0%,0) 100%),
+    -webkit-radial-gradient( 100%  50%, 50% 10%, hsla(0,0%,0%,.2) 0%, hsla(0,0%,0%,0) 100%);
+  --range-thumb-size: calc(var(--range-height) + .75rem);
+  /* width: 30px; */
+  /*   height: 30px; */
+  border-radius: 50%;
+  position: relative;
+  /*   color: hsla(0,0%,20%,1); */
+  /* background-color: hsl(0,0%,90%); */
+  box-shadow: 
+    /**/ inset 0px 1px #11111188, /* standard */
+    /**/ inset 0px 2px rgb(255 255 255 / .40), /* standard */
+    /**/ inset hsla(0, 0%, 22.5%,  .5)   0  0px 0px 1px, /* border */
+    /**/ inset hsla(0, 0%, 15%, .4  ) 0 -1px 5px 1px, /* soft SD */
+    /** hsla(0, 0%, 0%, .15) 0 0px 1px 1px, /* outer SD */
+    /**/ inset hsla(0, 0%,  0%, .175) 0  0px 0px 1px; /* bottom SD */
+  background-image: var(--metal-1);
+  &:before, &:after {
+    content: "";
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    /* fake conical gradients */
+    background-image: var(--metal-2);
+  }
+  &:before { transform: rotate( 45deg); }
+  &:after { transform: rotate(10deg); }
+}
