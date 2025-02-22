@@ -1,8 +1,10 @@
 # Fixed Podcast Player
 
+Web Component for an audio player and a <em>Play</em> button. The player is revealed when the button is scrolled into view.
+
 ## Preview
 - **[Preview on Netlify](https://fixed-podcast-player.netlify.app/)**
-- [View on CodePen](https://codepen.io/nonsalant/full/pvoyRmZ)
+- <a href="https://codepen.io/nonsalant/full/pvoyRmZ" target="_blank">View on CodePen</a>
 
 ## Build Commands
 
@@ -25,4 +27,4 @@ pnpm run build
 | `data-variation` | `''` | Player will not touch the edge on large screens if set to `floating`. |
 | `data-src` | `''` | The URL to the mp3 file. |
 | `data-thumb` | `''` | The URL to the thumbnail image. |
-| `svg-base` | `''` | The base URL to the SVG sprite sheet for the icons. |
+| `svg-base` | `''` | The base URL to the <a href="https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html" target="_blank">SVG sprite sheet</a> for the icons. |
