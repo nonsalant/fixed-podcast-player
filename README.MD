@@ -4,7 +4,7 @@ Web Component for an audio player and a <em>Play</em> button. The player is reve
 
 ## Preview
 - **[Preview on Netlify](https://fixed-podcast-player.netlify.app/)**
-- <a href="https://codepen.io/nonsalant/full/pvoyRmZ" target="_blank">View on CodePen</a>
+- [View on CodePen](https://codepen.io/nonsalant/pen/pvoyRmZ)
 
 ## Build Commands
 
