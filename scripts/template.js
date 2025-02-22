@@ -81,7 +81,7 @@ function renderMain(title, totalTime, svgBase) {
                 <div id="time-display-current" class="controls-surface flex">
                     <time>00:00</time>
                     <button type="button" title="Share with current timestamp" style="color: hsl(var(--clr-hue) var(--clr-sat) 12.5% / 100%); border-radius: 8px;" class="share-button | ghost icon-button">
-                        <div class="bg-icon" style="--bg: url(${svgBase}#share-icon);">
+                        <div class="bg-icon" style="background-image: url(${svgBase}#share-icon);">
                             <span class="visually-hidden">Share</span>
                         </div>
                     </button>
