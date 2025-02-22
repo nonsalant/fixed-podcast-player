@@ -1,5 +1,8 @@
 # Fixed Podcast Player
-[Preview the web component on CodePen](https://codepen.io/nonsalant/full/pvoyRmZ)
+
+## Preview
+- **[Preview on Netlify](https://fixed-podcast-player.netlify.app/)**
+- [View on CodePen](https://codepen.io/nonsalant/full/pvoyRmZ)
 
 ## Build Commands
 
