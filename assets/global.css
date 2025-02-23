@@ -1,4 +1,4 @@
-:root {
+:where(:root) {
     --pp-offset-top: 0px;
     --pp-offset-top-small: 0px;
 	--pp-content-width: 40rem;
