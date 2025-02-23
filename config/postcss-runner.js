@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 
 const input = path.resolve(__dirname, '../styles/index.postcss');
 const output = path.resolve(__dirname, '../assets/build/style.min.css');
+const outputDir = path.dirname(output);
 const configPath = path.resolve(__dirname, 'postcss.config.js');
 const packageJsonDir = path.resolve(__dirname, '..');
 
@@ -26,6 +27,9 @@ async function processCSS() {
         const config = await loadConfig();
         const result = await postcss(config.plugins).process(css, { from: input, to: output, map: config.map });
 
+        // Ensure the output directory exists
+        fs.mkdirSync(outputDir, { recursive: true });
+
         fs.writeFileSync(output, result.css);
         if (result.map) {
             fs.writeFileSync(`${output}.map`, result.map.toString());
@@ -38,6 +42,8 @@ async function processCSS() {
 }
 
 async function watchFiles() {
+    await processCSS(); // Process CSS initially before watching
+
     const config = await loadConfig();
     const watcher = chokidar.watch(input);
 
