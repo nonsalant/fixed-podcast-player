@@ -32,10 +32,10 @@ Include the **script** and the **global style sheet**:
 
 Add the `<podcast-player>` element to your HTML:
 ```html
-<podcast-player data-title="..." data-src="..." data-thumb="..." svg-base="./assets/icons.svg">
+<podcast-player data-title="…" data-src="…" data-thumb="…" svg-base="./assets/icons.svg">
     <template shadowrootmode="open">
         <!-- Scoped Style Sheet -->
-        <link rel="stylesheet" href="./assets/build/style.min.css" type="text/css">
+        <link rel="stylesheet" href="./assets/build/style.min.css">
     </template>
 </podcast-player>
 ```
