@@ -19,18 +19,18 @@ Build only command (no watch):
 pnpm run build
 ```
 
-## Attributes for the `<podcast-player>` Element
+## Attributes for the `<podcast-player>` element
 | Option | Default | Description |
 | --- | --- | --- |
-| `data-title` | `''` | The title of the episode. |
-| `data-position` | `bottom` | The position of the player. Can be `top` or `bottom`. |
-| `data-variation` | `''` | Player will not touch the edge on large screens if set to `floating`. |
-| `data-src` | `''` | The URL to the mp3 file. |
-| `data-thumb` | `''` | The URL to the thumbnail image. |
-| `svg-base` | `''` | The URL to the <a href="https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html" target="_blank">SVG sprite sheet</a> for the icons. |
+| `data-title` | `""` | The title of the episode |
+| `data-position` | `"bottom"` | The position of the player: `top` or `bottom` |
+| `data-variation` | `""` | Player will not touch the edge on large screens if set to `floating` |
+| `data-src` | `""` | The URL to the mp3 file |
+| `data-thumb` | `""` | The URL to the thumbnail image |
+| `svg-base` | `""` | The URL to the <a href="https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html" target="_blank">SVG sprite sheet</a> for the icons |
 
 ## Overridable CSS Variables
-Add these variables to your CSS to override the default values.
+Add these variables to your CSS to override the default values:
 ```css
 :root {
     --pp-offset-top: 0px;
