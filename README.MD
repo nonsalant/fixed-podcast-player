@@ -27,6 +27,7 @@ pnpm run build
 | `data-variation` | `""` | Player will not touch the edge on large screens if set to `floating` |
 | `data-src` | `""` | The URL to the mp3 file |
 | `data-thumb` | `""` | The URL to the thumbnail image |
+| `show-on` | `"scroll"` | The button event that triggers the player to show: `scroll`, `click`, `load`, or `hover` |
 | `svg-base` | `""` | The URL to the <a href="https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html" target="_blank">SVG sprite sheet</a> for the icons |
 
 ## Overridable CSS Variables

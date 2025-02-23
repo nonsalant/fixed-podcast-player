@@ -8,6 +8,7 @@ export default class PodcastPlayer extends HTMLElement {
     constructor() {
         super();
         // this.postId = this.getAttribute('data-post-id'),
+        this.showOn = this.getAttribute('show-on');
         this.initLocalStorage();
     }
     
@@ -20,49 +21,13 @@ export default class PodcastPlayer extends HTMLElement {
 
         this.addEventListeners();
         this.addShareFunctionality();
-        this.addIntersectionObserver();
-    }
-
-    addIntersectionObserver() {
-        const observerOptions = {
-            threshold: 1,
-            rootMargin: "100px 0px -100px 0px",
-        };
-        let flag = 0;
-        const observer = new IntersectionObserver((entry) => {
-            if (!entry.isIntersecting) {
-                if (flag) {
-                    this.podcastPlayer.classList.add('show');
-                    this.setAttribute('showing-player', '');
-                    this.podcastPlayer.removeAttribute('inert');
-                    observer.unobserve(this.showAndPlay);
-                } else { flag = 1; }
-            }
-        }, observerOptions);
-        observer.observe(this.showAndPlay);
-    }
-
-    addShareFunctionality() {
-        if (!navigator.share) { this.shareButton.style.display = 'none'; return; }
-        this.shareButton.addEventListener('click', event => {
-            const seconds = Math.floor(this.audio.currentTime);
-            const url = new URL(window.location.href);
-            if (seconds) url.searchParams.set('seconds', seconds);
-            // console.log(seconds, url);
-            const urlStr = url.toString();
-            const title = document.title + (seconds ? ` (${formatTime(seconds)})` : '');
-            navigator.share({ title: title, url: urlStr }).catch(() => null);
-            // console.log(location);
-        });
+        this.addShowOn();
     }
 
     // ? attributeChangedCallback(name, oldValue, newValue) {}
 
-    registerHandler(fn, el, ev='click') { this[fn.name]= fn.bind(this); el.addEventListener(ev,this[fn.name]); this.handlers.push([fn,el,ev]); }
-    unregisterHandler(fn, el, ev='click') { el.removeEventListener(ev, this[fn.name]); }
 
-
-    // handlers
+    // Handlers
 
     handleToggleMute() {
         this.audio.muted = !this.audio.muted;
@@ -77,7 +42,6 @@ export default class PodcastPlayer extends HTMLElement {
     }
 
     handleClose(event) {
-        // localStorage.removeItem('pp-current-track');
         if (this.audio.paused === false) this.handleShowAndPlay(event);
         this.podcastPlayer.classList.remove('show');
         this.removeAttribute('showing-player');
@@ -100,9 +64,7 @@ export default class PodcastPlayer extends HTMLElement {
     handleShowAndPlay(event) {
         // console.log('show and play');
         event.preventDefault();
-        this.podcastPlayer.classList.add('show');
-        this.podcastPlayer.removeAttribute('inert');
-        this.setAttribute('showing-player', '');
+        this.showPlayer();
         this.handleTogglePlayPause(event);
     }
 
@@ -152,7 +114,7 @@ export default class PodcastPlayer extends HTMLElement {
         const currentTime = this.audio.currentTime;
         this.scrubber.value = currentTime;
         this.timeDisplayCurrent.textContent = formatTime(currentTime);
-    }, 300); // don't run this more than once per this many milliseconds
+    }, 300); // don't run more than once per this many milliseconds
 
     handleScrub() {
         this.audio.currentTime = this.scrubber.value;
@@ -169,7 +131,61 @@ export default class PodcastPlayer extends HTMLElement {
     }
 
 
-    // helpers
+    // Helpers
+
+    registerHandler(fn, el, ev = 'click') {
+        this[fn.name] = fn.bind(this);
+        el.addEventListener(ev, this[fn.name]);
+        this.handlers.push([fn, el, ev]);
+    }
+
+    unregisterHandler(fn, el, ev = 'click') {
+        el.removeEventListener(ev, this[fn.name]);
+    }
+
+    addShowOn() {
+        if (this.showOn === 'scroll' || !this.showOn) this.addIntersectionObserver();
+        if (this.showOn === 'click') return;
+        if (this.showOn === 'load') this.showPlayer();
+        if (this.showOn === 'hover') this.showAndPlay.addEventListener('mouseenter', () => this.showPlayer() );
+    }
+
+    addIntersectionObserver() {
+        const observerOptions = {
+            threshold: 1,
+            rootMargin: "100px 0px -100px 0px",
+        };
+        let flag = 0;
+        const observer = new IntersectionObserver((entry) => {
+            if (!entry.isIntersecting) {
+                if (flag) {
+                    this.showPlayer();
+                    observer.unobserve(this.showAndPlay);
+                } else { flag = 1; }
+            }
+        }, observerOptions);
+        observer.observe(this.showAndPlay);
+    }
+
+    addShareFunctionality() {
+        if (!navigator.share) { this.shareButton.style.display = 'none'; return; }
+        this.shareButton.addEventListener('click', event => {
+            const seconds = Math.floor(this.audio.currentTime);
+            const url = new URL(window.location.href);
+            if (seconds) url.searchParams.set('seconds', seconds);
+            // console.log(seconds, url);
+            const urlStr = url.toString();
+            const title = document.title + (seconds ? ` (${formatTime(seconds)})` : '');
+            navigator.share({ title: title, url: urlStr }).catch(() => null);
+            // console.log(location);
+        });
+    }
+
+    showPlayer() {
+        this.podcastPlayer.classList.add('show');
+        this.setAttribute('showing-player', '');
+        this.podcastPlayer.removeAttribute('inert');
+    }
 
     addEventListeners() {
         const rh = this.registerHandler.bind(this);
@@ -229,9 +245,7 @@ export default class PodcastPlayer extends HTMLElement {
             this.audio.currentTime = seconds;
             url.searchParams.delete('seconds');
             window.history.pushState({}, '', url);
-            this.podcastPlayer.classList.add('show');
-            this.podcastPlayer.removeAttribute('inert');
-            this.setAttribute('showing-player', '');
+            this.showPlayer();
         }
     }
 
