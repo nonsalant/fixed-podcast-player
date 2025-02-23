@@ -22,6 +22,28 @@ Build only command (no watch):
 pnpm run build
 ```
 
+## Usage
+
+Include the **script** and the **global style sheet**:
+```html
+<link rel="stylesheet" href="./assets/global.css">
+<script src="./assets/build/script.min.js" type="module"></script>
+```
+
+Add the `<podcast-player>` element to your HTML:
+```html
+<podcast-player data-title="..." data-src="..." data-thumb="..." svg-base="./assets/icons.svg">
+    <template shadowrootmode="open">
+        <!-- Scoped Style Sheet -->
+        <link rel="stylesheet" href="./assets/build/style.min.css" type="text/css">
+    </template>
+</podcast-player>
+```
+
+Note the `<template>` element inside the `<podcast-player>` element. This is where you add the **scoped style sheet** for the player.
+
+Also note the `svg-base` attribute. This is the URL to the SVG sprite sheet for the icons.
+
 ## Attributes for the `<podcast-player>` element
 | Option | Default | Description |
 | --- | --- | --- |

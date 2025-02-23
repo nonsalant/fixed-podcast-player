@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 36%22><text y=%2232%22 font-size=%2232%22>🎧</text></svg>">
-    <title>Fixed Podcast Player</title>    
+    <title>Fixed Podcast Player</title>
+    <meta name="description" content="Web Component for an audio player and a Play button. The player is revealed when the button is scrolled into view.">
     <style>
         /* Demo Styles */
         :root { color-scheme: light dark; }
@@ -61,8 +62,8 @@
             svg-base="./assets/icons.svg"
         >
             <template shadowrootmode="open">
-                <!-- Scoped Stylesheet -->
-                <link rel="stylesheet" href="./assets/build/style.min.css" type="text/css">
+                <!-- Scoped Style Sheet -->
+                <link rel="stylesheet" href="./assets/build/style.min.css">
             </template>
         </podcast-player>
     
