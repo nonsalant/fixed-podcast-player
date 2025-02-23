@@ -33,15 +33,15 @@ Add the `<podcast-player>` element to your HTML:
 ```html
 <podcast-player data-title="…" data-src="…" data-thumb="…" svg-base="./assets/icons.svg">
     <template shadowrootmode="open">
-        <!-- Scoped Stylesheet -->
+        <!-- Podcast Player Scoped Stylesheet -->
         <link rel="stylesheet" href="./assets/build/style.min.css">
     </template>
 </podcast-player>
 ```
 
-Note the `<template shadowrootmode="open">` inside. This is where you add the **scoped stylesheet** for the player.
+👉 Note the `<template shadowrootmode="open">` inside. This is where you add the **scoped stylesheet** for the player.
 
-Also note the `svg-base` attribute. This is the URL to the **[SVG sprite sheet](https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html)** for the icons.
+👉 Also note the `svg-base` attribute. This is the URL to the **SVG sprite sheet** for the icons.
 
 ## Attributes for the `<podcast-player>` element
 | Option | Default | Description |
