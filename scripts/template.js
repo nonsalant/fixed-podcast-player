@@ -16,7 +16,7 @@ export default function podcastPlayerTemplate(props) {
             ${renderShowAndPlay(src, svgBase)}
         </div>
 
-        <audio preload="auto" src="${src}"></audio>
+        <audio preload="metadata" src="${src}"></audio>
         
         <div class="podcast-player" data-variation="${variation}" data-position="${position}" inert>
             ${renderHeader(thumb)}
