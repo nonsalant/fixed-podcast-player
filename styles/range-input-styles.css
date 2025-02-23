@@ -16,10 +16,7 @@ input[type="range"] {
     appearance: none;
     background: transparent;
     cursor: pointer;
-    /* min-width: 100px; */
-    /* width: 15rem; */
-    /* width: 100%; */
-    /* overflow: hidden; */
+    width: 100%;
 
     /* focus */
     &:focus::-webkit-slider-thumb {   

@@ -86,7 +86,10 @@ function renderMain(title, totalTime, svgBase) {
                         </div>
                     </button>
                 </div>
-                <input type="range" id="scrubber" min="0" max="0" value="0">
+                <label for="scrubber" class="flex">
+                    <span class="visually-hidden">Seek Bar</span>
+                    <input type="range" id="scrubber" min="0" max="0" value="0">
+                </label>
                 <div id="time-display-end" class="controls-surface mr-small"><time>${totalTime || ' --&thinsp;:&thinsp;-- '}</time></div>
             </section>
             <section>

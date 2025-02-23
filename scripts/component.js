@@ -62,7 +62,6 @@ export default class PodcastPlayer extends HTMLElement {
     }
 
     handleShowAndPlay(event) {
-        // console.log('show and play');
         event.preventDefault();
         this.showPlayer();
         this.handleTogglePlayPause(event);
@@ -78,7 +77,6 @@ export default class PodcastPlayer extends HTMLElement {
     }
 
     handleTogglePlayPause(event) {
-        // console.log('toggle play pause');
         event.preventDefault();
         const audio = this.audio;
         if (audio.paused) { // ▶︎
@@ -173,11 +171,9 @@ export default class PodcastPlayer extends HTMLElement {
             const seconds = Math.floor(this.audio.currentTime);
             const url = new URL(window.location.href);
             if (seconds) url.searchParams.set('seconds', seconds);
-            // console.log(seconds, url);
             const urlStr = url.toString();
             const title = document.title + (seconds ? ` (${formatTime(seconds)})` : '');
             navigator.share({ title: title, url: urlStr }).catch(() => null);
-            // console.log(location);
         });
     }
 
