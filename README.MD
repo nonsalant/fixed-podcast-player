@@ -1,17 +1,16 @@
 # Fixed Podcast Player
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/add63bda-b777-4889-95d9-68e936a82751/deploy-status)](https://app.netlify.com/sites/fixed-podcast-player/deploys)
+
 Web Component for an audio player and a <em>Play</em> button. The player is revealed when the button is scrolled into view.
 
 ## Preview
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/add63bda-b777-4889-95d9-68e936a82751/deploy-status)](https://app.netlify.com/sites/fixed-podcast-player/deploys)
-
 - **[Preview on Netlify](https://fixed-podcast-player.netlify.app/)**
 - [View on CodePen](https://codepen.io/nonsalant/pen/pvoyRmZ)
 
 ## Build Commands
 
-Install (if not done yet) and run dev (asset watch only, no server):
+Install (if not done yet) and run the dev command (asset watch only, no server):
 ```bash
 pnpm install
 pnpm run dev
@@ -40,9 +39,9 @@ Add the `<podcast-player>` element to your HTML:
 </podcast-player>
 ```
 
-Note the `<template>` element inside the `<podcast-player>` element. This is where you add the **scoped style sheet** for the player.
+Note the `<template shadowrootmode="open">` inside. This is where you add the **scoped style sheet** for the player.
 
-Also note the `svg-base` attribute. This is the URL to the SVG sprite sheet for the icons.
+Also note the `svg-base` attribute. This is the URL to the **[SVG sprite sheet](https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html)** for the icons.
 
 ## Attributes for the `<podcast-player>` element
 | Option | Default | Description |
@@ -52,8 +51,8 @@ Also note the `svg-base` attribute. This is the URL to the SVG sprite sheet for 
 | `data-variation` | `""` | Player will not touch the edge on large screens if set to `floating` |
 | `data-src` | `""` | The URL to the mp3 file |
 | `data-thumb` | `""` | The URL to the thumbnail image |
-| `show-on` | `"scroll"` | The button event that triggers the player to show: `scroll`, `click`, `load`, or `hover` |
-| `svg-base` | `""` | The URL to the <a href="https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html" target="_blank">SVG sprite sheet</a> for the icons |
+| `show-on` | `"scroll"` | The button event that triggers the player to show: `scroll` (when the button is scrolled into view for the first time), `click`, `load`, or `hover` |
+| `svg-base` | `""` | The URL to the [SVG sprite sheet](https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html) for the icons |
 
 ## Overridable CSS Variables
 Add these variables to your CSS to override the default values:
