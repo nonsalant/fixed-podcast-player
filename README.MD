@@ -3,6 +3,9 @@
 Web Component for an audio player and a <em>Play</em> button. The player is revealed when the button is scrolled into view.
 
 ## Preview
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/add63bda-b777-4889-95d9-68e936a82751/deploy-status)](https://app.netlify.com/sites/fixed-podcast-player/deploys)
+
 - **[Preview on Netlify](https://fixed-podcast-player.netlify.app/)**
 - [View on CodePen](https://codepen.io/nonsalant/pen/pvoyRmZ)
 
