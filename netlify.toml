@@ -1,0 +1,6 @@
+[build]
+  command = "pnpm run build"
+  publish = "." # Set the publish directory to the root folder
+
+[build.environment]
+  NPM_FLAGS = "--version" # This ensures that Netlify installs pnpm
