@@ -4,8 +4,8 @@
     --content-width: var(--pp-content-width, 52rem);
     --clr-hue: var(--pp-hue, 190deg);
     --clr-sat: var(--pp-sat, 65%);
-    --clr-lig: var(--pp-lig, 25%);
-    --clr-gradient-hue-difference: var(--pp-gradient-hue-difference, 33deg);
+    --clr-lig: var(--pp-lig, 35%);
+    --clr-gradient-hue-difference: var(--pp-gradient-hue-difference, 20deg);
 	--player-border-radius: var(--pp-radius, 1.125rem / 1rem);
 
     --podcast-bg-1: hsl(calc(var(--clr-hue) - var(--clr-gradient-hue-difference)) 100% calc(var(--clr-lig) + 5%));
