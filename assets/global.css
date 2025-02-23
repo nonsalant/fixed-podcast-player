@@ -1,4 +1,6 @@
 :root {
+    --pp-offset-top: 0px;
+    --pp-offset-top-small: 0px;
 	--pp-content-width: 40rem;
 	--pp-radius: 1.25rem / 1rem;
 	--pp-hue: 205deg;
@@ -10,7 +12,7 @@
 
 body {
 	--back-out: linear( 0 0%, 0.1935 4.37%, 0.3671 8.83%, 0.521 13.38%, 0.6557 18.04%, 0.7716 22.82%, 0.869 27.73%, 0.9488 32.81%, 1.0111 38.08%, 1.0512 42.81%, 1.0792 47.75%, 1.0953 52.97%, 1.1 58.55%, 1.0956 63.36%, 1.0838 68.73%, 1.0119 90.98%, 1.0029 95.69%, 1 100% );
-    
+
 	@media not (prefers-reduced-motion: reduce) { 
         transition: padding-block .6s var(--back-out);
     }

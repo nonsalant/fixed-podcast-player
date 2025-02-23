@@ -1,15 +1,9 @@
 /* 5. variations */
 
 /* 5.1 */
-
-/* @media (width <= 800px) { --pp-offset-top: 85px; --pp-offset-from-admin-bar: var(--wp-admin--admin-bar--height, 0px); } */
 .podcast-player[data-position=top] { 
-	--pp-offset-top: 0px;
 	margin: auto;
-	margin-top: 0;
-	/* margin-top: calc(var(--pp-offset-top, 0px) + var(--wp-admin--admin-bar--height, 0px)); */
-	margin-top: calc(var(--pp-offset-top, 0px) + var(--wp-admin--admin-bar--height, 0px));
-	/* margin-top: calc(var(--pp-offset-top) + var(--pp-offset-from-admin-bar, car(--wp-admin--admin-bar--height, 0px))); */
+	margin-top: calc(var(--player-offset-top) + var(--wp-admin--admin-bar--height, 0px));
 	transform: translateY(-100%);
 	border-radius: 0 0 1rem 1rem;
 	border-radius: 0 0 var(--player-border-radius) var(--player-border-radius);
@@ -39,12 +33,10 @@
 /* @media (width < 800px) { */
 @media (--lg-n-below) {
 	.podcast-player[data-position=top] {
-		/* --pp-offset-top: 50px; */
 		border-radius: 3px;
 	}
 	.podcast-player[data-position=top].show {
-		margin-top: 0;
-		margin-top: var(--pp-offset-top, 0px);
+		margin-top: calc(var(--player-offset-top-small) + var(--wp-admin--admin-bar--height, 0px));
 		border-radius: 3px;
 	}
 	/* @media (pointer: fine) { */
@@ -58,7 +50,6 @@
 
 /* 5.2 */
 /* podcast-player[data-variation=floating] { --player-border-radius: 2.25rem / 2rem; } */
-
 /* 5.2 responsivity */
 /* @media (width >= 800px) { */
 @media (--lg-n-above) {
@@ -69,7 +60,7 @@
 	}
 	.podcast-player[data-variation=floating][data-position=top] { 
 		margin-block: .75rem 0;
-		margin-top: calc(.75rem + var(--wp-admin--admin-bar--height, 0px));
+		margin-top: calc(.75rem + var(--player-offset-top) + var(--wp-admin--admin-bar--height, 0px));
 	}
 }
 
