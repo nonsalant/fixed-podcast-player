@@ -16,6 +16,9 @@
         }
     </style>
 
+    <!-- Podcast Player Scoped Stylesheet -->
+    <link media="scoped-podcast-player" rel="stylesheet" href="./assets/build/style.min.css">
+
     <!-- Podcast Player Global Styles & Script -->
     <link rel="stylesheet" href="./assets/global.css">
     <script src="./assets/build/script.min.js" type="module"></script>
@@ -38,6 +41,7 @@
         </ul>
         <p><b>Scroll down 👇</b></p>
     
+        <!-- --
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium explicabo voluptatem quos error itaque illum nihil, optio illo dicta maiores, deleniti nemo aperiam, doloribus nostrum quas reprehenderit exercitationem vitae esse.</p>
         <p>Atque voluptates optio eaque sed asperiores delectus corrupti voluptas architecto recusandae quis perspiciatis ratione dignissimos cum praesentium, placeat est ea pariatur. Odio aspernatur quas blanditiis quia repellendus voluptatem totam harum?</p>
         <p>Quas voluptatum beatae ullam nihil aspernatur debitis suscipit culpa sed molestias eius ipsum libero vitae incidunt consequatur architecto, fugit odio repudiandae rem? Libero, mollitia ipsam ducimus necessitatibus atque aliquam dicta.</p>
@@ -51,7 +55,8 @@
         <p>Dolorum repellat eligendi praesentium quisquam dignissimos provident aliquid quis? Tenetur cumque quam dicta, exercitationem itaque odio! Consequuntur eligendi voluptatum inventore maiores aliquam cupiditate reiciendis quaerat atque similique, dignissimos nobis voluptatem.</p>
         <p>Sint vitae ipsa optio dolor nulla recusandae accusamus illum! Dolor in asperiores facere blanditiis obcaecati ad, laborum libero veritatis cupiditate pariatur delectus ducimus consectetur deleniti nostrum temporibus voluptatum beatae minus.</p>
         <p>Nostrum repudiandae at, recusandae neque voluptate explicabo saepe laudantium voluptatem aliquam excepturi blanditiis veniam atque quod iusto dolore debitis voluptates suscipit mollitia minus quidem obcaecati architecto facere. Nisi, laborum ab.</p>
-    
+        <!-- -->
+
         <podcast-player 
             data-title="A closer look at ironweeds, or Vernonia, with Mt. Cuba’s Sam Hoadley"
             data-position="bottom"
@@ -60,12 +65,8 @@
             data-thumb="https://awaytogarden.com/wp-content/uploads/2025/02/Fritillary-on-Vernonia-0A6A7837-1920x1012-1-240x180.jpg"
             show-on="scroll"
             svg-base="./assets/icons.svg"
-        >
-            <template shadowrootmode="open">
-                <!-- Podcast Player Scoped Stylesheet -->
-                <link rel="stylesheet" href="./assets/build/style.min.css">
-            </template>
-        </podcast-player>
+            dont-slot
+        ></podcast-player>
     
         <p>Ea corrupti consectetur inventore quibusdam, quisquam odio dolore provident fuga quod odit voluptatibus itaque asperiores facere eos eveniet, facilis nisi quae cumque praesentium esse sunt, quia dolorum sint laborum. Id?</p>
         <p>Fuga libero minima minus necessitatibus, illo esse ad soluta distinctio officiis porro voluptatem consectetur recusandae deleniti eaque excepturi dicta quibusdam tempora cumque atque! Fugiat iusto officiis saepe nostrum soluta nesciunt.</p>

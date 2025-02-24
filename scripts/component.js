@@ -15,7 +15,11 @@ export default class PodcastPlayer extends HTMLElement {
     // Lifecycle methods
     
     connectedCallback() {
+        this.addShadowRoot();
+        this.scopeStyles();
+
         this.injectTemplate();
+
         this.initRefs();
         this.initUi();
 
@@ -24,7 +28,32 @@ export default class PodcastPlayer extends HTMLElement {
         this.addShowOn();
     }
 
-    // ? attributeChangedCallback(name, oldValue, newValue) {}
+    addShadowRoot() {
+        if (this.shadowRoot) return;
+
+        this.attachShadow({ mode: 'open' });
+
+        if (!this.hasAttribute('dont-slot')) {
+            // slot content (Light DOM)
+            const slot = document.createElement('slot');
+            this.shadowRoot.appendChild(slot);
+        } else {
+            Array.from(this.children).forEach(child => {
+                this.shadowRoot.appendChild(child.cloneNode(true));
+            });
+        }
+
+    }
+    scopeStyles() {
+        const elName = this.localName;
+        const selector = `[media=scoped-${elName}]`;
+        const stylesheets = document.querySelectorAll(selector);
+        stylesheets.forEach(stylesheet => {
+            const clone = stylesheet.cloneNode(true);
+            clone.setAttribute("media", "all");
+            this.shadowRoot.appendChild(clone);
+        });
+    }
 
 
     // Handlers
@@ -181,6 +210,7 @@ export default class PodcastPlayer extends HTMLElement {
         this.podcastPlayer.classList.add('show');
         this.setAttribute('showing-player', '');
         this.podcastPlayer.removeAttribute('inert');
+        this.podcastPlayer.hidden = false;
     }
 
     addEventListeners() {
