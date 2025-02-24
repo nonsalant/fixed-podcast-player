@@ -8,6 +8,7 @@ export default class PodcastPlayer extends HTMLElement {
     constructor() {
         super();
         this.showOn = this.getAttribute('show-on');
+        this.setSrcAttribute();
         this.setSvgBaseAttribute();
         this.initLocalStorage();
     }
@@ -17,6 +18,7 @@ export default class PodcastPlayer extends HTMLElement {
 
         this.injectTemplate();
         this.initRefs();
+        this.processLightDomIcons();
         this.initUi();
 
         this.addEventListeners();
@@ -80,11 +82,15 @@ export default class PodcastPlayer extends HTMLElement {
             this.beforePlay();
             audio.play();
             this.ppWrapper.classList.add('audio-playing');
+            document.querySelector('body').classList.add('audio-playing');
             this.ppWrapper.classList.remove('audio-paused');
+            document.querySelector('body').classList.remove('audio-paused');
         } else { // ❚❚
             audio.pause();
             this.ppWrapper.classList.add('audio-paused');
+            document.querySelector('body').classList.add('audio-paused');
             this.ppWrapper.classList.remove('audio-playing');
+            document.querySelector('body').classList.remove('audio-playing');
         }
     }
 
@@ -205,10 +211,10 @@ export default class PodcastPlayer extends HTMLElement {
 
     initRefs() {
         // Element references
+        this.showAndPlay = this.querySelector('.show-and-play'); // slotted from Light DOM
         const el = this.shadowRoot ?? this;
         this.ppWrapper = el.querySelector('.pp-wrapper');
         this.audio = el.querySelector('audio');
-        this.showAndPlay = el.querySelector('.show-and-play');
         this.podcastPlayer = el.querySelector('.podcast-player');
         this.playPauseButton = el.querySelector('.play-pause');
         this.scrubber = el.querySelector('#scrubber');
@@ -273,6 +279,12 @@ export default class PodcastPlayer extends HTMLElement {
         });
     }
 
+    setSrcAttribute() {
+        if (this.hasAttribute('data-src')) return;
+        const src = this.querySelector('a').getAttribute('href');
+        this.setAttribute('data-src', src);
+    }
+
     setSvgBaseAttribute() {
         if (this.hasAttribute('svg-base')) return;
         const selector = `link[media=scoped-${this.localName}][rel=icon]`;
@@ -281,13 +293,27 @@ export default class PodcastPlayer extends HTMLElement {
         this.setAttribute('svg-base', svgBase);
     }
 
+    processLightDomIcons() {
+        const icons = this.showAndPlay.querySelectorAll('i[data-icon]');
+        const svgBase = this.getAttribute('svg-base');
+        icons.forEach(icon => {
+            const iconName = icon.getAttribute('data-icon');
+            const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svgElement.setAttribute('aria-hidden', 'true');
+            const useElement = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+            useElement.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `${svgBase}#${iconName}`);
+            svgElement.appendChild(useElement);
+            icon.replaceWith(svgElement);
+        });
+    }
+
     scopeStyles() {
 		// Add Shadow DOM if not added yet
 		if (!this.shadowRoot) {
 			this.attachShadow({ mode: 'open' });		
 			// slot any existing content (Light DOM)
-			const slot = document.createElement('slot');
-			this.shadowRoot.appendChild(slot);
+			// const slot = document.createElement('slot');
+			// this.shadowRoot.appendChild(slot);
         }
 		// Add the scoped stylesheet(s)
 		const selector = `link[media=scoped-${this.localName}][rel=stylesheet]`;

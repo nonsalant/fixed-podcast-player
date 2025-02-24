@@ -23,3 +23,80 @@ body {
         padding-block: var(--body-offset-for-player) 0;
     }
 }
+
+.show-and-play {
+	/* all: initial; */
+	-webkit-appearance: none;
+	font-size: 1.2rem;
+	text-decoration: none;
+	/* font-weight: bold; */
+	cursor: pointer;
+	display: flex;
+	border-radius: .5rem;
+	color: #fff;
+	fill: #fff;
+	padding: .5rem 1rem;
+	width: 14rem;
+	/* margin-bottom: 1.5em; */
+	align-items: center;
+	justify-content: center;
+	/* background-color: #4d6f41; */
+	background-color: hsl(var(--clr-hue) var(--clr-sat) var(--clr-lig));
+	background-image: var(--grain-pattern);
+	transition: transform .2s ease-in-out, background .2s linear, opacity .2s ease-in-out;
+	transition: transform .2s var(--back-out), background .2s linear, opacity .4s var(--back-out);
+	/* transform-origin: left; */
+	width: fit-content;
+	font-family: sans-serif;
+	min-width: 10rem;
+	text-align: center;
+	box-shadow: inset 0px 1px #11111140, inset 0px 2px rgb(255 255 255 / .25);
+	& > * {
+		display: flex;
+		gap: .25rem;
+		align-items: center;
+		justify-content: space-between;
+	}
+	svg { 
+		width: 1.5rem; height: 1.5rem;
+		scale: 1.25;
+		transform-origin: right;
+		/* margin-inline-end: .75rem; */
+		/* outline: solid 1px red !important; */
+	}
+	@starting-style { opacity: 0; }
+}
+
+.show-and-play[class]:hover {
+	transform: scale(1.02);
+	background-color: #333333;
+	transition: transform .3s ease-in-out, background .3s ease-in-out;
+	transition: transform .3s var(--back-out), background .3s var(--back-out);
+}
+.show-and-play[class]:active {
+	transform: scale(1);
+	background-color: #000;
+}
+
+/* button UI imperative logic */
+.show-and-play > * {
+	display: none;
+	align-content: center;
+	& > * { display: grid; place-content: center; }
+}
+
+/* button UI imperative logic */
+.show-and-play > * {
+	display: none;
+	align-content: center;
+	& > * { display: grid; place-content: center; }
+}
+body:not(.audio-playing):not(.audio-paused) .show-and-play {
+	& > :nth-child(1) { display: flex; }
+}
+body.audio-playing .show-and-play {
+	& > :nth-child(2) { display: flex; }
+}
+body.audio-paused .show-and-play {
+	& > :nth-child(3) { display: flex; }
+}
