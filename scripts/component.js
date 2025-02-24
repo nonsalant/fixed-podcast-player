@@ -7,19 +7,15 @@ export default class PodcastPlayer extends HTMLElement {
 
     constructor() {
         super();
-        // this.postId = this.getAttribute('data-post-id'),
         this.showOn = this.getAttribute('show-on');
+        this.setSvgBaseAttribute();
         this.initLocalStorage();
     }
     
-    // Lifecycle methods
-    
     connectedCallback() {
-        this.addShadowRoot();
         this.scopeStyles();
 
         this.injectTemplate();
-
         this.initRefs();
         this.initUi();
 
@@ -27,34 +23,6 @@ export default class PodcastPlayer extends HTMLElement {
         this.addShareFunctionality();
         this.addShowOn();
     }
-
-    addShadowRoot() {
-        if (this.shadowRoot) return;
-
-        this.attachShadow({ mode: 'open' });
-
-        if (!this.hasAttribute('dont-slot')) {
-            // slot content (Light DOM)
-            const slot = document.createElement('slot');
-            this.shadowRoot.appendChild(slot);
-        } else {
-            Array.from(this.children).forEach(child => {
-                this.shadowRoot.appendChild(child.cloneNode(true));
-            });
-        }
-
-    }
-    scopeStyles() {
-        const elName = this.localName;
-        const selector = `[media=scoped-${elName}]`;
-        const stylesheets = document.querySelectorAll(selector);
-        stylesheets.forEach(stylesheet => {
-            const clone = stylesheet.cloneNode(true);
-            clone.setAttribute("media", "all");
-            this.shadowRoot.appendChild(clone);
-        });
-    }
-
 
     // Handlers
 
@@ -304,6 +272,33 @@ export default class PodcastPlayer extends HTMLElement {
             svgBase: this.getAttribute('svg-base'),
         });
     }
+
+    setSvgBaseAttribute() {
+        if (this.hasAttribute('svg-base')) return;
+        const selector = `link[media=scoped-${this.localName}][rel=icon]`;
+        const svgBase = document.querySelector(selector)?.getAttribute('href');
+        if(!svgBase) return;
+        this.setAttribute('svg-base', svgBase);
+    }
+
+    scopeStyles() {
+		// Add Shadow DOM if not added yet
+		if (!this.shadowRoot) {
+			this.attachShadow({ mode: 'open' });		
+			// slot any existing content (Light DOM)
+			const slot = document.createElement('slot');
+			this.shadowRoot.appendChild(slot);
+        }
+		// Add the scoped stylesheet(s)
+		const selector = `link[media=scoped-${this.localName}][rel=stylesheet]`;
+        const stylesheets = document.querySelectorAll(selector);
+        if (!stylesheets) return;
+		stylesheets.forEach(stylesheet => {
+			const clone = stylesheet.cloneNode(true);
+			clone.setAttribute("media", "all");
+            this.shadowRoot.appendChild(clone);
+        });
+	}
 
 }
 
