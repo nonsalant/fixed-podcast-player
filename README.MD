@@ -8,40 +8,29 @@ Web Component for an audio player and a <em>Play</em> button. The player is reve
 - **[Preview on Netlify](https://fixed-podcast-player.netlify.app/)**
 - [View on CodePen](https://codepen.io/nonsalant/pen/pvoyRmZ)
 
-## Build Commands
-
-Install (if not done yet) and run the dev command (asset watch only, no server):
-```bash
-pnpm install
-pnpm run dev
-```
-
-Build only command (no watch):
-```bash
-pnpm run build
-```
-
 ## Usage
 
-Include the **script** and the **global stylesheet**:
+Include the assets in the `<head>`:
 ```html
+<!-- Podcast Player Assets (Global CSS, Scoped CSS, SVG, JS) -->
 <link rel="stylesheet" href="./assets/global.css">
-<script src="./assets/build/script.min.js" type="module"></script>
+<link media="scoped-podcast-player" rel="stylesheet" href="./assets/build/style.min.css">
+<link media="scoped-podcast-player" rel="icon" href="./assets/icons.svg" type="image/svg+xml">
+<script type="module" src="./assets/build/script.min.js"></script>
 ```
 
 Add the `<podcast-player>` element to your HTML:
 ```html
-<podcast-player data-title="…" data-src="…" data-thumb="…" svg-base="./assets/icons.svg">
-    <template shadowrootmode="open">
-        <!-- Podcast Player Scoped Stylesheet -->
-        <link rel="stylesheet" href="./assets/build/style.min.css">
-    </template>
+<podcast-player data-title="…" data-thumb="…">
+    <a href="[…].mp3" class="show-and-play">
+        <div><i data-icon="play-circle-solid"></i><b>Play</b></div>
+        <div><i data-icon="pause-circle"></i><span>Pause</span></div>
+        <div><i data-icon="play-circle"></i><span>Resume</span></div>
+    </a>
 </podcast-player>
 ```
 
-👉 Note the `<template shadowrootmode="open">` inside. This is where you add the **scoped stylesheet** for the player.
-
-👉 Also note the `svg-base` attribute. This is the URL to the **SVG sprite sheet** for the icons.
+👉 Note `href` of the `.show-and-play` link: this is the audio's `src`.
 
 ## Attributes for the `<podcast-player>` element
 | Option | Default | Description |
@@ -80,3 +69,18 @@ Add these variables to your CSS to override the default values:
 | `--pp-lig` | `40%` | The lightness of the Play button's background color |
 | `--pp-gradient-hue-difference` | `15deg` | The difference in hue between the two colors of the player's background gradient |
 | `--body-offset-for-player` | `110px` | Extra padding for the body (at the top or at the bottom) to make space for the player |
+
+## Build Commands
+
+Install (if not done yet) and run the dev command (asset watch only, no server):
+```bash
+pnpm install
+pnpm run dev
+```
+
+Build only command (no watch):
+```bash
+pnpm run build
+```
+
+
