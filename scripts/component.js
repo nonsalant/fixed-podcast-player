@@ -287,7 +287,7 @@ export default class PodcastPlayer extends HTMLElement {
 
     initSvgBaseAttribute() {
         if (this.hasAttribute('svg-base')) return;
-        const selector = `link[media=scoped-${this.localName}][type=image/svg]`;
+        const selector = `link[media=scoped-${this.localName}][type="image/svg"]`;
         const svgBase = document.querySelector(selector)?.getAttribute('href');
         if(!svgBase) return;
         this.setAttribute('svg-base', svgBase);
