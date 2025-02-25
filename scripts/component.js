@@ -8,8 +8,8 @@ export default class PodcastPlayer extends HTMLElement {
     constructor() {
         super();
         this.showOn = this.getAttribute('show-on');
-        this.setSrcAttribute();
-        this.setSvgBaseAttribute();
+        this.initSrcAttribute();
+        this.initSvgBaseAttribute();
         this.initLocalStorage();
     }
     
@@ -279,15 +279,15 @@ export default class PodcastPlayer extends HTMLElement {
         });
     }
 
-    setSrcAttribute() {
+    initSrcAttribute() {
         if (this.hasAttribute('data-src')) return;
-        const src = this.querySelector('a').getAttribute('href');
+        const src = this.querySelector('.show-and-play').getAttribute('href');
         this.setAttribute('data-src', src);
     }
 
-    setSvgBaseAttribute() {
+    initSvgBaseAttribute() {
         if (this.hasAttribute('svg-base')) return;
-        const selector = `link[media=scoped-${this.localName}][rel=icon]`;
+        const selector = `link[media=scoped-${this.localName}][type=image/svg]`;
         const svgBase = document.querySelector(selector)?.getAttribute('href');
         if(!svgBase) return;
         this.setAttribute('svg-base', svgBase);

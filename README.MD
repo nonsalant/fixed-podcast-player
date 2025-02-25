@@ -14,10 +14,12 @@ Include the assets in the `<head>`:
 ```html
 <!-- Podcast Player Assets (Global CSS, Scoped CSS, SVG, JS) -->
 <link rel="stylesheet" href="./assets/global.css">
-<link media="scoped-podcast-player" rel="stylesheet" href="./assets/build/style.min.css">
-<link media="scoped-podcast-player" rel="icon" href="./assets/icons.svg" type="image/svg+xml">
+<link rel="stylesheet" media="scoped-podcast-player" href="./assets/build/style.min.css">
+<link rel="preload" media="scoped-podcast-player" href="./assets/icons.svg" type="image/svg+xml" as="image">
 <script type="module" src="./assets/build/script.min.js"></script>
 ```
+
+👉 Note: The `<link rel="preload">` above (3rd item) sets the URL for the [SVG sprite sheet](https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html) used for the icons.
 
 Add the `<podcast-player>` element to your HTML:
 ```html
@@ -30,7 +32,7 @@ Add the `<podcast-player>` element to your HTML:
 </podcast-player>
 ```
 
-👉 Note `href` of the `.show-and-play` link: this is the audio's `src`.
+👉 Note: the `href` of the `.show-and-play` link is the audio source (i.e. the mp3 URL).
 
 ## Attributes for the `<podcast-player>` element
 | Option | Default | Description |
@@ -38,10 +40,9 @@ Add the `<podcast-player>` element to your HTML:
 | `data-title` | `""` | The title of the episode |
 | `data-position` | `"bottom"` | The position of the player: `top` or `bottom` |
 | `data-variation` | `""` | Player will not touch the edge on large screens if set to `floating` |
-| `data-src` | `""` | The URL to the mp3 file |
 | `data-thumb` | `""` | The URL to the thumbnail image |
 | `show-on` | `"scroll"` | The button event that triggers the player to show: `scroll` (when the button is scrolled into view for the first time), `click`, `load`, or `hover` |
-| `svg-base` | `""` | The URL to the [SVG sprite sheet](https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html) for the icons |
+| `svg-base` | `""` | You can use this for the SVG sprite sheet URL instead of providing it as a `<link rel="preload">` resource (see **Usage** above). |
 
 ## Overridable CSS Variables
 Add these variables to your CSS to override the default values:
