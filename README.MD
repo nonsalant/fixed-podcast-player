@@ -25,9 +25,9 @@ Add the `<podcast-player>` element to your HTML:
 ```html
 <podcast-player data-title="…" data-thumb="…">
   <a href="[…].mp3" class="show-and-play">
-    <div><i data-icon="play-circle-solid"></i><b>Play</b></div>
-    <div><i data-icon="pause-circle"></i><span>Pause</span></div>
-    <div><i data-icon="play-circle"></i><span>Resume</span></div>
+    <div><i icon-name="play-circle-solid"></i><b>Play</b></div>
+    <div><i icon-name="pause-circle"></i><span>Pause</span></div>
+    <div><i icon-name="play-circle"></i><span>Resume</span></div>
   </a>
 </podcast-player>
 ```

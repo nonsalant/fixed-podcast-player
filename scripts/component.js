@@ -294,10 +294,10 @@ export default class PodcastPlayer extends HTMLElement {
     }
 
     processLightDomIcons() {
-        const icons = this.showAndPlay.querySelectorAll('i[data-icon]');
+        const icons = this.showAndPlay.querySelectorAll('i[icon-name]');
         const svgBase = this.getAttribute('svg-base');
         icons.forEach(icon => {
-            const iconName = icon.getAttribute('data-icon');
+            const iconName = icon.getAttribute('icon-name');
             const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svgElement.setAttribute('aria-hidden', 'true');
             const useElement = document.createElementNS('http://www.w3.org/2000/svg', 'use');
