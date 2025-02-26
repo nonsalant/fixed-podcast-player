@@ -10,7 +10,8 @@ Web Component for an audio player and a <em>Play</em> button. The player is reve
 
 ## Usage
 
-Include the assets in the `<head>`:
+### 1. Include the assets in the `<head>`
+
 ```html
 <!-- Podcast Player Assets (Global CSS, Scoped CSS, SVG, JS) -->
 <link rel="stylesheet" href="./assets/global.css">
@@ -21,7 +22,8 @@ Include the assets in the `<head>`:
 
 👉 Note: The `<link rel="preload">` above (3rd item) sets the URL for the [SVG sprite sheet](https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html) used for the icons.
 
-Add the `<podcast-player>` element to your HTML:
+### 2. Add the `<podcast-player>` element in the `<body>`
+
 ```html
 <podcast-player data-title="…" data-thumb="…">
   <a href="[…].mp3" class="show-and-play">
