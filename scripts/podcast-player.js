@@ -328,7 +328,7 @@ export default class PodcastPlayer extends HTMLElement {
     }
     
     injectStylesFromGlobal() {
-        const selector = "link.fpp[rel=stylesheet]";
+        const selector = "link.fpp[rel=stylesheet]:not([media=none])";
         const stylesheets = document.querySelectorAll(selector);
         if (!stylesheets) return;
         stylesheets.forEach(stylesheet => {
