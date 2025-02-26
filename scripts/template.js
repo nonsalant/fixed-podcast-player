@@ -13,12 +13,12 @@ export default function podcastPlayerTemplate(props) {
     return `
     <div class="pp-wrapper">
         <div>
-            ${renderShowAndPlay(src, svgBase)}
+            <slot></slot>
         </div>
 
         <audio preload="metadata" src="${src}"></audio>
         
-        <div class="podcast-player" data-variation="${variation}" data-position="${position}" inert>
+        <div class="podcast-player" data-variation="${variation}" data-position="${position}" inert hidden>
             ${renderHeader(thumb)}
             ${renderMain(title, totalTime, svgBase)}
             ${renderFooter(svgBase)}

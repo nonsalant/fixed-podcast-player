@@ -8,51 +8,40 @@ Web Component for an audio player and a <em>Play</em> button. The player is reve
 - **[Preview on Netlify](https://fixed-podcast-player.netlify.app/)**
 - [View on CodePen](https://codepen.io/nonsalant/pen/pvoyRmZ)
 
-## Build Commands
-
-Install (if not done yet) and run the dev command (asset watch only, no server):
-```bash
-pnpm install
-pnpm run dev
-```
-
-Build only command (no watch):
-```bash
-pnpm run build
-```
-
 ## Usage
 
-Include the **script** and the **global stylesheet**:
+Include the assets in the `<head>`:
 ```html
+<!-- Podcast Player Assets (Global CSS, Scoped CSS, SVG, JS) -->
 <link rel="stylesheet" href="./assets/global.css">
-<script src="./assets/build/script.min.js" type="module"></script>
+<link rel="stylesheet" media="scoped-podcast-player" href="./assets/build/style.min.css">
+<link rel="preload" media="scoped-podcast-player" href="./assets/icons.svg" type="image/svg+xml" as="image">
+<script type="module" src="./assets/build/script.min.js"></script>
 ```
+
+👉 Note: The `<link rel="preload">` above (3rd item) sets the URL for the [SVG sprite sheet](https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html) used for the icons.
 
 Add the `<podcast-player>` element to your HTML:
 ```html
-<podcast-player data-title="…" data-src="…" data-thumb="…" svg-base="./assets/icons.svg">
-    <template shadowrootmode="open">
-        <!-- Podcast Player Scoped Stylesheet -->
-        <link rel="stylesheet" href="./assets/build/style.min.css">
-    </template>
+<podcast-player data-title="…" data-thumb="…">
+  <a href="[…].mp3" class="show-and-play">
+    <div><i icon-name="play-circle-solid"></i><b>Play</b></div>
+    <div><i icon-name="pause-circle"></i><span>Pause</span></div>
+    <div><i icon-name="play-circle"></i><span>Resume</span></div>
+  </a>
 </podcast-player>
 ```
 
-👉 Note the `<template shadowrootmode="open">` inside. This is where you add the **scoped stylesheet** for the player.
-
-👉 Also note the `svg-base` attribute. This is the URL to the **SVG sprite sheet** for the icons.
+👉 Note: the `href` of the `.show-and-play` link is the audio source (i.e. the mp3 URL).
 
 ## Attributes for the `<podcast-player>` element
 | Option | Default | Description |
 | --- | --- | --- |
 | `data-title` | `""` | The title of the episode |
+| `data-thumb` | `""` | The URL to the thumbnail image |
 | `data-position` | `"bottom"` | The position of the player: `top` or `bottom` |
 | `data-variation` | `""` | Player will not touch the edge on large screens if set to `floating` |
-| `data-src` | `""` | The URL to the mp3 file |
-| `data-thumb` | `""` | The URL to the thumbnail image |
 | `show-on` | `"scroll"` | The button event that triggers the player to show: `scroll` (when the button is scrolled into view for the first time), `click`, `load`, or `hover` |
-| `svg-base` | `""` | The URL to the [SVG sprite sheet](https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html) for the icons |
 
 ## Overridable CSS Variables
 Add these variables to your CSS to override the default values:
@@ -80,3 +69,18 @@ Add these variables to your CSS to override the default values:
 | `--pp-lig` | `40%` | The lightness of the Play button's background color |
 | `--pp-gradient-hue-difference` | `15deg` | The difference in hue between the two colors of the player's background gradient |
 | `--body-offset-for-player` | `110px` | Extra padding for the body (at the top or at the bottom) to make space for the player |
+
+## Build Commands
+
+Install (if not done yet) and run the dev command (asset watch only, no server):
+```bash
+pnpm install
+pnpm run dev
+```
+
+Build only command (no watch):
+```bash
+pnpm run build
+```
+
+
