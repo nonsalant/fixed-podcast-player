@@ -2,8 +2,8 @@ import esbuild from 'esbuild';
 import { stripTemplateLiteralWhitespace } from './esbuild-plugins.js';
 
 const buildOptions = {
-    entryPoints: ['scripts/component.js'],
-    outfile: 'assets/build/script.min.js',
+    entryPoints: ['scripts/podcast-player.js'],
+    outfile: 'assets/build/podcast-player.min.js',
     plugins: [stripTemplateLiteralWhitespace()],
     bundle: true,
     minify: true,

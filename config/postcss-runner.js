@@ -7,8 +7,8 @@ import chokidar from 'chokidar';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const input = path.resolve(__dirname, '../styles/index.postcss');
-const output = path.resolve(__dirname, '../assets/build/style.min.css');
+const input = path.resolve(__dirname, '../styles/podcast-player.css');
+const output = path.resolve(__dirname, '../assets/build/podcast-player.min.css');
 const outputDir = path.dirname(output);
 const configPath = path.resolve(__dirname, 'postcss.config.js');
 const packageJsonDir = path.resolve(__dirname, '..');

@@ -6,21 +6,15 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 36%22><text y=%2232%22 font-size=%2232%22>🎧</text></svg>">
     <title>Fixed Podcast Player Demo</title>
     <meta name="description" content="Web Component for an audio player and a Play button. The player is revealed when the button is scrolled into view.">
-    <style>
-        /* Demo Styles */
-        :root { color-scheme: light dark; }
-        body { padding-inline: 1lh; }
-        main {
-            max-width: 55rem; margin-inline: auto; 
-            font-family: system-ui; text-wrap: pretty;
-        }
+    <!-- Demo Styles -->
+    <style> :root { color-scheme: light dark; } body { padding-inline: 1lh; }
+        main { max-width: 55rem; margin-inline: auto; font-family: system-ui; text-wrap: pretty; }
     </style>
 
-    <!-- Podcast Player Assets (Global CSS, Scoped CSS, SVG, JS) -->
-    <link rel="stylesheet" href="./assets/global.css">
-    <link rel="stylesheet" media="scoped-podcast-player" href="./assets/build/style.min.css">
-    <link rel="preload" media="scoped-podcast-player" href="./assets/icons.svg" type="image/svg+xml" as="image">
-    <script type="module" src="./assets/build/script.min.js"></script>
+    <!-- Podcast Player Assets (CSS, JS, SVG) -->
+    <link rel="stylesheet" class="fpp" href="./assets/build/podcast-player.min.css">
+    <script src="./assets/build/podcast-player.min.js" type="module"></script>
+    <link rel="icon-sprite-sheet" class="fpp" href="./assets/icons.svg">
 
 </head>
 <body>
@@ -59,10 +53,9 @@
         <podcast-player 
             data-title="A closer look at ironweeds, or Vernonia, with Mt. Cuba&#39;s Sam Hoadley"
             data-position="bottom"
-            data-variation=""
+            data-variation="floating"
             data-thumb="https://awaytogarden.com/wp-content/uploads/2025/02/Fritillary-on-Vernonia-0A6A7837-1920x1012-1-240x180.jpg"
-            show-on="scroll"
-        >
+            show-on="scroll">
             <a class="show-and-play" href="https://robinhoodradioondemand.com/podcast-player/40848/ironweeds-with-sam-hoadley-a-way-to-garden-with-margaret-roach-feb-17-2025.mp3">
                 <div><i icon-name="play-circle-solid"></i><b>Play</b></div>
                 <div><i icon-name="pause-circle"></i><span>Pause</span></div>

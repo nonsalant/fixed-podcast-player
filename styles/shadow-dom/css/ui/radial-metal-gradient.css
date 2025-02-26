@@ -1,8 +1,8 @@
 /* https://codepen.io/frankcastro/details/gPPqVa */
 /* https://codepen.io/nonsalant/pen/NWQPPdj/941b1b92bc262d8ab08b3394232a04c5 */
 
-.metal,
-input[type="range"]:not([data-size=small])::-webkit-slider-thumb {
+:where(:host) .metal,
+:where(:host) input[type="range"]:not([data-size=small])::-webkit-slider-thumb {
   /* filter: sepia(.05) hue-rotate(70deg); */
   /* filter: sepia(.25) hue-rotate(70deg); */
   --metal-1: 

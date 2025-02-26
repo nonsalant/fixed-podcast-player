@@ -12,21 +12,28 @@ Web Component for an audio player and a <em>Play</em> button. The player is reve
 
 ### 1. Include the assets in the `<head>`
 
-```html
-<!-- Podcast Player Assets (Global CSS, Scoped CSS, SVG, JS) -->
-<link rel="stylesheet" href="./assets/global.css">
-<link rel="stylesheet" media="scoped-podcast-player" href="./assets/build/style.min.css">
-<link rel="preload" media="scoped-podcast-player" href="./assets/icons.svg" type="image/svg+xml" as="image">
-<script type="module" src="./assets/build/script.min.js"></script>
-```
+Adjust the paths below as needed:
 
-👉 Note: The `<link rel="preload">` above (3rd item) sets the URL for the [SVG sprite sheet](https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html) used for the icons.
+```html
+<!-- Podcast Player Assets (CSS, JS, SVG) -->
+<link rel="stylesheet" class="fpp" href="./assets/build/podcast-player.min.css">
+<script src="./assets/build/podcast-player.min.js" type="module"></script>
+<link rel="icon-sprite-sheet" class="fpp" href="./assets/icons.svg">
+```
+<details>
+<summary><b>Icon Sprite Sheet</b> (3rd <code>&lt;link&gt;</code> item)</summary>
+<p>The <code>&lt;link rel="icon-sprite-sheet"&gt;</code> above sets the URL for the <a href="https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html">SVG sprite sheet</a> used for the icons.</p>
+<p>This can be omitted by setting the following attribute on the <code>&lt;podcast-player&gt;</code> element:
+<br><code>svg-base="./assets/icons.svg"</code></p>
+</details>
 
 ### 2. Add the `<podcast-player>` element in the `<body>`
 
+Note the data attributes, and the `href` of `.show-and-play` which is the audio source (i.e. the mp3 URL):
+
 ```html
-<podcast-player data-title="…" data-thumb="…">
-  <a href="[…].mp3" class="show-and-play">
+<podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
+  <a class="show-and-play" href="audio.mp3">
     <div><i icon-name="play-circle-solid"></i><b>Play</b></div>
     <div><i icon-name="pause-circle"></i><span>Pause</span></div>
     <div><i icon-name="play-circle"></i><span>Resume</span></div>
@@ -34,10 +41,9 @@ Web Component for an audio player and a <em>Play</em> button. The player is reve
 </podcast-player>
 ```
 
-👉 Note: the `href` of the `.show-and-play` link is the audio source (i.e. the mp3 URL).
 
 ## Attributes for the `<podcast-player>` element
-| Option | Default | Description |
+| Attribute | Default | Description |
 | --- | --- | --- |
 | `data-title` | `""` | The title of the episode |
 | `data-thumb` | `""` | The URL to the thumbnail image |
@@ -46,18 +52,16 @@ Web Component for an audio player and a <em>Play</em> button. The player is reve
 | `show-on` | `"scroll"` | The button event that triggers the player to show: `scroll` (when the button is scrolled into view for the first time), `click`, `load`, or `hover` |
 
 ## Overridable CSS Variables
-Add these variables to your CSS to override the default values:
+
+You can add variables to your CSS to override the default values. 
+
+For example, you can easily change the color of the Play button and the intensity of  the player's gradient background:
 ```css
 :root {
-  --pp-offset-top: 0px;
-  --pp-offset-top-small: 0px;
-  --pp-content-width: 40rem;
-  --pp-radius: 1.25rem / 1rem;
   --pp-hue: 205deg;
   --pp-sat: 35%;
   --pp-lig: 40%;
   --pp-gradient-hue-difference: 15deg;
-  --body-offset-for-player: 110px;
 }
 ```
 | Variable | Default | Description |

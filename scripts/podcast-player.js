@@ -2,7 +2,7 @@ import { showScrubberThumb, hideScrubberThumb } from "./helpers/fade-scrubber-th
 import { isIOS, formatTime, initLocalStorageItem, throttle } from './helpers/utils.js';
 import podcastPlayerTemplate from './template.js';
 
-// web component
+// Custom Element
 export default class PodcastPlayer extends HTMLElement {
 
     constructor() {
@@ -15,6 +15,7 @@ export default class PodcastPlayer extends HTMLElement {
     
     connectedCallback() {
         this.scopeStyles();
+        this.injectStylesFromGlobal();
 
         this.injectTemplate();
         this.initRefs();
@@ -287,7 +288,7 @@ export default class PodcastPlayer extends HTMLElement {
 
     initSvgBaseAttribute() {
         if (this.hasAttribute('svg-base')) return;
-        const selector = `link[media=scoped-${this.localName}][type="image/svg+xml"]`;
+        const selector = `link.fpp[rel=icon-sprite-sheet]`;
         const svgBase = document.querySelector(selector)?.getAttribute('href');
         if(!svgBase) return;
         this.setAttribute('svg-base', svgBase);
@@ -316,7 +317,7 @@ export default class PodcastPlayer extends HTMLElement {
 			// this.shadowRoot.appendChild(slot);
         }
 		// Add the scoped stylesheet(s)
-		const selector = `link[media=scoped-${this.localName}][rel=stylesheet]`;
+		const selector = "link.fpp[media=none][rel=stylesheet]";
         const stylesheets = document.querySelectorAll(selector);
         if (!stylesheets) return;
 		stylesheets.forEach(stylesheet => {
@@ -324,7 +325,17 @@ export default class PodcastPlayer extends HTMLElement {
 			clone.setAttribute("media", "all");
             this.shadowRoot.appendChild(clone);
         });
-	}
+    }
+    
+    injectStylesFromGlobal() {
+        const selector = "link.fpp[rel=stylesheet]";
+        const stylesheets = document.querySelectorAll(selector);
+        if (!stylesheets) return;
+        stylesheets.forEach(stylesheet => {
+			const clone = stylesheet.cloneNode(true);
+            this.shadowRoot.appendChild(clone);
+        });
+    }
 
 }
 
