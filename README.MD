@@ -49,15 +49,15 @@ Web Component for an audio player and a <em>Play</em> button. The player is reve
 Add these variables to your CSS to override the default values:
 ```css
 :root {
-    --pp-offset-top: 0px;
-    --pp-offset-top-small: 0px;
-    --pp-content-width: 40rem;
-    --pp-radius: 1.25rem / 1rem;
-    --pp-hue: 205deg;
-    --pp-sat: 35%;
-    --pp-lig: 40%;
-    --pp-gradient-hue-difference: 15deg;
-    --body-offset-for-player: 110px;
+  --pp-offset-top: 0px;
+  --pp-offset-top-small: 0px;
+  --pp-content-width: 40rem;
+  --pp-radius: 1.25rem / 1rem;
+  --pp-hue: 205deg;
+  --pp-sat: 35%;
+  --pp-lig: 40%;
+  --pp-gradient-hue-difference: 15deg;
+  --body-offset-for-player: 110px;
 }
 ```
 | Variable | Default | Description |
