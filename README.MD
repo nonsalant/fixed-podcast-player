@@ -24,11 +24,11 @@ Include the assets in the `<head>`:
 Add the `<podcast-player>` element to your HTML:
 ```html
 <podcast-player data-title="…" data-thumb="…">
-    <a href="[…].mp3" class="show-and-play">
-        <div><i data-icon="play-circle-solid"></i><b>Play</b></div>
-        <div><i data-icon="pause-circle"></i><span>Pause</span></div>
-        <div><i data-icon="play-circle"></i><span>Resume</span></div>
-    </a>
+  <a href="[…].mp3" class="show-and-play">
+    <div><i data-icon="play-circle-solid"></i><b>Play</b></div>
+    <div><i data-icon="pause-circle"></i><span>Pause</span></div>
+    <div><i data-icon="play-circle"></i><span>Resume</span></div>
+  </a>
 </podcast-player>
 ```
 
@@ -38,11 +38,10 @@ Add the `<podcast-player>` element to your HTML:
 | Option | Default | Description |
 | --- | --- | --- |
 | `data-title` | `""` | The title of the episode |
+| `data-thumb` | `""` | The URL to the thumbnail image |
 | `data-position` | `"bottom"` | The position of the player: `top` or `bottom` |
 | `data-variation` | `""` | Player will not touch the edge on large screens if set to `floating` |
-| `data-thumb` | `""` | The URL to the thumbnail image |
 | `show-on` | `"scroll"` | The button event that triggers the player to show: `scroll` (when the button is scrolled into view for the first time), `click`, `load`, or `hover` |
-| `svg-base` | `""` | You can use this for the SVG sprite sheet URL instead of providing it as a `<link rel="preload">` resource (see **Usage** above). |
 
 ## Overridable CSS Variables
 Add these variables to your CSS to override the default values:
