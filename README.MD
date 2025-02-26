@@ -10,7 +10,7 @@ Web Component for a sticky audio player and its *Play* button.
 
 ## Usage
 
-### 1. Include the assets in the `<head>`
+### 1. Include the assets
 
 Adjust the paths below as needed:
 
@@ -27,7 +27,7 @@ Adjust the paths below as needed:
 <br><code>svg-base="./assets/icons.svg"</code></p>
 </details>
 
-### 2. Add the `<podcast-player>` element in the `<body>`
+### 2. Add the `<podcast-player>` element
 
 Note the data `data-title`, and `data-thumb` attributes; as well as the `href` of `.show-and-play` which is the audio source (i.e. the mp3 URL):
 
