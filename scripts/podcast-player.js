@@ -295,16 +295,24 @@ export default class PodcastPlayer extends HTMLElement {
     }
 
     processLightDomIcons() {
-        const icons = this.showAndPlay.querySelectorAll('i[icon-name]');
+        const icons = this.showAndPlay.querySelectorAll('[icon-name]');
         const svgBase = this.getAttribute('svg-base');
-        icons.forEach(icon => {
+        icons.forEach(icon => {    
+            // Wrap existing content in a span
+            const spanElement = document.createElement('span');
+            while (icon.firstChild) {
+                spanElement.appendChild(icon.firstChild);
+            }
+            icon.appendChild(spanElement);
+    
+            // Add SVG element
             const iconName = icon.getAttribute('icon-name');
             const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            svgElement.setAttribute('aria-hidden', 'true');
             const useElement = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-            useElement.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `${svgBase}#${iconName}`);
+            useElement.setAttribute('href', `${svgBase}#${iconName}`);
             svgElement.appendChild(useElement);
-            icon.replaceWith(svgElement);
+            svgElement.setAttribute('aria-hidden', 'true');
+            icon.insertBefore(svgElement, icon.firstChild);
         });
     }
 

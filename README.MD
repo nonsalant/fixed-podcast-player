@@ -29,14 +29,14 @@ Adjust the paths below as needed:
 
 ### 2. Add the `<podcast-player>` element in the `<body>`
 
-Note the data `data-title`, and `data-thumb` attributes; and the `href` of `.show-and-play` which is the audio source (i.e. the mp3 URL):
+Note the data `data-title`, and `data-thumb` attributes; as well as the `href` of `.show-and-play` which is the audio source (i.e. the mp3 URL):
 
 ```html
 <podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
   <a class="show-and-play" href="audio.mp3">
-    <div><i icon-name="play-circle-solid"></i><b>Play</b></div>
-    <div><i icon-name="pause-circle"></i><span>Pause</span></div>
-    <div><i icon-name="play-circle"></i><span>Resume</span></div>
+    <div icon-name="play-circle-solid">Play</div>
+    <div icon-name="pause-circle">Pause</div>
+    <div icon-name="play-circle">Resume</div>
   </a>
 </podcast-player>
 ```
