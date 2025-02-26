@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/add63bda-b777-4889-95d9-68e936a82751/deploy-status)](https://app.netlify.com/sites/fixed-podcast-player/deploys)
 
-Web Component for an audio player and a <em>Play</em> button. The player is revealed when the button is scrolled into view.
+Web Component for a sticky audio player and its *Play* button.
 
 ## Preview
 - **[Preview on Netlify](https://fixed-podcast-player.netlify.app/)**
@@ -21,15 +21,15 @@ Adjust the paths below as needed:
 <link rel="icon-sprite-sheet" class="fpp" href="./assets/icons.svg">
 ```
 <details>
-<summary><b>Icon Sprite Sheet</b> (3rd <code>&lt;link&gt;</code> item)</summary>
+<summary><b>Icon Sprite Sheet</b> (3rd asset above)</summary>
 <p>The <code>&lt;link rel="icon-sprite-sheet"&gt;</code> above sets the URL for the <a href="https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html">SVG sprite sheet</a> used for the icons.</p>
-<p>This can be omitted by setting the following attribute on the <code>&lt;podcast-player&gt;</code> element:
+<p>This can be omitted from here if setting the following attribute on the <code>&lt;podcast-player&gt;</code> element:
 <br><code>svg-base="./assets/icons.svg"</code></p>
 </details>
 
 ### 2. Add the `<podcast-player>` element in the `<body>`
 
-Note the data attributes, and the `href` of `.show-and-play` which is the audio source (i.e. the mp3 URL):
+Note the data `data-title`, and `data-thumb` attributes; and the `href` of `.show-and-play` which is the audio source (i.e. the mp3 URL):
 
 ```html
 <podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
