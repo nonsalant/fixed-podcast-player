@@ -12,7 +12,7 @@ Web Component for a sticky audio player and its *Play* button.
 
 ### 1. Include the assets
 
-Adjust the paths below as needed:
+Adjust the paths below as needed—the ones below are the ones used by the demo in the `index.html` file:
 
 ```html
 <!-- Podcast Player Assets (CSS, JS, SVG) -->
@@ -21,7 +21,7 @@ Adjust the paths below as needed:
 <link rel="icon-sprite-sheet" class="fpp" href="./assets/icons.svg">
 ```
 <details>
-<summary><b>Icon Sprite Sheet</b> (3rd asset above)</summary>
+<summary><b>Icon sprite sheet?</b> (the 3rd asset above)</summary>
 <p>The <code>&lt;link rel="icon-sprite-sheet"&gt;</code> above sets the URL for the <a href="https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html">SVG sprite sheet</a> used for the icons.</p>
 <p>This can be omitted from here if setting the following attribute on the <code>&lt;podcast-player&gt;</code> element:
 <br><code>svg-base="./assets/icons.svg"</code></p>
@@ -82,6 +82,7 @@ Note the `data-src` attribute that is now used for the audio source.
 | `data-variation` | `""` | Player will not touch the edge on large screens if set to `floating` |
 | `show-on` | `"scroll"` | The button event that triggers the player to show: `scroll` (when the button is scrolled into view for the first time), `click`, `load`, or `hover` |
 | `data-src` | `undefined` | Set this value to the audio URL if not using a link with a `href` (e.g: if using a `button` element) |
+| `svg-base` | `undefined` | Setting this to the URL of the SVG sprite sheet allows you to omit `<link rel="icon-sprite-sheet">` from the assets (see *1. Include the assets* above). |
 
 ## Overridable CSS Variables
 
