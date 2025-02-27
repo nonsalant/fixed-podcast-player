@@ -23,6 +23,6 @@
     inset 0px -1px #11111120, /* */
     inset 1px 0px #11111120, /* */
     inset -1px 0px #11111120, /* */
-    hsla(0, 0%, 25%, .25) 0  0px 0px 1px
+    0  0px 0px 1px hsla(0, 0%, 25%, .25)
   ;
 }
