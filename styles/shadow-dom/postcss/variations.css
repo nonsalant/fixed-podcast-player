@@ -20,15 +20,17 @@
 			.icon-move svg { transform: scaley(-1); }
 		}
 	}
-	/* @media (pointer: fine) { */
-		.podcast-player[data-position=top].show { 
-			transform: translateY(0px);
-		}
+	.podcast-player[data-position=top].show { 
+		transform: translateY(0px);
+	}
+	@media (pointer: fine) {
 		.podcast-player[data-position=top]:has(.icon-move:hover) {
-			transform: translatey(3px);
-			@media (pointer: fine) { .icon-move { translate: 0 -3px; } }
+			transform: translatey(6px);
+			/* @media (pointer: fine) {  */
+				.icon-move { translate: 0 -3px; } 
+			/* } */
 		}
-	/* } */
+	}
 
 	/* 5.1 responsivity */
 	/* @media (width < 800px) { */
@@ -36,16 +38,20 @@
 		.podcast-player[data-position=top].show {
 			margin-top: calc(var(--player-offset-top-small) + var(--wp-admin--admin-bar--height, 0px));
 		}
-		@media (pointer: fine) {
+		/* @media (pointer: fine) {
 			.podcast-player[data-position=top].show:has(.icon-move:hover) {
 				transform: translatey(3px);
 			}
-		}
+		} */
 	}
 
 
 	/* 5.2 */
-	/* podcast-player[data-variation=floating] { --player-border-radius: 2.25rem / 2rem; } */
+	/* [data-variation=floating][data-position=top].show:has(.icon-move:hover) {
+		@media (pointer: fine) {
+			transform: translatey(6px);
+		}
+	} */
 	/* 5.2 responsivity */
 	/* @media (width >= 800px) { */
 	@media (--lg-n-above) {
