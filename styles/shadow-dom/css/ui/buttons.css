@@ -16,8 +16,7 @@
 		justify-content: center;
 		border-radius: 50%;
 		border-radius: 12px;
-		background: hsl(156deg 18% 79% / 90%);
-		background: hsl(var(--clr-hue) 40% 77% / 96%);
+		background-color: hsl(var(--clr-hue) 40% 77% / 96%);
 		background-image: var(--grain-pattern);
 		box-shadow: inset 0px 1px #11111140, inset 0px 2px rgb(255 255 255 / .60);
 		transition: all .2s ease-in-out;
@@ -25,8 +24,11 @@
 		transform-origin: center;
 		place-content: center;
 		svg { height: 1rem; }
+		&:where(footer .podcast-icon) {
+			background-color: hsl(var(--clr-hue) 40% 77% / 85%);
+		}
 		&:hover {
-			background-color: hsl(var(--clr-hue) 30% 90% / 100%);
+			background-color: hsl(var(--clr-hue) 30% 90% / 85%);
 			color: #000;
 			transform: scale(1.075);
 		}

@@ -94,7 +94,7 @@
 			display: none; align-content: center;
 			& > * { display: grid; place-content: center; }
 		}
-		&:is(body:not(.audio-playing):not(.audio-paused) .show-and-play) > :nth-child(1) { display: flex; letter-spacing: .125rem; }
+		&:is(body:not(.audio-playing):not(.audio-paused) .show-and-play) > :nth-child(1) { display: flex; }
 		&:is(body.audio-playing .show-and-play) > :nth-child(2) { display: flex; }
 		&:is(body.audio-paused .show-and-play) > :nth-child(3) { display: flex; }
 	}

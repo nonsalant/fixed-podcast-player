@@ -1,7 +1,4 @@
 :host {
-    --range-color-base: #aabbaa;
-    --range-color-base:  hsl(var(--clr-hue) 100% 12.5% / 100%);
-    --range-color-base: hsl(var(--clr-hue) 30% 15% / .75);
     --range-color-base: hsl(var(--clr-hue) 15% 15% / .75);
     --range-color-accent: hsl(var(--clr-hue) 90% 95% / 100%);
     --range-height: 1rem;
@@ -19,16 +16,8 @@
     width: 100%;
 
     /* focus */
-    &:focus::-webkit-slider-thumb {   
-        border: 1px solid var(--range-color-base);
-        /* outline: 1px solid #dfdfdf80; */
-        /* outline-offset: 0.125rem; */
-    }
-    &:focus::-moz-range-thumb {
-        border: 1px solid var(--range-color-base);
-        /* outline: 1px solid #dfdfdf80; */
-        /* outline-offset: 0.125rem; */
-    }
+    &:focus::-webkit-slider-thumb { outline: 2px solid #22222250; }
+    &:focus::-moz-range-thumb { outline: 2px solid #22222250; }
 
 }
 
@@ -37,7 +26,6 @@
     background-image: var(--grain-pattern);
     border-radius: 0.5rem;
     height: var(--range-height);
-    /* box-shadow: -407px 0 0 400px #f50; */
 }
 
 :where(:host) input[type="range"]::-webkit-slider-runnable-track {
