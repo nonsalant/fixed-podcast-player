@@ -132,6 +132,15 @@ export default class PodcastPlayer extends HTMLElement {
         localStorage.setItem('pp-volume', this.volumeControl.value);
     }
 
+    handleMouseEnterShowAndPlay() { this.podcastPlayer.classList.add('related-hover'); }
+    handleMouseLeaveShowAndPlay() { this.podcastPlayer.classList.remove('related-hover'); }
+
+    handleMouseEnterPlayPause() { this.showAndPlay.classList.add('related-hover'); }
+    handleMouseLeavePlayPause() { this.showAndPlay.classList.remove('related-hover'); }
+
+    handleMouseEnterClose() { this.showAndPlay.classList.add('related-hover'); }
+    handleMouseLeaveClose() { this.showAndPlay.classList.remove('related-hover'); }
+
 
     // Helpers
 
@@ -194,6 +203,13 @@ export default class PodcastPlayer extends HTMLElement {
         // add handle- functions as methods of this class
         rh(this.handleShowAndPlay, this.showAndPlay);
         rh(this.handleTogglePlayPause, this.playPauseButton);
+
+        rh(this.handleMouseEnterShowAndPlay, this.showAndPlay, 'mouseenter');
+        rh(this.handleMouseLeaveShowAndPlay, this.showAndPlay, 'mouseleave');
+        rh(this.handleMouseEnterPlayPause, this.playPauseButton, 'mouseenter');
+        rh(this.handleMouseLeavePlayPause, this.playPauseButton, 'mouseleave');
+        rh(this.handleMouseEnterClose, this.closeButton, 'mouseenter');
+        rh(this.handleMouseLeaveClose, this.closeButton, 'mouseleave');
 
         // display the duration if the metadata of the audio is available. If it is not available, we add the event listener
         // see: https://css-tricks.com/lets-create-a-custom-audio-player/#aa-display-the-audio-duration
@@ -300,9 +316,7 @@ export default class PodcastPlayer extends HTMLElement {
         icons.forEach(icon => {    
             // Wrap existing content in a span
             const spanElement = document.createElement('span');
-            while (icon.firstChild) {
-                spanElement.appendChild(icon.firstChild);
-            }
+            while (icon.firstChild) spanElement.appendChild(icon.firstChild);
             icon.appendChild(spanElement);
     
             // Add SVG element

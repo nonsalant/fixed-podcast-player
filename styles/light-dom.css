@@ -71,7 +71,8 @@
 
 		@starting-style { opacity: 0; }
 	
-		&[class]:hover {
+		&[class]:hover,
+		&.related-hover {
 			transform: scale(1.02);
 			background-color: #333333;
 			transition: transform .3s var(--back-out), background .3s var(--back-out);

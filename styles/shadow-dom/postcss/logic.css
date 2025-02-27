@@ -1,21 +1,28 @@
-:where(:host) {
+:host {
 	/* 1. imperative logic */
 
 	/* when playing, or when "Play" buttons are hovered -> show ::before */
 	.pp-wrapper:where(
 		.audio-playing, 
-		:has(:where(.show-and-play, .play-pause):hover)
+		:has(:where(.show-and-play, .play-pause):hover),
 	) .podcast-player::before { 
 		opacity: 1; 
+	}
+
+	.pp-wrapper .podcast-player.related-hover::before {
+		opacity: 1;
 	}
 
 	/* safari bug */
 	/* .show-and-play:hover + .podcast-player::before { opacity: 1; } */
 	/* .pp-wrapper.audio-playing .podcast-player::before { opacity: 1; } */
-	.podcast-player:has(.play-pause:hover)::before { opacity: 1; }
+	/* .podcast-player:has(.play-pause:hover)::before { opacity: 1; } */
+
+	/* * { display: none !important; } */
 
 	/* When trigger btn is hovered change .play-pause */
-	.pp-wrapper:has(.show-and-play:hover) .play-pause {
+	.pp-wrapper:has(.show-and-play:hover) .play-pause,
+	.podcast-player.related-hover .play-pause {
 		background-color: hsl(var(--clr-hue) 30% 90% / 100%);
 		color: #000;
 		transform: scale(1.075);
