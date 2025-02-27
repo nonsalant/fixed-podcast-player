@@ -29,7 +29,7 @@ Adjust the paths below as needed:
 
 ### 2. Add the `<podcast-player>` element
 
-Note the data `data-title`, and `data-thumb` attributes; as well as the `href` of `.show-and-play` which is the audio source (i.e. the mp3 URL):
+Note the (self-explanatory) `data-title`, and `data-thumb` attributes on the element; as well as the `href` of `.show-and-play` inside the element which is the audio source (i.e. the mp3 URL):
 
 ```html
 <podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
