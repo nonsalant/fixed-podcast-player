@@ -7,6 +7,7 @@
     --clr-lig: var(--pp-lig, 35%);
     --clr-gradient-hue-difference: var(--pp-gradient-hue-difference, 20deg);
 	--player-border-radius: var(--pp-radius, 1.125rem / 1rem);
+    --player-offscreen-border-radius: var(--pp-offscreen-radius, 3px);
 
     --podcast-bg-1: hsl(calc(var(--clr-hue) - var(--clr-gradient-hue-difference)) 100% calc(var(--clr-lig) + 5%));
     --podcast-bg-2: hsl(var(--clr-hue) var(--clr-sat) var(--clr-lig));

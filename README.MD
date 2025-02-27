@@ -70,6 +70,7 @@ For example, you can easily change the color of the Play button and the intensit
 | `--pp-offset-top-small` | `0px` | Account for any sticky header or navigation on small screens |
 | `--pp-content-width` | `40rem` | The "content" width of the player |
 | `--pp-radius` | `1.25rem / 1rem` | The border radius of the player. The `x / y` format means the corners will be more oval (when `x` is different from `y`) instead of circular |
+| `--pp-offscreen-radius` | `3px` | The player's border radius for the corners touching the top or bottom edge of the screen. |
 | `--pp-hue` | `205deg` | The hue of the base color |
 | `--pp-sat` | `35%` | The saturation of the base color |
 | `--pp-lig` | `40%` | The lightness of the base color |

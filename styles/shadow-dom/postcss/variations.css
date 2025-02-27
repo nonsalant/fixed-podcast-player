@@ -6,12 +6,9 @@
 		margin: auto;
 		margin-top: calc(var(--player-offset-top) + var(--wp-admin--admin-bar--height, 0px));
 		transform: translateY(-100%);
-		border-radius: 0 0 1rem 1rem;
-		border-radius: 0 0 var(--player-border-radius) var(--player-border-radius);
-		/*  */
 		border-radius: var(--player-border-radius);
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
+		border-top-left-radius: var(--player-offscreen-border-radius, 0);
+		border-top-right-radius: var(--player-offscreen-border-radius, 0);
 		/*  */
 		.main { flex-direction: column-reverse; }
 		footer {
@@ -26,9 +23,7 @@
 	@media (pointer: fine) {
 		.podcast-player[data-position=top]:has(.icon-move:hover) {
 			transform: translatey(6px);
-			/* @media (pointer: fine) {  */
-				.icon-move { translate: 0 -3px; } 
-			/* } */
+			.icon-move { translate: 0 -3px; } 
 		}
 	}
 
@@ -38,11 +33,6 @@
 		.podcast-player[data-position=top].show {
 			margin-top: calc(var(--player-offset-top-small) + var(--wp-admin--admin-bar--height, 0px));
 		}
-		/* @media (pointer: fine) {
-			.podcast-player[data-position=top].show:has(.icon-move:hover) {
-				transform: translatey(3px);
-			}
-		} */
 	}
 
 
