@@ -29,8 +29,8 @@ Adjust the paths below as needed:
 
 ### 2. Add the `<podcast-player>` element
 
-Note the (self-explanatory) `data-title`, and `data-thumb` attributes on the element; as well as the `href` of `.show-and-play` inside the element which is the audio source (i.e. the mp3 URL):
-
+#### Basic Usage
+Note the `data-title` and `data-thumb` attributes on the element:
 ```html
 <podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
   <a class="show-and-play" href="audio.mp3">
@@ -38,9 +38,10 @@ Note the (self-explanatory) `data-title`, and `data-thumb` attributes on the ele
   </a>
 </podcast-player>
 ```
+Also note the `href` of `<a class="show-and-play">` inside the element which is the audio source (i.e. the mp3 URL).
 
+#### Change the *Pause* and *Resume* text
 You can also set the text for each state of the button with this more explicit markup:
-
 ```html
 <podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
   <a class="show-and-play" href="audio.mp3">
@@ -50,9 +51,8 @@ You can also set the text for each state of the button with this more explicit m
   </a>
 </podcast-player>
 ```
-
-Or set the text and the icon (from the icons.svg sprite sheet) used for each state of the button:
-
+#### Define the button text + icons
+Or set the text and the icon (from the `assets/icons.svg` sprite sheet) used for each state of the button:
 ```html
 <podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
   <a class="show-and-play" href="audio.mp3">
@@ -62,7 +62,7 @@ Or set the text and the icon (from the icons.svg sprite sheet) used for each sta
   </a>
 </podcast-player>
 ```
-
+#### Using a `<button>` element
 If you'd like the button to be a `button` element and not to be a link (note the `data-src` attribute on the main element):
 
 ```html
