@@ -33,16 +33,14 @@
 	/* 5.1 responsivity */
 	/* @media (width < 800px) { */
 	@media (--lg-n-below) {
-		.podcast-player[data-position=top] {}
 		.podcast-player[data-position=top].show {
 			margin-top: calc(var(--player-offset-top-small) + var(--wp-admin--admin-bar--height, 0px));
 		}
-		/* @media (pointer: fine) { */
+		@media (pointer: fine) {
 			.podcast-player[data-position=top].show:has(.icon-move:hover) {
 				transform: translatey(3px);
-				/* padding-block: .25rem 0; */
 			}
-		/* } */
+		}
 	}
 
 
