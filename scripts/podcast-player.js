@@ -27,6 +27,62 @@ export default class PodcastPlayer extends HTMLElement {
         this.addShowOn();
     }
 
+    disconnectedCallback() {
+        document.querySelector('body').classList.remove('audio-playing', 'audio-paused');
+    }
+
+    // Refs
+    initRefs() {
+        // Element references
+        this.showAndPlay = this.querySelector('.show-and-play'); // slotted from Light DOM
+        const el = this.shadowRoot ?? this;
+        this.ppWrapper = el.querySelector('.pp-wrapper');
+        this.audio = el.querySelector('audio');
+        this.podcastPlayer = el.querySelector('.podcast-player');
+        this.playPauseButton = el.querySelector('.play-pause');
+        this.scrubber = el.querySelector('#scrubber');
+        this.timeDisplayCurrent = el.querySelector('#time-display-current time');
+        this.timeDisplayEnd = el.querySelector('#time-display-end time');
+        this.muteButton = el.querySelector('.mute');
+        this.volumeControl = el.querySelector('#volume-control');
+        this.speedControl = el.querySelector('#speed-control');
+        this.shareButton = el.querySelector('.share-button');
+        this.moveButton = el.querySelector('.icon-move');
+        this.closeButton = el.querySelector('.icon-close');
+        this.volumeGroup = el.querySelector('.volume-group');
+    }
+
+    // Event Listeners
+    addEventListeners() {
+        const rh = this.registerHandler.bind(this);
+        this.handlers = [];
+        // add handle- functions as methods of this class
+        rh(this.handleShowAndPlay, this.showAndPlay);
+        rh(this.handleTogglePlayPause, this.playPauseButton);
+
+        rh(this.handleMouseEnterShowAndPlay, this.showAndPlay, 'mouseenter');
+        rh(this.handleMouseLeaveShowAndPlay, this.showAndPlay, 'mouseleave');
+        rh(this.handleMouseEnterPlayPause, this.playPauseButton, 'mouseenter');
+        rh(this.handleMouseLeavePlayPause, this.playPauseButton, 'mouseleave');
+        rh(this.handleMouseEnterClose, this.closeButton, 'mouseenter');
+        rh(this.handleMouseLeaveClose, this.closeButton, 'mouseleave');
+
+        // display the duration if the metadata of the audio is available. If it is not available, we add the event listener
+        // see: https://css-tricks.com/lets-create-a-custom-audio-player/#aa-display-the-audio-duration
+        // rh(handleLoadMetadata, this.audio, 'loadedmetadata');
+        if (this.audio.readyState > 0) this.handleLoadMetadata();
+        else rh(this.handleLoadMetadata, this.audio, 'loadedmetadata');
+
+        rh(this.handleUpdateTime, this.audio, 'timeupdate');
+        rh(this.handleScrub, this.scrubber, 'input');
+        rh(this.handleChangeSpeed, this.speedControl, 'change');
+        rh(this.handleControlVolume, this.volumeControl, 'input');
+        rh(this.handleToggleMute, this.muteButton);
+        rh(this.handleMove, this.moveButton);
+        rh(this.handleClose, this.closeButton);
+    }
+
+
     // Handlers
 
     handleToggleMute() {
@@ -132,12 +188,11 @@ export default class PodcastPlayer extends HTMLElement {
         localStorage.setItem('pp-volume', this.volumeControl.value);
     }
 
+    // Hover Handlers
     handleMouseEnterShowAndPlay() { this.podcastPlayer.classList.add('related-hover'); }
     handleMouseLeaveShowAndPlay() { this.podcastPlayer.classList.remove('related-hover'); }
-
     handleMouseEnterPlayPause() { this.showAndPlay.classList.add('related-hover'); }
     handleMouseLeavePlayPause() { this.showAndPlay.classList.remove('related-hover'); }
-
     handleMouseEnterClose() { this.showAndPlay.classList.add('related-hover'); }
     handleMouseLeaveClose() { this.showAndPlay.classList.remove('related-hover'); }
 
@@ -195,55 +250,6 @@ export default class PodcastPlayer extends HTMLElement {
         this.setAttribute('showing-player', '');
         this.podcastPlayer.removeAttribute('inert');
         this.podcastPlayer.hidden = false;
-    }
-
-    addEventListeners() {
-        const rh = this.registerHandler.bind(this);
-        this.handlers = [];
-        // add handle- functions as methods of this class
-        rh(this.handleShowAndPlay, this.showAndPlay);
-        rh(this.handleTogglePlayPause, this.playPauseButton);
-
-        rh(this.handleMouseEnterShowAndPlay, this.showAndPlay, 'mouseenter');
-        rh(this.handleMouseLeaveShowAndPlay, this.showAndPlay, 'mouseleave');
-        rh(this.handleMouseEnterPlayPause, this.playPauseButton, 'mouseenter');
-        rh(this.handleMouseLeavePlayPause, this.playPauseButton, 'mouseleave');
-        rh(this.handleMouseEnterClose, this.closeButton, 'mouseenter');
-        rh(this.handleMouseLeaveClose, this.closeButton, 'mouseleave');
-
-        // display the duration if the metadata of the audio is available. If it is not available, we add the event listener
-        // see: https://css-tricks.com/lets-create-a-custom-audio-player/#aa-display-the-audio-duration
-        // rh(handleLoadMetadata, this.audio, 'loadedmetadata');
-        if (this.audio.readyState > 0) this.handleLoadMetadata();
-        else rh(this.handleLoadMetadata, this.audio, 'loadedmetadata');
-
-        rh(this.handleUpdateTime, this.audio, 'timeupdate');
-        rh(this.handleScrub, this.scrubber, 'input');
-        rh(this.handleChangeSpeed, this.speedControl, 'change');
-        rh(this.handleControlVolume, this.volumeControl, 'input');
-        rh(this.handleToggleMute, this.muteButton);
-        rh(this.handleMove, this.moveButton);
-        rh(this.handleClose, this.closeButton);
-    }
-
-    initRefs() {
-        // Element references
-        this.showAndPlay = this.querySelector('.show-and-play'); // slotted from Light DOM
-        const el = this.shadowRoot ?? this;
-        this.ppWrapper = el.querySelector('.pp-wrapper');
-        this.audio = el.querySelector('audio');
-        this.podcastPlayer = el.querySelector('.podcast-player');
-        this.playPauseButton = el.querySelector('.play-pause');
-        this.scrubber = el.querySelector('#scrubber');
-        this.timeDisplayCurrent = el.querySelector('#time-display-current time');
-        this.timeDisplayEnd = el.querySelector('#time-display-end time');
-        this.muteButton = el.querySelector('.mute');
-        this.volumeControl = el.querySelector('#volume-control');
-        this.speedControl = el.querySelector('#speed-control');
-        this.shareButton = el.querySelector('.share-button');
-        this.moveButton = el.querySelector('.icon-move');
-        this.closeButton = el.querySelector('.icon-close');
-        this.volumeGroup = el.querySelector('.volume-group');
     }
 
     initLocalStorage() {
