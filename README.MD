@@ -29,7 +29,7 @@ Adjust the paths below as needed:
 
 ### 2. Add the `<podcast-player>` element
 
-#### Basic Usage
+#### Example 1: Basic Usage
 Note the `data-title` and `data-thumb` attributes on the element:
 ```html
 <podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
@@ -38,9 +38,9 @@ Note the `data-title` and `data-thumb` attributes on the element:
   </a>
 </podcast-player>
 ```
-Also note the `href` of `<a class="show-and-play">` inside the element which is the audio source (i.e. the mp3 URL).
+Also note the audio source (i.e. the mp3 URL) in the `href` of `<a class="show-and-play">`
 
-#### Change the *Pause* and *Resume* text
+#### Example 2: Change the *Pause* and *Resume* text
 You can also set the text for each state of the button with this more explicit markup:
 ```html
 <podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
@@ -51,8 +51,9 @@ You can also set the text for each state of the button with this more explicit m
   </a>
 </podcast-player>
 ```
-#### Define the button text + icons
-Or set the text and the icon (from the `assets/icons.svg` sprite sheet) used for each state of the button:
+
+#### Example 3: Define the button text + icons
+Or set the text and the icon (from the `assets/icons.svg` [sprite sheet](https://ryantrimble.com/blog/what-the-heck-is-an-svg-sprite-sheet.html)) used for each state of the button:
 ```html
 <podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
   <a class="show-and-play" href="audio.mp3">
@@ -62,14 +63,15 @@ Or set the text and the icon (from the `assets/icons.svg` sprite sheet) used for
   </a>
 </podcast-player>
 ```
-#### Using a `<button>` element
-If you'd like the button to be a `button` element and not to be a link (note the `data-src` attribute on the main element):
 
+#### Example 4: Using a `<button>` element
+If you'd like the button to be a `button` element and not a link:
 ```html
 <podcast-player data-src="audio.mp3" data-title="Episode Title" data-thumb="thumbnail.jpg">
   <button class="show-and-play" type="button">Play</button>
 </podcast-player>
 ```
+Note the `data-src` attribute that is now used for the audio source.
 
 ## Attributes for the `<podcast-player>` element
 | Attribute | Default | Description |
