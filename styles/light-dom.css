@@ -29,6 +29,7 @@
 	.show-and-play {
 		/* all: initial; */
 		appearance: none;
+		border: transparent 0;
 		font-size: 1.2rem;
 		text-decoration: none;
 		cursor: pointer;

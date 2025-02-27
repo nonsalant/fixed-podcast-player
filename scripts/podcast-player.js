@@ -261,15 +261,13 @@ export default class PodcastPlayer extends HTMLElement {
     }
 
     updateSecondsFromUrl() {
-        // if ?seconds= in URL, show the player and set the currentTime
         let url = new URL(window.location.href);
         let seconds = url.searchParams.get('seconds');
-        if (seconds) {
-            this.audio.currentTime = seconds;
-            url.searchParams.delete('seconds');
-            window.history.pushState({}, '', url);
-            this.showPlayer();
-        }
+        if (!seconds) return;
+        // if ?seconds= in URL, remove it, set time, show player
+        url.searchParams.delete('seconds'); window.history.pushState({}, '', url);
+        this.audio.currentTime = seconds;
+        this.showPlayer();
     }
 
     initUi() {
@@ -303,8 +301,9 @@ export default class PodcastPlayer extends HTMLElement {
     }
 
     initSrcAttribute() {
-        if (this.hasAttribute('data-src')) return;
+        // if (this.hasAttribute('data-src')) return;
         const src = this.querySelector('.show-and-play').getAttribute('href');
+        if (!src) return;
         this.setAttribute('data-src', src);
     }
 
@@ -317,22 +316,45 @@ export default class PodcastPlayer extends HTMLElement {
     }
 
     processLightDomIcons() {
-        const icons = this.showAndPlay.querySelectorAll('[icon-name]');
+        const defaults = [
+            { text: "Play", icon: "play-circle-solid" },
+            { text: "Pause", icon: "pause-circle" },
+            { text: "Resume", icon: "play-circle" }
+        ]
+        let icons = this.showAndPlay.querySelectorAll('& > *'); // '[icon-name]'
+
+        // if it only has a text node, wrap it in a span
+        if (this.showAndPlay.childNodes.length === 1 && this.showAndPlay.childNodes[0].nodeType === 3) {
+            const textWrapper = document.createElement('span');
+            textWrapper.textContent = this.showAndPlay.textContent;
+            this.showAndPlay.textContent = '';
+            this.showAndPlay.appendChild(textWrapper);
+            icons = this.showAndPlay.querySelectorAll('& > *');
+        }
+
         const svgBase = this.getAttribute('svg-base');
-        icons.forEach(icon => {    
-            // Wrap existing content in a span
-            const spanElement = document.createElement('span');
-            while (icon.firstChild) spanElement.appendChild(icon.firstChild);
-            icon.appendChild(spanElement);
+        defaults.forEach((item, i) => {    
+            if (icons[i]) {
+                // Wrap existing content
+                const textWrapper = document.createElement('span');
+                while (icons[i].firstChild) textWrapper.appendChild(icons[i].firstChild);
+                icons[i].appendChild(textWrapper);
+            } else {
+                // Create new element
+                const textWrapper = document.createElement('span');
+                textWrapper.textContent = item.text;
+                this.showAndPlay.appendChild(textWrapper);
+                icons = this.showAndPlay.querySelectorAll('& > *');
+            }
     
             // Add SVG element
-            const iconName = icon.getAttribute('icon-name');
+            const iconName = icons[i].getAttribute('icon-name') || item.icon;
             const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             const useElement = document.createElementNS('http://www.w3.org/2000/svg', 'use');
             useElement.setAttribute('href', `${svgBase}#${iconName}`);
             svgElement.appendChild(useElement);
             svgElement.setAttribute('aria-hidden', 'true');
-            icon.insertBefore(svgElement, icon.firstChild);
+            icons[i].insertBefore(svgElement, icons[i].firstChild);
         });
     }
 

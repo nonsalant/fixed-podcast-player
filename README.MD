@@ -34,13 +34,42 @@ Note the (self-explanatory) `data-title`, and `data-thumb` attributes on the ele
 ```html
 <podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
   <a class="show-and-play" href="audio.mp3">
-    <div icon-name="play-circle-solid">Play</div>
-    <div icon-name="pause-circle">Pause</div>
-    <div icon-name="play-circle">Resume</div>
+    Play
   </a>
 </podcast-player>
 ```
 
+You can also set the text for each state of the button with this more explicit markup:
+
+```html
+<podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
+  <a class="show-and-play" href="audio.mp3">
+    <span>Play</span>
+    <span>Pause</span>
+    <span>Resume</span>
+  </a>
+</podcast-player>
+```
+
+Or set the text and the icon (from the icons.svg sprite sheet) used for each state of the button:
+
+```html
+<podcast-player data-title="Episode Title" data-thumb="thumbnail.jpg">
+  <a class="show-and-play" href="audio.mp3">
+    <span icon-name="play-circle-solid">Play</span>
+    <span icon-name="pause-circle">Pause</span>
+    <span icon-name="play-circle">Resume</span>
+  </a>
+</podcast-player>
+```
+
+If you'd like the button to be a `button` element and not to be a link (note the `data-src` attribute on the main element):
+
+```html
+<podcast-player data-src="audio.mp3" data-title="Episode Title" data-thumb="thumbnail.jpg">
+  <button class="show-and-play" type="button">Play</button>
+</podcast-player>
+```
 
 ## Attributes for the `<podcast-player>` element
 | Attribute | Default | Description |
@@ -50,6 +79,7 @@ Note the (self-explanatory) `data-title`, and `data-thumb` attributes on the ele
 | `data-position` | `"bottom"` | The position of the player: `top` or `bottom` |
 | `data-variation` | `""` | Player will not touch the edge on large screens if set to `floating` |
 | `show-on` | `"scroll"` | The button event that triggers the player to show: `scroll` (when the button is scrolled into view for the first time), `click`, `load`, or `hover` |
+| `data-src` | `undefined` | Set this value to the audio URL if not using a link with a `href` (e.g: if using a `button` element) |
 
 ## Overridable CSS Variables
 
