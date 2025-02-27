@@ -1,8 +1,6 @@
 /* https://codepen.io/nonsalant/pen/xbxRjBN/d9b904ac593fd738cd5b34236c4b5d53 */
-
-:where(:host) .metal,
-:where(:host) input[type="range"]:not([data-size=small])::-webkit-slider-thumb {
-  --metal-1: 
+:where(:host) {
+  --range-thumb-img: 
     -webkit-radial-gradient(  50%   0%,  8% 50%, hsla(0,0%,100%, .95) 0%, hsla(0,0%,100%,0) 100%),
     -webkit-radial-gradient(  50% 100%, 12% 50%, hsla(0,0%,100%, .95) 0%, hsla(0,0%,100%,0) 100%),
     -webkit-radial-gradient(   0%  50%, 50%  7%, hsla(0,0%,100%, .95) 0%, hsla(0,0%,100%,0) 100%),
@@ -11,18 +9,28 @@
     -webkit-repeating-radial-gradient(50% 50%, 100% 100%, transparent 0%, transparent 18%, hsla(0,0%,100%, .4) 22.5%),
     -webkit-repeating-radial-gradient(50% 50%, 100% 100%, transparent 0%, transparent 3.6%, hsla(0,0%,100%, .4) 5%)
   ;
-  
   --range-thumb-size: calc(var(--range-height) + .75rem);
-  
+  --range-thumb-shadow:
+    inset 0px 1px #11111120,
+    inset 0px -1px #11111120,
+    inset 1px 0px #11111120,
+    inset -1px 0px #11111120,
+    0  0px 0px 1px hsla(0, 0%, 25%, .25)
+  ;
+}
+
+:where(:host) input[type="range"]:not([data-size=small])::-webkit-slider-thumb {
   border-radius: 50%;
   position: relative;
   background-color: #eee;
-  background-image: var(--metal-1);
-  box-shadow:  
-    inset 0px 1px #11111120, /* */
-    inset 0px -1px #11111120, /* */
-    inset 1px 0px #11111120, /* */
-    inset -1px 0px #11111120, /* */
-    0  0px 0px 1px hsla(0, 0%, 25%, .25)
-  ;
+  background-image: var(--range-thumb-img);
+  box-shadow: var(--range-thumb-shadow);
+}
+
+:where(:host) input[type="range"]:not([data-size=small])::-moz-range-thumb {
+  border-radius: 50%;
+  position: relative;
+  background-color: #eee;
+  background-image: var(--range-thumb-img);
+  box-shadow: var(--range-thumb-shadow);
 }
