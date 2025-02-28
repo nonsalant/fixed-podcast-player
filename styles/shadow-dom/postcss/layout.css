@@ -26,14 +26,12 @@
 		background-position: top center;
 		background-size: cover;
 		background-color: #ffffff80;
-		filter: sepia(.25);
-		box-shadow: inset 0px 1px #11111120, inset 0px 2px rgb(255 255 255 / .2),
-			0 0 .5em .25em hsl(70deg 75% 15% / 30%) inset,
-			0 0 1.5em .5em hsl(70deg 75% 15% / 50%) inset;
-		/* width: 9em;
-		min-width: 9em;
-		height: 9em; */
-		/* height: 9rem; */
+		/* filter: sepia(.25); */
+		box-shadow: 
+			0px 1px #11111120 inset,
+			0px 2px rgb(255 255 255 / .2) inset,
+			0 0 .5em .25em hsl(var(--clr-hue) 75% 15% / 30%) inset,
+			0 0 1.5em .5em hsl(var(--clr-hue) 75% 15% / 50%) inset;
 		width: 9rem;
 		aspect-ratio: 1;
 		transition: all .3s ease-in-out;
@@ -46,7 +44,7 @@
 			width: 1.5px;
 			height: 100%;
 			margin-block: 2px;
-			position: absolute;
+			/* position: absolute; */
 			inset: 0;
 			margin-inline-start: auto;
 		}
@@ -63,14 +61,14 @@
 		transition: opacity .6s ease-out;
 		transition: opacity .6s var(--back-out);
 
-		&> :nth-child(1) {
+		& > :nth-child(1) {
 			display: grid;
 			align-content: start;
 			grid-template-columns: auto auto 1fr auto;
 			gap: .5rem;
 		}
 		
-		&> :nth-child(2) {
+		& > :nth-child(2) {
 			display: grid;
 			align-content: start;
 			grid-template-columns: 1fr auto;
@@ -118,7 +116,6 @@
 		display: inline-block;
 		/* width: 2.5em; */
 		text-align: center;
-		/* letter-spacing: .1em; */
 		font-variant-numeric: tabular-nums;
 		font-family: var(--font-2), var(--monospace-font);
 		/* font-size: clamp(0, 0.7122rem + 0.8138vw, 18.72px);  */
@@ -138,7 +135,6 @@
 
 	/* @media (width < 800px) { */
 	@media (--lg-n-below) {
-		/* .podcast-player { grid-template-columns: 1fr auto; } */
 
 		.podcast-player header {
 			display: none;
@@ -160,13 +156,6 @@
 		#time-display-end {
 			display: none;
 		}
-		
-		/* disable textured bg */
-		/* .controls-surface-2:has(.volume-group) {
-			padding: 0; 
-			background-color: transparent;
-			display: contents;
-		} */
 	}
 
 	/* @media (width < 360px) { */
@@ -175,10 +164,10 @@
 			grid-template-columns: auto auto 1fr auto;
 		}
 
-		#time-display-current > *:not(button),
-		#time-display-end {
-			display: none;
+		#time-display-current > *:not(button), #time-display-end { 
+			display: none; 
 		}
+
 		*:has( > .share-button) {
 			/* outline: solid 1px red; */
 			background-color: transparent;
