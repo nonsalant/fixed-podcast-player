@@ -3,7 +3,8 @@
 		/* all: initial; */
 		/* outline: solid 3px purple; */
 		-webkit-appearance: none;
-		font-family: var(--font-2) !important;
+		font-family: var(--font-2);
+		/* font-family: system-ui, sans-serif; */
 		cursor: pointer;
 		border: none;
 		color: #444;
@@ -44,7 +45,8 @@
 		border-radius: 8px; 
 		font-size: .8rem; 
 		font-weight: bold; 
-		font-family: var(--font-2);
+		/* font-family: var(--font-2); */
+		font-family: system-ui, sans-serif;
 		/* width: 4rem; */
 		border-radius: 12px; 
 		width: auto; 
@@ -57,7 +59,8 @@
 
 	.icon-button {
 		-webkit-appearance: none;
-		font-family: var(--font-1) !important;
+		/* font-family: var(--font-1) !important; */
+		font-family: system-ui, sans-serif;
 		display: grid; 
 		place-content: center;
 		width: 1rem; 

@@ -26,7 +26,8 @@
 
     /* color-scheme: light dark; */
 	--font-1: Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif;
-    --font-2: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
+    --font-2-non-downloadable: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
+    --font-2: Inconsolata, var(--font-2-non-downloadable);
     --monospace-font: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 
 	--shadow-1: 0 1px 2px -1px hsl(220 3% 15% / calc(1% + 9%));

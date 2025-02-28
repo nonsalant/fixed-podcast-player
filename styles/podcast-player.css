@@ -6,6 +6,10 @@
 
 @import url('shadow-dom/css/lib/abstracts.css');
 @import url('shadow-dom/css/lib/reset.css');
+
+/* fonts */
+@import url('shadow-dom/css/lib/fonts.css');
+
 @import url('shadow-dom/css/ui/buttons.css');
 @import url('shadow-dom/css/ui/range-input-styles.css');
 @import url('shadow-dom/css/ui/radial-metal-gradient.css');
