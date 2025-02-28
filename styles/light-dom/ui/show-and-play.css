@@ -1,0 +1,70 @@
+:root .show-and-play {
+	/* all: initial; */
+	appearance: none;
+	border: transparent 0;
+	font-size: 1.2rem;
+	text-decoration: none;
+	cursor: pointer;
+	display: flex;
+	border-radius: .5rem;
+	color: #fff;
+	fill: #fff;
+	padding: .5rem 1rem;
+	width: 14rem;
+	align-items: center;
+	justify-content: center;
+	background-color: hsl(var(--clr-hue) var(--clr-sat) var(--clr-lig));
+	background-image: var(--grain-pattern);
+	transition: transform .2s var(--back-out), background .2s linear, opacity .4s var(--back-out);
+	width: fit-content;
+	min-width: 7rem;
+	font-family: var(--font-1);
+	box-shadow: inset 0px 1px #11111140, inset 0px 2px rgb(255 255 255 / .25);
+
+	/* filter: contrast(1.5); */
+	@media (prefers-color-scheme: dark) { 
+		filter: contrast(1.25) brightness(1.25);
+	}
+
+	& > * {
+		display: flex;
+		gap: .25rem;
+		align-items: center;
+		justify-content: space-between;
+	}
+	svg { 
+		width: 1.5rem; height: 1.5rem;
+		scale: 1.25;
+		transform-origin: right;
+		/* margin-inline-end: .75rem; */
+	}
+
+	@starting-style { opacity: 0; }
+
+	&[class]:hover,
+	&.related-hover {
+		transform: scale(1.02);
+		background-color: #333333;
+		transition: transform .3s var(--back-out), background .3s var(--back-out);
+		@media (prefers-color-scheme: dark) { 
+			background-color: #555555;
+		}
+	}
+
+	&[class]:active {
+		transform: scale(1);
+		background-color: #000;
+		@media (prefers-color-scheme: dark) { 
+			background-color: #444444;
+		}
+	}
+
+	/* button UI imperative logic */
+	& > * {
+		display: none; align-content: center;
+		& > * { display: grid; place-content: center; }
+	}
+	&:is(body:not(.audio-playing):not(.audio-paused) .show-and-play) > :nth-child(1) { display: flex; font-weight: bold;}
+	&:is(body.audio-playing .show-and-play) > :nth-child(2) { display: flex; }
+	&:is(body.audio-paused .show-and-play) > :nth-child(3) { display: flex; }
+}

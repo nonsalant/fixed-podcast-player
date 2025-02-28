@@ -320,7 +320,7 @@ export default class PodcastPlayer extends HTMLElement {
             { text: "Play", icon: "play-circle-solid" },
             { text: "Pause", icon: "pause-circle" },
             { text: "Resume", icon: "play-circle" }
-        ]
+        ];
         let icons = this.showAndPlay.querySelectorAll('& > *'); // '[icon-name]'
 
         // if it only has a text node, wrap it in a span
