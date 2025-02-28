@@ -46,13 +46,11 @@
 		transition: transform .2s var(--back-out), background .2s linear, opacity .4s var(--back-out);
 		width: fit-content;
 		min-width: 7rem;
-		font-family: var(--font-2, sans-serif);
-		font-weight: bold;
-		letter-spacing: .025rem;
+		font-family: system-ui, sans-serif;
+		/* font-family: var(--font-2); */
 		box-shadow: inset 0px 1px #11111140, inset 0px 2px rgb(255 255 255 / .25);
-		font-weight: bold;
 
-		filter: contrast(1.5);
+		/* filter: contrast(1.5); */
 		@media (prefers-color-scheme: dark) { 
 			filter: contrast(1.25) brightness(1.25);
 		}
@@ -95,7 +93,7 @@
 			display: none; align-content: center;
 			& > * { display: grid; place-content: center; }
 		}
-		&:is(body:not(.audio-playing):not(.audio-paused) .show-and-play) > :nth-child(1) { display: flex; }
+		&:is(body:not(.audio-playing):not(.audio-paused) .show-and-play) > :nth-child(1) { display: flex; font-weight: bold;}
 		&:is(body.audio-playing .show-and-play) > :nth-child(2) { display: flex; }
 		&:is(body.audio-paused .show-and-play) > :nth-child(3) { display: flex; }
 	}

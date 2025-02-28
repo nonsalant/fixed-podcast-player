@@ -95,8 +95,9 @@
 		margin: 0;
 		max-width: 100%;
 		/* max-width: calc(100% - 2rem); */
-		font-family: sans-serif;
+		/* font-family: sans-serif; */
 		font-family: var(--font-2);
+		font-family: system-ui;
 		font-size: clamp(14px, 0.7122rem + 0.8138vw, 18.72px);
 		font-weight: 600;
 		overflow: hidden;
@@ -119,6 +120,9 @@
 		display: inline-block;
 		font-variant-numeric: tabular-nums;
 		font-family: var(--font-2);
+		/* width: 2.5em; */
+		text-align: center;
+		/* letter-spacing: .1em; */
 		font-size: medium;
 		/* font-family: var(--monospace-font); */
 		/* color: var(--range-color-base, #111); */

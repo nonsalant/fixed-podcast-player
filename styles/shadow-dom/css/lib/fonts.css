@@ -1,0 +1,10 @@
+/* https://gwfh.mranftl.com/fonts */
+
+/* inconsolata-700 - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Inconsolata';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/inconsolata-v32-latin-700.woff2') format('woff2');
+}
