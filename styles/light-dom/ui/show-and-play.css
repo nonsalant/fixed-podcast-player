@@ -43,20 +43,16 @@
 
 	&[class]:hover,
 	&.related-hover {
+		transition: transform .3s var(--back-out), background .3s var(--back-out);
 		transform: scale(1.02);
 		background-color: #333333;
-		transition: transform .3s var(--back-out), background .3s var(--back-out);
-		@media (prefers-color-scheme: dark) { 
-			background-color: #555555;
-		}
+		@media (prefers-color-scheme: dark) { background-color: #555555; }
 	}
 
 	&[class]:active {
 		transform: scale(1);
 		background-color: #000;
-		@media (prefers-color-scheme: dark) { 
-			background-color: #444444;
-		}
+		@media (prefers-color-scheme: dark) { background-color: #444444; }
 	}
 
 	/* button UI imperative logic */

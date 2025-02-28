@@ -70,14 +70,14 @@
         border-radius: .5rem;
         flex-wrap: nowrap;
         align-items: center;
-        translate: 0 -1px;
+        /* translate: 0 -1px; */
     }
     .controls-surface-2 {
         display: flex;
         padding: .5rem .75rem; 
         margin: -.5rem 0;
         background-color: hsl(var(--clr-hue) 10% 15% / 25%);
-        background-image: var(--grain-pattern);
+        /* background-image: var(--grain-pattern); */
         box-shadow: var(--inset-shadow);
         border-radius: calc(8px + .6125rem);
         translate: 0 -2px;
