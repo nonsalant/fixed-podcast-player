@@ -1,11 +1,11 @@
 /* Setup */
+@import url('lib/fonts.css');
 @import url('lib/abstracts.css');
 @import url('lib/overrides.css');
-@import url('shadow-dom/css/lib/fonts.css');
 
 /* Light DOM Styles: */
-@import url('light-dom/ui/body.css');
-@import url('light-dom/ui/show-and-play.css');
+@import url('light-dom/body.css');
+@import url('light-dom/show-and-play.css');
 
 /* Shadow DOM Styles: */
 @import url('shadow-dom/css/lib/abstracts.css');
