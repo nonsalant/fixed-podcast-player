@@ -22,12 +22,12 @@
 
 
 	--inset-shadow: inset 0px 1px #11111120, inset 0px 2px #ffffff20;
-	--text-shadow: 1px 1px 2px hsl(var(--clr-hue) 100% 10%);
+	--text-shadow: 1px 1px 1px hsl(var(--clr-hue) 100% 10%);
 
-    /* color-scheme: light dark; */
-	--font-1: Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif;
-    --font-2-non-downloadable: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
-    --font-2: Inconsolata, var(--font-2-non-downloadable);
+    --font-1: system-ui, sans-serif;
+    --font-2: Inconsolata, sans-serif; /* see fonts.css */
+    --font-3: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
+	--font-4: Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif;
     --monospace-font: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 
 	--shadow-1: 0 1px 2px -1px hsl(220 3% 15% / calc(1% + 9%));

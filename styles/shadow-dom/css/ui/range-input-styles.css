@@ -3,6 +3,7 @@
     --range-color-accent: hsl(var(--clr-hue) 90% 95% / 100%);
     --range-height: 1rem;
     --range-thumb-size: calc(var(--range-height) + 6px);
+    --range-thumb-size: calc(var(--range-height) + .75rem);
 }
 
 /* ? todo: further customization from https://blog.logrocket.com/creating-custom-css-range-slider-javascript-upgrades/ */

@@ -5,7 +5,7 @@
     -webkit-radial-gradient(  50% 100%, 12% 50%, hsla(0,0%,100%, .95) 0%, hsla(0,0%,100%,0) 100%),
     -webkit-radial-gradient(   0%  50%, 50%  7%, hsla(0,0%,100%, .95) 0%, hsla(0,0%,100%,0) 100%),
     -webkit-radial-gradient( 100%  50%, 50%  5%, hsla(0,0%,100%, .95) 0%, hsla(0,0%,100%,0) 100%),
-    -webkit-repeating-radial-gradient(50% 50%, 100% 100%, transparent 0%, transparent 4.5%, hsla(0,0%,  0%, .1) 7.5%),
+    -webkit-repeating-radial-gradient(50% 50%, 100% 100%, transparent 0%, transparent 16%, hsla(0,0%,  0%, .05) 19%),
     -webkit-repeating-radial-gradient(50% 50%, 100% 100%, transparent 0%, transparent 18%, hsla(0,0%,100%, .4) 22.5%),
     -webkit-repeating-radial-gradient(50% 50%, 100% 100%, transparent 0%, transparent 3.6%, hsla(0,0%,100%, .4) 5%)
   ;

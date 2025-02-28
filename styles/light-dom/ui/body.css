@@ -1,0 +1,5 @@
+body:not([data-no-player-offset]) {
+    @media not (prefers-reduced-motion: reduce) { transition: padding-block .6s var(--back-out); }
+    &:has(podcast-player[showing-player]) { padding-block: var(--body-padding, 0) var(--body-offset-for-player); }
+    &:has(podcast-player[showing-player][data-position=top]) { padding-block: var(--body-offset-for-player) var(--body-padding, 0); }
+}

@@ -1,14 +1,18 @@
-/* Light DOM Styles: */
-@import url('light-dom.css');
+/* Customizations */
+@import url('overrides.css');
 
+/* Light DOM Styles: */
+@import url('light-dom/lib/abstracts.css');
+@import url('light-dom/ui/body.css');
+@import url('light-dom/ui/show-and-play.css');
+
+/* fonts */
+@import url('shadow-dom/css/lib/fonts.css');
 
 /* Shadow DOM Styles: */
 
 @import url('shadow-dom/css/lib/abstracts.css');
 @import url('shadow-dom/css/lib/reset.css');
-
-/* fonts */
-@import url('shadow-dom/css/lib/fonts.css');
 
 @import url('shadow-dom/css/ui/buttons.css');
 @import url('shadow-dom/css/ui/range-input-styles.css');
