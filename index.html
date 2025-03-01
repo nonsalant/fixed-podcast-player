@@ -87,7 +87,7 @@
                 }
             }
         </style>
-        <fieldset id="options" onchange="console.log('changed')">
+        <fieldset id="customize">
             <legend>🎨 Customize</legend>
             
             <color-picker>
@@ -245,7 +245,7 @@
             </section>
 
         </fieldset>
-        <fieldset id="codes">
+        <fieldset id="attributes">
             <legend>⚙️ Attributes</legend>
 
             <label for="variation">
@@ -259,9 +259,9 @@
                 </select>
             </label>
 
-            <label for="variation">
+            <label for="position">
                 <span>Default position</span>
-                <select id="variation" 
+                <select id="position" 
                     onchange="el = document.querySelector('podcast-player');
                     el.setAttribute('data-position', this.value);
                     el.shadowRoot.querySelector('.podcast-player').setAttribute('data-position', this.value);">
@@ -279,6 +279,35 @@
                 </code>
             </section>
         </fieldset>
+        <script type="module">
+            document.querySelector("fieldset#customize").addEventListener("input", (e) => {
+                processCustomize("#customize");
+            });
+            document.querySelector("fieldset#attributes").addEventListener("input", (e) => {
+                processAttributes("#attributes");
+            });
+
+            function processCustomize(selector) {
+                const fieldset = document.querySelector("fieldset"+selector);
+                const colorPicker = fieldset.querySelector("#color-picker").value;
+                const gradientDifference = fieldset.querySelector("#gradient-difference").value;
+                const contentWidth = fieldset.querySelector("#content-width").value;
+                const borderRadius = fieldset.querySelector("#border-radius").value;
+                console.log({colorPicker, gradientDifference, contentWidth, borderRadius});
+            }
+            function processAttributes(selector) {
+                const fieldset = document.querySelector("fieldset"+selector);
+                const variation = fieldset.querySelector("#variation").value;
+                const position = fieldset.querySelector("#position").value;
+                console.log({variation, position});
+            }
+            function renderCss() {
+                
+            }
+            function renderHtml() {
+                
+            }
+        </script>
 
         <p><a href="https://github.com/nonsalant/fixed-podcast-player/">View GitHub repo</a></p>
         <p><a href="https://codepen.io/nonsalant/pen/pvoyRmZ" target="_blank">View on CodePen</a></p>
