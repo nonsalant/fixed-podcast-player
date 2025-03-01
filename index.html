@@ -69,15 +69,15 @@
 
         <style>
             fieldset {
-                border-radius: 3px;
-                
-                margin-block-start: 1lh;
-                legend { font-weight: bold; padding-inline: .25lh; }
                 accent-color: var(--pp-color);
-            }
-            #options {
                 display: grid;
+                border-radius: 3px;
                 gap: 1lh;
+                margin-block: 1.5lh;
+                padding: 1lh .5lh;
+                legend { font-weight: bold; padding-inline: .25lh; }
+                :is(h2, h3) { margin-block-end: 0; }
+                code:has(pre) { overflow: auto; display: block; }
                 & > label { 
                     display: grid;
                     gap: .5lh;
@@ -88,25 +88,25 @@
             }
         </style>
         <fieldset id="options" onchange="console.log('changed')">
-            <legend>⚙️ Customize</legend>
+            <legend>🎨 Customize</legend>
             
             <color-picker>
                 <style>
                     /* color picker styles */
-                    label:has(>#color-picker[type=color]) {display:flex; gap:.5lh; align-items:center; cursor:pointer; ul {margin:0; padding-inline-start:1lh;} }
+                    label:has(>#color-picker[type=color]) {display:flex; gap:.5lh; ul {margin:0; padding-inline-start:1lh;} }
                     #color-picker[type=color] {border-radius:50%; inline-size:2em; block-size:2em; cursor: pointer; padding:0px; border-width:3px; border-style:solid; border-color:rgb(220,220,220);}
                     #color-picker[type=color]::-webkit-color-swatch-wrapper {padding:0px;}
                     #color-picker[type=color]::-webkit-color-swatch {border-radius:50%;}
                     #color-picker[type=color]::-moz-color-swatch {border-radius:50%;}
                 </style>
                 <label for="color-picker">
-                    <input type="color" value="#426c8a" id="color-picker">
                     <span>Button color<br> (also the base color)</span>
+                    <input type="color" value="#426c8a" id="color-picker">
                     <output>
                         <ul>
-                            <li>hue: 205deg</li>
-                            <li>saturation: 35%</li>
-                            <li>lightnes: 40%</li>
+                            <li>hue: <code>205deg</code></li>
+                            <li>saturation: <code>35%</code></li>
+                            <li>lightnes: <code>40%</code></li>
                         </ul>
                     </output>
                 </label>
@@ -224,12 +224,28 @@
             </label>
 
             <label for="border-radius">
-                <span>Border radius</span>
+                <span>Player border radius</span>
                 <input type="range" id="border-radius" min="0" max="50" step="1" value="24"
                 oninput="document.documentElement.style.setProperty('--pp-radius', this.value + 'px');
                 this.nextElementSibling.innerText = this.value + 'px';">
                 <code>24px</code>
             </label>
+
+            <!-- <h3>CSS</h3>
+            <code>
+                <pre>:root {
+    --pp-hue: 205deg;
+    --pp-sat: 35%;
+    --pp-lig: 40%;
+    --pp-gradient-hue-difference: 15deg;
+    --pp-content-width: 640px;
+}</pre>
+            </code> -->
+
+        </fieldset>
+
+        <fieldset id="codes">
+            <legend>⚙️ Attributes</legend>
 
             <label for="variation">
                 <span>Variation</span>
@@ -241,38 +257,26 @@
                     <option value="">Fixed to the bottom or top on all screens</option>
                 </select>
             </label>
-        </fieldset>
 
-        <style>
-            #codes {
-                display: grid;
-                margin-block: 1.5lh;
-                :is(h2, h3) { margin-block-end: 0; }
-                code:has(pre) { overflow: auto; display: block; }
-            }
-        </style>
-        <fieldset id="codes">
-            <legend>📟 Codes</legend>
-            <h3>CSS custom prop overrides</h3>
-            <code>
-                <pre>:root {
-    --pp-hue: 205deg;
-    --pp-sat: 35%;
-    --pp-lig: 40%;
-    --pp-gradient-hue-difference: 15deg;
-    --pp-content-width: 640px;
-}</pre>
-            </code>
+            <label for="variation">
+                <span>Default position</span>
+                <select id="variation" 
+                    onchange="el = document.querySelector('podcast-player');
+                    el.setAttribute('data-position', this.value);
+                    el.shadowRoot.querySelector('.podcast-player').setAttribute('data-position', this.value);">
+                    <option value="bottom">Bottom of screen</option>
+                    <option value="top">Top of screen</option>
+                </select>
+            </label>
 
-            <h3>HTML</h3>
+            <!-- <h3>HTML</h3>
             <code>
                 <pre>&lt;podcast-player data-title="…" data-thumb="…" data-variation="floating"&gt;
     &lt;a class="show-and-play" href="…"&gt;Play&lt;/a&gt;
 &lt;/podcast-player&gt;</pre>
-            </code>
+            </code> -->
         </fieldset>
-    
-        <hr>
+
         <p><a href="https://github.com/nonsalant/fixed-podcast-player/">View GitHub repo</a></p>
         <p><a href="https://codepen.io/nonsalant/pen/pvoyRmZ" target="_blank">View on CodePen</a></p>
     </main>
