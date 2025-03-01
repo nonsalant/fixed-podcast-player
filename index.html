@@ -208,7 +208,7 @@
             </script>
 
             <label for="gradient-difference">
-                <span>Gradient hue difference<br> (player background)</span>
+                <span>Hue distance<br> (for gradient background)</span>
                 <input type="range" id="gradient-difference" min="0" max="360" step="1" value="15"
                 oninput="document.documentElement.style.setProperty('--pp-gradient-hue-difference', this.value + 'deg');
                 this.nextElementSibling.innerText = this.value + 'deg';">
@@ -225,10 +225,10 @@
 
             <label for="border-radius">
                 <span>Border radius</span>
-                <input type="range" id="border-radius" min="0" max="5" step="0.05" value="2"
-                oninput="document.documentElement.style.setProperty('--pp-radius', this.value + 'rem');
-                this.nextElementSibling.innerText = this.value + 'rem';">
-                <output>2rem</output>
+                <input type="range" id="border-radius" min="0" max="50" step="1" value="24"
+                oninput="document.documentElement.style.setProperty('--pp-radius', this.value + 'px');
+                this.nextElementSibling.innerText = this.value + 'px';">
+                <output>24px</output>
             </label>
 
             <label for="variation">
