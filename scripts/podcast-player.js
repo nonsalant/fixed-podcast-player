@@ -5,6 +5,23 @@ import podcastPlayerTemplate from './template.js';
 // Custom Element
 export default class PodcastPlayer extends HTMLElement {
 
+    // static get observedAttributes() {
+    //     return ['data-position', 'data-variation'];
+    // }
+
+    // attributeChangedCallback(name, oldValue, newValue) {
+    //     if (oldValue !== newValue) {
+    //         switch (name) {
+    //             case 'data-position':
+    //                 this.podcastPlayer.setAttribute("position", newValue);
+    //                 break;
+    //             case 'data-variation':
+    //                 this.podcastPlayer.setAttribute("variation", newValue);
+    //                 break;
+    //         }
+    //     }
+    // }
+
     constructor() {
         super();
         this.showOn = this.getAttribute('show-on');

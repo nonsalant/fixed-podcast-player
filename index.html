@@ -211,6 +211,17 @@
                 this.nextElementSibling.innerText = this.value + 'rem';">
                 <output>40rem</output>
             </label>
+
+            <label for="variation">
+                <span>Variation (on large screens)</span>
+                <select id="variation" 
+                    onchange="el = document.querySelector('podcast-player');
+                    el.setAttribute('data-variation', this.value);
+                    el.shadowRoot.querySelector('.podcast-player').setAttribute('data-variation', this.value);">
+                    <option value="floating">Floating</option>
+                    <option value="">Fixed</option>
+                </select>
+            </label>
         </fieldset>
     
         <p>Ea corrupti consectetur inventore quibusdam, quisquam odio dolore provident fuga quod odit voluptatibus itaque asperiores facere eos eveniet, facilis nisi quae cumque praesentium esse sunt, quia dolorum sint laborum. Id?</p>
