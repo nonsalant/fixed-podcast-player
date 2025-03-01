@@ -17,14 +17,14 @@
 	background-image: var(--grain-pattern);
 	transition: transform .2s var(--back-out), background .2s linear, opacity .4s var(--back-out);
 	width: fit-content;
-	min-width: 7rem;
+	min-width: 10rem;
 	font-family: var(--font-1);
 	box-shadow: inset 0px 1px #11111140, inset 0px 2px rgb(255 255 255 / .25);
 
 	/* filter: contrast(1.5); */
-	@media (prefers-color-scheme: dark) { 
+	/* @media (prefers-color-scheme: dark) { 
 		filter: contrast(1.25) brightness(1.25);
-	}
+	} */
 
 	& > * {
 		display: flex;

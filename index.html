@@ -7,7 +7,8 @@
     <title>Fixed Podcast Player Demo</title>
     <meta name="description" content="Web Component for an audio player and a Play button. The player is revealed when the button is scrolled into view.">
     <!-- Demo Styles -->
-    <style> :root { color-scheme: light dark; } body { padding: 1lh; background: light-dark(whitesmoke, #111); }
+    <style> *, *:before, *:after { box-sizing: border-box; }
+        :root { color-scheme: light dark; } body { padding: 1lh; background: light-dark(whitesmoke, #111); }
         main { max-width: 55rem; margin-inline: auto; font-family: system-ui; text-wrap: pretty; }
     </style>
 
@@ -67,17 +68,27 @@
         </podcast-player> -->
 
         <style>
-            fieldset#options {
+            fieldset {
                 border-radius: 3px;
-                display: grid;
-                gap: 1lh;
+                
                 margin-block-start: 1lh;
                 legend { font-weight: bold; padding-inline: .25lh; }
                 accent-color: var(--pp-color);
             }
+            #options {
+                display: grid;
+                gap: 1lh;
+                & > label { 
+                    display: grid;
+                    gap: .5lh;
+                    align-items: center; 
+                    grid-template-columns: auto 1fr 5rem;
+                    @media (width < 600px ) { grid-template-columns: 1fr; }
+                }
+            }
         </style>
-        <fieldset id="options">
-            <legend>⚙️ Options</legend>
+        <fieldset id="options" onchange="console.log('changed')">
+            <legend>⚙️ Customize</legend>
             
             <color-picker>
                 <style>
@@ -89,8 +100,8 @@
                     #color-picker[type=color]::-moz-color-swatch {border-radius:50%;}
                 </style>
                 <label for="color-picker">
-                    <span>Base Color</span>
                     <input type="color" value="#426c8a" id="color-picker">
+                    <span>Button color (also the base color)</span>
                     <output>
                         <ul>
                             <li>hue: 205deg</li>
@@ -197,7 +208,7 @@
             </script>
 
             <label for="gradient-difference">
-                <span>Gradient hue difference</span>
+                <span>Gradient hue difference<br> (player background)</span>
                 <input type="range" id="gradient-difference" min="0" max="360" step="1" value="15"
                 oninput="document.documentElement.style.setProperty('--pp-gradient-hue-difference', this.value + 'deg');
                 this.nextElementSibling.innerText = this.value + 'deg';">
@@ -205,32 +216,53 @@
             </label>
 
             <label for="content-width">
-                <span>Player content width</span>
-                <input type="range" id="content-width" min="0" max="100" step="1" value="40"
-                oninput="document.documentElement.style.setProperty('--pp-content-width', this.value + 'rem');
-                this.nextElementSibling.innerText = this.value + 'rem';">
-                <output>40rem</output>
+                <span>Player content max width<br> (on large screens)</span>
+                <input type="range" id="content-width" min="200" max="2000" step="1" value="640"
+                oninput="document.documentElement.style.setProperty('--pp-content-width', this.value + 'px');
+                this.nextElementSibling.innerText = this.value + 'px';">
+                <output>640px</output>
             </label>
 
             <label for="variation">
-                <span>Variation (on large screens)</span>
+                <span>Variation</span>
                 <select id="variation" 
                     onchange="el = document.querySelector('podcast-player');
                     el.setAttribute('data-variation', this.value);
                     el.shadowRoot.querySelector('.podcast-player').setAttribute('data-variation', this.value);">
-                    <option value="floating">Floating</option>
-                    <option value="">Fixed</option>
+                    <option value="floating">Floating on large screens</option>
+                    <option value="">Fixed to the bottom (or top) edge on all screens</option>
                 </select>
             </label>
         </fieldset>
-    
-        <p>Ea corrupti consectetur inventore quibusdam, quisquam odio dolore provident fuga quod odit voluptatibus itaque asperiores facere eos eveniet, facilis nisi quae cumque praesentium esse sunt, quia dolorum sint laborum. Id?</p>
-        <p>Fuga libero minima minus necessitatibus, illo esse ad soluta distinctio officiis porro voluptatem consectetur recusandae deleniti eaque excepturi dicta quibusdam tempora cumque atque! Fugiat iusto officiis saepe nostrum soluta nesciunt.</p>
-        <p>Tempore totam quo cupiditate, ratione delectus sit eligendi aliquid quidem, velit iste itaque pariatur eius nostrum a dolores culpa voluptatem, minus accusantium asperiores. At nam doloribus est molestiae, provident explicabo?</p>
-        <p>Perspiciatis enim nostrum voluptatum consequatur, vitae earum itaque officiis dolores deleniti molestiae, id necessitatibus nam eius. Nostrum ratione incidunt, eaque provident accusamus earum, omnis velit similique nobis, eos vel nesciunt?</p>
-        <p>Illo facere recusandae ducimus maxime! Molestias ducimus asperiores vitae officia iure beatae praesentium expedita dolor repellat nisi, quibusdam fugit odio, obcaecati accusamus perferendis quaerat sit, dicta neque modi voluptatem porro?</p>
-        <p>Reprehenderit obcaecati vitae maxime illo in suscipit quo a molestiae veniam iusto eveniet temporibus, ullam nisi sit hic quas doloremque? Quam nam sed ab adipisci blanditiis perspiciatis fugiat beatae quod!</p>
 
+        <style>
+            #codes {
+                display: grid;
+                margin-block: 1.5lh;
+                code:has(pre) { overflow: auto; display: block; }
+            }
+        </style>
+        <fieldset id="codes">
+            <legend>📟 Codes</legend>
+            <h3>CSS custom prop overrides</h3>
+            <code>
+                <pre>:root {
+    --pp-hue: 205deg;
+    --pp-sat: 35%;
+    --pp-lig: 40%;
+    --pp-gradient-hue-difference: 15deg;
+    --pp-content-width: 640px;
+}</pre>
+            </code>
+
+            <h3>Custom element markup</h3>
+            <code>
+                <pre>&lt;podcast-player data-title="…" data-thumb="…" data-variation="floating"&gt;
+    &lt;a class="show-and-play" href="…"&gt;Play&lt;/a&gt;
+&lt;/podcast-player&gt;</pre>
+            </code>
+        </fieldset>
+    
         <hr>
         <p><a href="https://github.com/nonsalant/fixed-podcast-player/">View GitHub repo</a></p>
         <p><a href="https://codepen.io/nonsalant/pen/pvoyRmZ" target="_blank">View on CodePen</a></p>
