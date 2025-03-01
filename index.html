@@ -65,6 +65,112 @@
                 <div icon-name="play-circle">Resume</div>
             </a>
         </podcast-player> -->
+
+        <h3>⚙️ Options</h3>
+        
+        <color-picker>
+            <style>
+                /* color picker styles */
+                label:has(>#color-picker[type=color]) {display:flex; gap:.5lh; align-items:center; cursor:pointer; margin-block-end:1lh;}
+                #color-picker[type=color] {border-radius:50%; inline-size:2em; block-size:2em; cursor: pointer; padding:0px; border-width:3px; border-style:solid; border-color:rgb(220,220,220);}
+                #color-picker[type=color]::-webkit-color-swatch-wrapper {padding:0px;}
+                #color-picker[type=color]::-webkit-color-swatch {border-radius:50%;}
+                #color-picker[type=color]::-moz-color-swatch {border-radius:50%;}
+            </style>
+            <label for="color-picker">
+                <span>Base Color</span>
+                <input type="color" value="#05267b" id="color-picker">
+            </label>
+        </color-picker>
+        <script type="module">
+            class ColorPicker extends HTMLElement {
+                constructor() {
+                    super();
+                    this.defaultColor = this.getAttribute("default-color") ?? "#003366"; // darkblue
+                    this.propName = "--pp-color";
+                    this.hue = "--pp-hue";
+                    this.sat = "--pp-sat";
+                    this.lig = "--pp-lig";
+                }
+
+                connectedCallback() {
+                    this.picker = this.querySelector("input[type=color]");
+
+                    const initialColor = getProp(this.propName);
+                    this.picker.value = initialColor.startsWith("#")
+                        ? initialColor
+                        : this.defaultColor;
+
+                    this.picker.addEventListener("input", this.updateColor.bind(this));
+                }
+
+                updateColor(event) {
+                    setProp(this.propName, event.target.value);
+                    const hsl = hexToHsl(event.target.value);
+                    setProp(this.hue, hsl.h + "deg");
+                    setProp(this.sat, hsl.s + "%");
+                    setProp(this.lig, hsl.l + "%");
+                    // console.log(hsl);
+                }
+            }
+
+            customElements.define("color-picker", ColorPicker);
+
+            function setProp(propName, propValue) {
+                document.documentElement.style.setProperty(propName, propValue);
+            }
+
+            function getProp(propName) {
+                return getComputedStyle(document.documentElement)
+                    .getPropertyValue(propName)
+                    .trim();
+            }
+
+            function hexToHsl(hex) {
+                // Remove '#' if present
+                hex = hex.replace(/^#/, "");
+
+                let r = parseInt(hex.substring(0, 2), 16) / 255;
+                let g = parseInt(hex.substring(2, 4), 16) / 255;
+                let b = parseInt(hex.substring(4, 6), 16) / 255;
+
+                let max = Math.max(r, g, b),
+                    min = Math.min(r, g, b);
+                let h,
+                    s,
+                    l = (max + min) / 2;
+
+                if (max === min) {
+                    h = s = 0; // Grayscale
+                } else {
+                    let d = max - min;
+                    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+                    switch (max) {
+                        case r:
+                            h = (g - b) / d + (g < b ? 6 : 0);
+                            break;
+                        case g:
+                            h = (b - r) / d + 2;
+                            break;
+                        case b:
+                            h = (r - g) / d + 4;
+                            break;
+                    }
+
+                    h = Math.round(h * 60);
+                }
+
+                return { h, s: Math.round(s * 100), l: Math.round(l * 100) };
+            }
+
+        </script>
+
+        <label for="gradient-difference">
+            <span>Gradient hue difference</span>
+            <input type="range" id="gradient-difference" min="0" max="360" step="1" value="15"
+            oninput="document.documentElement.style.setProperty('--pp-gradient-hue-difference', this.value + 'deg');">
+        </label>
     
         <p>Ea corrupti consectetur inventore quibusdam, quisquam odio dolore provident fuga quod odit voluptatibus itaque asperiores facere eos eveniet, facilis nisi quae cumque praesentium esse sunt, quia dolorum sint laborum. Id?</p>
         <p>Fuga libero minima minus necessitatibus, illo esse ad soluta distinctio officiis porro voluptatem consectetur recusandae deleniti eaque excepturi dicta quibusdam tempora cumque atque! Fugiat iusto officiis saepe nostrum soluta nesciunt.</p>
