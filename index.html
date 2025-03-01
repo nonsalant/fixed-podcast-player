@@ -101,7 +101,7 @@
                 </style>
                 <label for="color-picker">
                     <input type="color" value="#426c8a" id="color-picker">
-                    <span>Button color (also the base color)</span>
+                    <span>Button color<br> (also the base color)</span>
                     <output>
                         <ul>
                             <li>hue: 205deg</li>
@@ -147,9 +147,9 @@
                         // console.log(hsl);
                         this.querySelector("output").innerHTML = `
                         <ul>
-                            <li>hue: ${hsl.h}deg</li>
-                            <li>saturation: ${hsl.s}%</li>
-                            <li>lightnes: ${hsl.l}%</li>
+                            <li>hue: <code>${hsl.h}deg</code></li>
+                            <li>saturation: <code>${hsl.s}%</code></li>
+                            <li>lightnes: <code>${hsl.l}%</code></li>
                         </ul>
                         `;
                     }
@@ -212,7 +212,7 @@
                 <input type="range" id="gradient-difference" min="0" max="360" step="1" value="15"
                 oninput="document.documentElement.style.setProperty('--pp-gradient-hue-difference', this.value + 'deg');
                 this.nextElementSibling.innerText = this.value + 'deg';">
-                <output>15deg</output>
+                <code>15deg</code>
             </label>
 
             <label for="content-width">
@@ -220,7 +220,7 @@
                 <input type="range" id="content-width" min="200" max="2000" step="1" value="640"
                 oninput="document.documentElement.style.setProperty('--pp-content-width', this.value + 'px');
                 this.nextElementSibling.innerText = this.value + 'px';">
-                <output>640px</output>
+                <code>640px</code>
             </label>
 
             <label for="border-radius">
@@ -228,7 +228,7 @@
                 <input type="range" id="border-radius" min="0" max="50" step="1" value="24"
                 oninput="document.documentElement.style.setProperty('--pp-radius', this.value + 'px');
                 this.nextElementSibling.innerText = this.value + 'px';">
-                <output>24px</output>
+                <code>24px</code>
             </label>
 
             <label for="variation">
