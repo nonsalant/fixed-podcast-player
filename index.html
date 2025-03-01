@@ -208,7 +208,7 @@
             </script>
 
             <label for="gradient-difference">
-                <span>Hue distance<br> (for gradient background)</span>
+                <span>Hue difference in gradient<br> (for player background)</span>
                 <input type="range" id="gradient-difference" min="0" max="360" step="1" value="15"
                 oninput="document.documentElement.style.setProperty('--pp-gradient-hue-difference', this.value + 'deg');
                 this.nextElementSibling.innerText = this.value + 'deg';">
@@ -231,19 +231,20 @@
                 <code>24px</code>
             </label>
 
-            <!-- <h3>CSS</h3>
-            <code>
-                <pre>:root {
+            <section>
+                <h3>CSS</h3>
+                <code>
+                    <pre>:root {
     --pp-hue: 205deg;
     --pp-sat: 35%;
     --pp-lig: 40%;
     --pp-gradient-hue-difference: 15deg;
     --pp-content-width: 640px;
 }</pre>
-            </code> -->
+                </code>
+            </section>
 
         </fieldset>
-
         <fieldset id="codes">
             <legend>⚙️ Attributes</legend>
 
@@ -269,12 +270,14 @@
                 </select>
             </label>
 
-            <!-- <h3>HTML</h3>
-            <code>
-                <pre>&lt;podcast-player data-title="…" data-thumb="…" data-variation="floating"&gt;
+            <section>
+                <h3>HTML</h3>
+                <code>
+                    <pre>&lt;podcast-player data-title="…" data-thumb="…" data-variation="floating"&gt;
     &lt;a class="show-and-play" href="…"&gt;Play&lt;/a&gt;
 &lt;/podcast-player&gt;</pre>
-            </code> -->
+                </code>
+            </section>
         </fieldset>
 
         <p><a href="https://github.com/nonsalant/fixed-podcast-player/">View GitHub repo</a></p>
