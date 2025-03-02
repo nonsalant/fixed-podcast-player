@@ -12,14 +12,14 @@
         <label for="color-picker">
             <span>Button color<br> (also the base color)</span>
             <input type="color" value="#426c8a" id="color-picker">
-            <output>
-                <ul>
-                    <li>hue: <code>205deg</code></li>
-                    <li>saturation: <code>35%</code></li>
-                    <li>lightnes: <code>40%</code></li>
-                </ul>
-            </output>
         </label>
+        <output>
+            <ul>
+                <li><label for="hue"><span>hue</span> <input type="range" id="hue" min="0" max="360" step="1" value="205"><code>205deg</code></label></li>
+                <li><label for="sat"><span>saturation</span> <input type="range" id="sat" min="0" max="100" step="1" value="35"><code>35%</code></label></li>
+                <li><label for="lig"><span>lightness</span> <input type="range" id="lig" min="0" max="100" step="1" value="40"><code>40%</code></label></li>
+            </ul>
+        </output>
     </color-picker>
 
     <label for="gradient-difference">
