@@ -1,17 +1,17 @@
 (async () => {
     const scriptTag = document.getElementById("customizer-script");
-    if (!window.location.search.includes('?customize')) return;
+    if (!window.location.search.includes("?customize")) return;
 
     // Load customizer
     const response = await fetch("./customizer/index.html");
-    const container = Object.assign(document.createElement('div'), { innerHTML: await response.text() });
+    const container = Object.assign(document.createElement("div"), { innerHTML: await response.text() });
     scriptTag.replaceWith(...container.childNodes);
 
 
-    // Load customizer scripts (styles are inside the HTML)
+    // Load customizer scripts (css files are inside the HTML)
     const localScripts = [
-        "./script.js",
-        "./color-picker.js"
+        "./customizer/script.js",
+        "./customizer/color-picker.js"
     ];
     await Promise.all(localScripts.map(src => import(src)));
     const scripts = [
@@ -22,7 +22,7 @@
     
     // Change the link
     const link = document.getElementById("customizer-link");
-    const url = new URL(window.location); url.searchParams.delete('customize');
+    const url = new URL(window.location); url.searchParams.delete("customize");
     Object.assign(link, { href: url.toString(), textContent: "Close Customizer" });
 
     // Scroll to the element before the <podcast-player>
