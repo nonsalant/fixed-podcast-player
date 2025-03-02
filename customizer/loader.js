@@ -10,8 +10,8 @@
 
     // Load customizer scripts (styles are inside the HTML)
     const localScripts = [
-        "script.js",
-        "color-picker.js"
+        "./script.js",
+        "./color-picker.js"
     ];
     await Promise.all(localScripts.map(src => import(src)));
     const scripts = [
