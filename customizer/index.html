@@ -1,19 +1,14 @@
 <!-- code-block  CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/vs.min.css">
 
+<!-- fieldset styles -->
 <link rel="stylesheet" href="./customizer/fieldset.css">
 <fieldset id="customize">
     <legend>🎨 Customize</legend>
     
     <color-picker>
-        <style>
-            /* color picker styles */
-            label:has(>#color-picker[type=color]) {display:flex; align-items:center; gap:.5lh; ul {margin:0; padding-inline-start:1lh;} }
-            #color-picker[type=color] {border-radius:50%; inline-size:2em; block-size:2em; cursor: pointer; padding:0px; border-width:3px; border-style:solid; border-color:rgb(220,220,220);}
-            #color-picker[type=color]::-webkit-color-swatch-wrapper {padding:0px;}
-            #color-picker[type=color]::-webkit-color-swatch {border-radius:50%;}
-            #color-picker[type=color]::-moz-color-swatch {border-radius:50%;}
-        </style>
+        <!-- color picker styles -->
+        <link rel="stylesheet" href="./customizer/color-picker.css">
         <label for="color-picker">
             <span>Button color<br> (also the base color)</span>
             <input type="color" value="#426c8a" id="color-picker">
@@ -54,7 +49,7 @@
     <section>
         <h3>overrides.css</h3>
         <copy-to-clipboard>
-            <code-block language="css" controls>
+            <code-block language="css">
               <pre><code>:root {
     --pp-hue: 205deg;
     --pp-sat: 35%;
@@ -132,7 +127,7 @@
     <section>
         <h3>index.html</h3>
         <copy-to-clipboard>
-            <code-block language="html" controls>
+            <code-block language="html">
                 <pre><code>&lt;podcast-player data-title="…" data-thumb="…" data-variation="floating"&gt;
     &lt;a class="show-and-play" href="…"&gt;Play&lt;/a&gt;
 &lt;/podcast-player&gt;</code></pre>

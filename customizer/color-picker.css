@@ -1,0 +1,12 @@
+label:has(>#color-picker[type=color]) {
+    display:flex; align-items:center; gap:.5lh; ul {margin:0; padding-inline-start:1lh;}
+}
+
+#color-picker[type=color] {
+    border-radius:50%; inline-size:2em; block-size:2em; cursor: pointer; padding:0px; border-width:3px; border-style:solid; border-color:rgb(220,220,220);
+}
+
+#color-picker[type=color]::-webkit-color-swatch-wrapper {padding:0px;}
+
+#color-picker[type=color]::-webkit-color-swatch {border-radius:50%;}
+#color-picker[type=color]::-moz-color-swatch {border-radius:50%;}
