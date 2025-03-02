@@ -5,7 +5,7 @@ fieldset {
     border-radius: 3px;
     gap: 1lh;
     margin-block: 1.5lh;
-    padding: .25lh .5lh;
+    padding: .25lh 1lh;
 
     legend { font-weight: bold; padding-inline: .25lh; }
     :is(h2, h3) { margin-block-end: 0; }
