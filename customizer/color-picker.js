@@ -35,9 +35,9 @@ class ColorPicker extends HTMLElement {
         // console.log(hsl);
         this.querySelector("output").innerHTML = `
         <ul>
-            <li><label for="hue"><span>hue</span>       <input type="range" id="hue" min="0" max="360" step="1" value="205" oninput="document.documentElement.style.setProperty('--pp-hue', this.value + 'deg'); this.nextElementSibling.innerText = this.value + 'deg'; document.getElementById('color-picker').value = window.hslToHex(document.documentElement.style.getPropertyValue('--pp-hue').replace(/deg$/, ''), document.documentElement.style.getPropertyValue('--pp-sat').replace(/%$/, ''), document.documentElement.style.getPropertyValue('--pp-lig').replace(/%$/, ''));"><code>${hsl.h}deg</code></label></li>
-            <li><label for="sat"><span>saturation</span><input type="range" id="sat" min="0" max="100" step="1" value="35"  oninput="document.documentElement.style.setProperty('--pp-sat', this.value + '%');   this.nextElementSibling.innerText = this.value + '%';   document.getElementById('color-picker').value = window.hslToHex(document.documentElement.style.getPropertyValue('--pp-hue').replace(/deg$/, ''), document.documentElement.style.getPropertyValue('--pp-sat').replace(/%$/, ''), document.documentElement.style.getPropertyValue('--pp-lig').replace(/%$/, ''));"><code>${hsl.s}%</code></label></li>
-            <li><label for="lig"><span>lightness</span> <input type="range" id="lig" min="0" max="100" step="1" value="40"  oninput="document.documentElement.style.setProperty('--pp-lig', this.value + '%');   this.nextElementSibling.innerText = this.value + '%';   document.getElementById('color-picker').value = window.hslToHex(document.documentElement.style.getPropertyValue('--pp-hue').replace(/deg$/, ''), document.documentElement.style.getPropertyValue('--pp-sat').replace(/%$/, ''), document.documentElement.style.getPropertyValue('--pp-lig').replace(/%$/, ''));"><code>${hsl.l}%</code></label></li>
+            <li>${renderRangeCustomProp('hue', '--pp-hue', 'hue',        0, 360, 1, 205, 'deg')}</li>
+            <li>${renderRangeCustomProp('sat', '--pp-sat', 'saturation', 0, 100, 1, 35, '%')}</li>
+            <li>${renderRangeCustomProp('lig', '--pp-lig', 'lightness',  0, 100, 1, 40, '%')}</li>
         </ul>
         `;
     }
@@ -93,7 +93,7 @@ function hexToHsl(hex) {
     return { h, s: Math.round(s * 100), l: Math.round(l * 100) };
 }
 
-window.hslToHex = function (h, s, l) {
+globalThis.__hslToHex = function(h, s, l) {
     s /= 100;
     l /= 100;
 
@@ -121,4 +121,28 @@ window.hslToHex = function (h, s, l) {
     b = Math.round((b + m) * 255).toString(16).padStart(2, '0');
 
     return `#${r}${g}${b}`;
+}
+
+function renderRangeCustomProp(id, propName, label, min, max, step, value, unit) {
+    return `
+    <label for="${id}">
+    <span>${label}</span>
+    <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${value}"
+            oninput="
+                this.nextElementSibling.innerText = this.value+'${unit}';
+                document.documentElement.style.setProperty('${propName}', this.value+'${unit}');
+
+                const hex = globalThis.__hslToHex(
+                    document.documentElement.style.getPropertyValue('--pp-hue').replace(/deg$/, ''),
+                    document.documentElement.style.getPropertyValue('--pp-sat').replace(/%$/, ''),
+                    document.documentElement.style.getPropertyValue('--pp-lig').replace(/%$/, '')
+                );
+
+                document.documentElement.style.setProperty('--pp-color', hex);
+                document.getElementById('color-picker').value = hex;
+            "
+        >
+        <code>${value}${unit}</code>
+    </label>
+    `;
 }
