@@ -1,6 +1,6 @@
 fieldset {
     accent-color: var(--pp-color);
-    background-color: light-dark(#eee, #222);
+    background-color: light-dark(#ddd, #333);
     display: grid;
     border-radius: 3px;
     gap: 1lh;
