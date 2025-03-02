@@ -3,7 +3,7 @@ label:has(>#color-picker[type=color]) {
 }
 
 #color-picker[type=color] {
-    border-radius:50%; inline-size:3em; block-size:3em; cursor: pointer; padding:0px; border-width:3px; border-style:solid; border-color:rgb(220,220,220);
+    border-radius:50%; inline-size:4em; block-size:4em; cursor: pointer; padding:0px; border-width:3px; border-style:solid; border-color:rgb(220,220,220);
 }
 
 #color-picker[type=color]::-webkit-color-swatch-wrapper {padding:0px;}
