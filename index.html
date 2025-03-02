@@ -74,38 +74,7 @@
         <!-- -->
         
         <a href="?customize" id="customizer-link" class="show-and-play" style="background-color: rgba(136, 136, 136, 0.94); margin-block: 1lh;">Customize</a>
-        <script type="module" id="customizer-script">
-            (async () => {
-                const scriptTag = document.getElementById("customizer-script");
-                if (!window.location.search.includes('?customize')) return;
-
-                // Load customizer
-                const response = await fetch("./customizer/index.html");
-                const container = Object.assign(document.createElement('div'), { innerHTML: await response.text() });
-                scriptTag.replaceWith(...container.childNodes);
-
-
-                // Load customizer scripts (styles are inside the HTML)
-                const localScripts = [
-                    "./customizer/script.js",
-                    "./customizer/color-picker.js"
-                ];
-                await Promise.all(localScripts.map(src => import(src)));
-                const scripts = [
-                    "https://cdn.jsdelivr.net/npm/@parsonic/copy-to-clipboard/min.js",
-                    "https://cdn.jsdelivr.net/npm/@heppokofrontend/html-code-block-element/lib/html-code-block-element.common.min.js"
-                ];
-                await Promise.all(scripts.map(src => import(src)));
-                
-                // Change the link
-                const link = document.getElementById("customizer-link");
-                const url = new URL(window.location); url.searchParams.delete('customize');
-                Object.assign(link, { href: url.toString(), textContent: "Close Customizer" });
-
-                // Scroll to the element before the <podcast-player>
-                document.querySelector("*:has(+ podcast-player)").scrollIntoView({ behavior: "smooth" });
-            })();
-        </script>
+        <script type="module" id="customizer-script" src="./customizer/loader.js"></script>
 
         <p><a href="https://github.com/nonsalant/fixed-podcast-player/">View GitHub repo</a></p>
         <p><a href="https://codepen.io/nonsalant/pen/pvoyRmZ" target="_blank">View on CodePen</a></p>
