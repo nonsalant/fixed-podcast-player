@@ -1,11 +1,11 @@
 fieldset {
     accent-color: var(--pp-color);
-    background-color: light-dark(#ddd, #333);
+    background-color: light-dark(#ddd, #111);
     display: grid;
     border-radius: 3px;
     gap: 1lh;
     margin-block: 1.5lh;
-    padding: .25lh 1lh;
+    padding: .5lh 1lh;
 
     legend { font-weight: bold; padding-inline: .25lh; }
     :is(h2, h3) { margin-block-end: 0; }
@@ -26,7 +26,7 @@ fieldset {
         white-space: pre-wrap; word-wrap: break-word;
     }
     code-block {
-        /* ! this didn't eork here: white-space: pre-wrap; word-wrap: break-word; */
+        /* ! this didn't work here: white-space: pre-wrap; word-wrap: break-word; */
         max-width: 100%;
         display: block;
         overflow-x: auto;
