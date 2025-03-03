@@ -1,6 +1,7 @@
 (async () => {
     const scriptTag = document.getElementById("customizer-script");
-    if (!window.location.search.includes("?customize")) return;
+    const urlParams = new URLSearchParams(window.location.search);
+    if (!urlParams.has("customize")) return;
 
     // Load customizer
     const response = await fetch("./customizer/index.html");
@@ -14,6 +15,8 @@
         "./color-picker.js"
     ];
     await Promise.all(localScripts.map(src => import(src)));
+    
+    // Load external scripts (copy-to-clipboard and html-code-block-element)
     const scripts = [
         "https://cdn.jsdelivr.net/npm/@parsonic/copy-to-clipboard/min.js",
         "https://cdn.jsdelivr.net/npm/@heppokofrontend/html-code-block-element/lib/html-code-block-element.common.min.js"
