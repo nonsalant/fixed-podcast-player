@@ -1,26 +1,37 @@
-document.querySelector("fieldset#customize").addEventListener("input", (e) => {
+document.querySelector("fieldset#customize").addEventListener("input", () => {
     processCustomize("#customize");
 });
-document.querySelector("fieldset#attributes").addEventListener("input", (e) => {
+document.querySelector("fieldset#attributes").addEventListener("input", () => {
     processAttributes("#attributes");
 });
 
 function processCustomize(selector) {
     const fieldset = document.querySelector("fieldset"+selector);
-    const colorPicker = fieldset.querySelector("#color-picker").value;
+    const hue = fieldset.querySelector("#hue").value;
+    const sat = fieldset.querySelector("#sat").value;
+    const lig = fieldset.querySelector("#lig").value;
     const gradientDifference = fieldset.querySelector("#gradient-difference").value;
     const contentWidth = fieldset.querySelector("#content-width").value;
     const borderRadius = fieldset.querySelector("#border-radius").value;
-    // console.log({colorPicker, gradientDifference, contentWidth, borderRadius});
-    renderCss();
+
+    document.querySelector("fieldset#customize code-block").innerHTML = `:root {
+    --pp-hue: ${hue};
+    --pp-sat: ${sat};
+    --pp-lig: ${lig};
+    --pp-gradient-hue-difference: ${gradientDifference || "15deg"};
+    --pp-content-width: ${contentWidth || "640px"};
+    --pp-radius: ${borderRadius || "24px"};
+}`;
 }
+
 function processAttributes(selector) {
     const fieldset = document.querySelector("fieldset"+selector);
     const variation = fieldset.querySelector("#variation").value;
     const position = fieldset.querySelector("#position").value;
     const title = fieldset.querySelector("#title").value;
     const thumb = fieldset.querySelector("#thumb").value;
-const src = fieldset.querySelector("#src").value;
+    const src = fieldset.querySelector("#src").value;
+    
     document.querySelector("fieldset#attributes code-block").innerHTML = `&lt;podcast-player 
     data-title="${title || "…"}"
     data-thumb="${thumb || "…"}"
@@ -31,14 +42,3 @@ const src = fieldset.querySelector("#src").value;
 &lt;/podcast-player&gt;`;
 }
 
-function renderCss() {
-    // console.log(document.querySelector("fieldset#customize code pre"))
-    document.querySelector("fieldset#customize code-block").innerHTML = `:root {
-    --pp-hue: ${document.documentElement.style.getPropertyValue("--pp-hue")};
-    --pp-sat: ${document.documentElement.style.getPropertyValue("--pp-sat")};
-    --pp-lig: ${document.documentElement.style.getPropertyValue("--pp-lig")};
-    --pp-gradient-hue-difference: ${document.documentElement.style.getPropertyValue("--pp-gradient-hue-difference") || "15deg"};
-    --pp-content-width: ${document.documentElement.style.getPropertyValue("--pp-content-width") || "640px"};
-    --pp-radius: ${document.documentElement.style.getPropertyValue("--pp-radius") || "24px"};
-}`;
-}
