@@ -43,7 +43,7 @@
         oninput="globalThis.customizer.setupPropListener(this, '--pp-radius', 'px');">
         <code>24px</code>
     </label>
-this
+
     <section>
         <h3>overrides.css</h3>
         <copy-to-clipboard>
@@ -70,7 +70,7 @@ this
     <label for="variation">
         <span>Variation</span>
         <select id="variation" 
-        oninput="globalThis.customizer.setupAttListener(this, 'data-variation');">
+        oninput="new globalThis.customizer.setupContentListener(this, 'data-variation');">
             <option value="floating">Floating on large screens</option>
             <option value="">Fixed to the bottom or top on all screens</option>
         </select>
@@ -79,7 +79,7 @@ this
     <label for="position">
         <span>Default position</span>
         <select id="position" 
-        oninput="globalThis.customizer.setupAttListener(this, 'data-position');">
+        oninput="new globalThis.customizer.setupContentListener(this, 'data-position');">
             <option value="bottom">Bottom of screen</option>
             <option value="top">Top of screen</option>
         </select>
@@ -91,21 +91,21 @@ this
         <span>Episode title</span>
         <input id="title" 
         value="A closer look at ironweeds, or Vernonia, with Mt. Cuba&#39;s Sam Hoadley"
-        oninput="new globalThis.customizer.setupContentListener(this, 'titleTemplate');">
+        oninput="new globalThis.customizer.setupContentListener(this, 'data-title');">
     </label>
 
     <label for="thumb">
         <span>Thumbnail URL</span>
         <input id="thumb" 
         value="https://picsum.photos/200"
-        oninput="new globalThis.customizer.setupContentListener(this, 'thumbTemplate');">
+        oninput="new globalThis.customizer.setupContentListener(this, 'data-thumb');">
     </label>
 
     <label for="src">
         <span>Audio URL</span>
         <input id="src" 
         value="https://robinhoodradioondemand.com/podcast-player/40982/fat-houseplants-with-ken-druse-a-way-to-garden-with-margaret-roach-march-3-2025.mp3"
-        oninput="new globalThis.customizer.setupContentListener(this, 'srcTemplate');">
+        oninput="new globalThis.customizer.setupContentListener(this, 'data-src');">
     </label>
 
     <section>

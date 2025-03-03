@@ -9,7 +9,7 @@
     Object.assign(link, { href: url.toString(), textContent: "Close Customizer" });
 
     // Load customizer
-    const response = await fetch("./customizer/index.html");
+    const response = await fetch("./customizer/customizer.html");
     const container = Object.assign(document.createElement("div"), { innerHTML: await response.text() });
     scriptTag.replaceWith(...container.childNodes);
 
