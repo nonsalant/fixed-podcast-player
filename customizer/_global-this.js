@@ -14,45 +14,51 @@ globalThis.customizer.setupPropListener = function(el, propName, unit) {
 
 /* used in customizer/index.html */
 globalThis.customizer.setupAttListener = function(el, attName) {
-    el.setAttribute ("oninput", globalThis.customizer.commonTemplate(attName) + `
+    el.setAttribute ("oninput", globalThis.customizer.setupContentListener.commonTemplate(attName) + `
         currentPlayer.shadowRoot.querySelector('.podcast-player').setAttribute('${attName}', this.value);
     `);
 }
 
 /* used in customizer/index.html */
-globalThis.customizer.setupContentListener = function(el, templateFunctionName, attName = "") {
-    globalThis.customizer.setupContentListener[templateFunctionName](el, attName);
-}
+globalThis.customizer.setupContentListener = class {
+    constructor(el, templateFunctionName, attName = "") {
+        globalThis.customizer.setupContentListener[templateFunctionName](el, attName);
+    }
 
-globalThis.customizer.commonTemplate = function(attName, alsoPlayerAtt = false) {
-    return `
-        currentPlayer = document.querySelector('podcast-player');
-        currentPlayer.setAttribute('${attName}', this.value);
-        ${ alsoPlayerAtt ?
+    static commonTemplate(attName, alsoPlayerAtt = false) {
+        return `
+            currentPlayer = document.querySelector('podcast-player');
+            currentPlayer.setAttribute('${attName}', this.value);
+        ${alsoPlayerAtt ?
             `currentPlayer.shadowRoot.querySelector('.podcast-player').setAttribute('${attName}', this.value);`
-        : ""}
-    `;
+            : ""}
+        `;
+    }
+
+    static titleTemplate(el, attName) {
+        attName = attName || "data-title";
+        el.setAttribute("oninput", this.commonTemplate(attName, true) + `
+            currentPlayer.shadowRoot.querySelector('h3').setAttribute('title', this.value);
+            currentPlayer.shadowRoot.querySelector('h3').innerText = this.value;
+        `);
+    }
+
+    static thumbTemplate(el, attName) {
+        attName = attName || "data-thumb";
+        el.setAttribute("oninput", this.commonTemplate(attName, true) + `
+            currentPlayer.shadowRoot.querySelector('header').style.backgroundImage = 'url('+this.value+')';
+        `);
+    }
+
+    static srcTemplate(el, attName) {
+        attName = attName || "data-src";
+        el.setAttribute("oninput", this.commonTemplate(attName, true) + `
+            currentPlayer.shadowRoot.querySelector('audio').src = this.value;
+            currentPlayer.shadowRoot.querySelector('a')?.setAttribute('href', this.value);
+        `);
+    }
 }
 
-globalThis.customizer.setupContentListener.titleTemplate = function(el, attName) {
-    attName = attName || "data-title";
-    el.setAttribute("oninput", globalThis.customizer.commonTemplate(attName, true) + `
-        currentPlayer.shadowRoot.querySelector('h3').setAttribute('title', this.value);
-        currentPlayer.shadowRoot.querySelector('h3').innerText = this.value;
-    `);
-}
 
-globalThis.customizer.setupContentListener.thumbTemplate = function(el, attName) {
-    attName = attName || "data-thumb";
-    el.setAttribute("oninput", globalThis.customizer.commonTemplate(attName, true) + `
-        currentPlayer.shadowRoot.querySelector('header').style.backgroundImage = 'url('+this.value+')';
-    `);
-}
 
-globalThis.customizer.setupContentListener.srcTemplate = function(el, attName) {
-    attName = attName || "data-src";
-    el.setAttribute("oninput", globalThis.customizer.commonTemplate(attName, true) + `
-        currentPlayer.shadowRoot.querySelector('audio').src = this.value;
-        currentPlayer.shadowRoot.querySelector('a')?.setAttribute('href', this.value);
-    `);
-}
+
