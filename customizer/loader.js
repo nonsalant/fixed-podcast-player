@@ -15,29 +15,33 @@
 
     // Load customizer scripts (css files are referenced inside)
     const localScripts = [
-        "./_global-this.js",
+        "./global-this/_customizer.js",
+        "./global-this/_color-picker.js",
         "./fieldsets.js",
-        "./_global-this-color-picker.js",
         "./color-picker.js",
     ];
     await Promise.all(localScripts.map(src => import(src)));
     
     // Load external scripts (copy-to-clipboard and html-code-block-element)
-    // https://github.com/heppokofrontend/html-code-block-element
-    // https://github.com/p-m-p/parsonic/tree/main/packages/copy-to-clipboard
-    // ! Bug: the word "copy" is being copied at the start of the copied text
     const scripts = [
+        // https://github.com/p-m-p/parsonic/tree/main/packages/copy-to-clipboard
         "https://cdn.jsdelivr.net/npm/@heppokofrontend/html-code-block-element/lib/html-code-block-element.common.min.js",
-        "https://cdn.jsdelivr.net/npm/@parsonic/copy-to-clipboard/min.js",
+        // https://github.com/heppokofrontend/html-code-block-element
+        "https://cdn.jsdelivr.net/npm/@parsonic/copy-to-clipboard/min.js", // ! Bug: the word "copy" is being copied too
     ];
     await Promise.all(scripts.map(src => import(src)));
 
-    // Init the customizer: Trigger an input event once to update any oninput attributes
+    // Init Customizer fields: Trigger an input event once to hydrate the oninput attributes
     const triggerableElements = document.querySelectorAll("fieldset [oninput]");
     triggerableElements.forEach(el => {
         el.dispatchEvent(new Event("input", { bubbles: true }));
     });
-
+    /*  e.g: oninput="new globalThis.customizer.setupContentListener(this, 'data-variation');"
+    becomes: oninput="const pp = document.querySelector('podcast-player');
+            pp.setAttribute('data-variation', this.value);
+            pp.shadowRoot.querySelector('.podcast-player').setAttribute('data-variation', this.value);"
+    */
+    
     // Scroll to the element before the <podcast-player>
     document.querySelector("*:has(+ podcast-player)").scrollIntoView({ behavior: "smooth" });
 

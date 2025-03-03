@@ -24,7 +24,8 @@ fieldset {
         }
     }
     pre:has(code) {
-        white-space: pre-wrap; word-wrap: break-word;
+        white-space: pre-wrap;
+        word-wrap: break-word;
     }
     code-block {
         /* ! this didn't work here: white-space: pre-wrap; word-wrap: break-word; */
