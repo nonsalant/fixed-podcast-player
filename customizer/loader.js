@@ -23,9 +23,12 @@
     await Promise.all(localScripts.map(src => import(src)));
     
     // Load external scripts (copy-to-clipboard and html-code-block-element)
+    // https://github.com/heppokofrontend/html-code-block-element
+    // https://github.com/p-m-p/parsonic/tree/main/packages/copy-to-clipboard
+    // ! Bug: the word "copy" is being copied at the start of the copied text
     const scripts = [
+        "https://cdn.jsdelivr.net/npm/@heppokofrontend/html-code-block-element/lib/html-code-block-element.common.min.js",
         "https://cdn.jsdelivr.net/npm/@parsonic/copy-to-clipboard/min.js",
-        "https://cdn.jsdelivr.net/npm/@heppokofrontend/html-code-block-element/lib/html-code-block-element.common.min.js"
     ];
     await Promise.all(scripts.map(src => import(src)));
 
