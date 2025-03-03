@@ -34,11 +34,13 @@ fieldset {
         button { margin-block-start: 2em; }
     }
 
-    & > label { 
+    & > label,
+    .control { 
         display: grid;
         gap: .5lh;
         align-items: center; 
         grid-template-columns: auto 1fr 5rem;
         @media (width < 600px ) { grid-template-columns: 1fr; }
+        width: 100%;
     }
 }

@@ -93,7 +93,7 @@ function hexToHsl(hex) {
     return { h, s: Math.round(s * 100), l: Math.round(l * 100) };
 }
 
-globalThis.__hslToHex = function(h, s, l) {
+function hslToHex(h, s, l) {
     s /= 100;
     l /= 100;
 
@@ -122,17 +122,18 @@ globalThis.__hslToHex = function(h, s, l) {
 
     return `#${r}${g}${b}`;
 }
+globalThis.colorPicker_hslToHex = hslToHex;
 
 function renderRangeCustomProp(id, propName, label, min, max, step, value, unit) {
     return `
-    <label for="${id}">
-    <span>${label}</span>
-    <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${value}"
+    <label class="control" for="${id}">
+        <span>${label}</span>
+        <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${value}"
             oninput="
                 this.nextElementSibling.innerText = this.value+'${unit}';
                 document.documentElement.style.setProperty('${propName}', this.value+'${unit}');
 
-                const hex = globalThis.__hslToHex(
+                const hex = globalThis.colorPicker_hslToHex(
                     document.documentElement.style.getPropertyValue('--pp-hue').replace(/deg$/, ''),
                     document.documentElement.style.getPropertyValue('--pp-sat').replace(/%$/, ''),
                     document.documentElement.style.getPropertyValue('--pp-lig').replace(/%$/, '')
