@@ -2,13 +2,7 @@
 globalThis.customizer = globalThis.customizer ?? {};
 globalThis.customizer.colorPicker = {};
 
-function setProp(propName, propValue) { document.documentElement.style.setProperty(propName, propValue); }
-globalThis.customizer.setProp = setProp;
-
-function getProp(propName) { return getComputedStyle(document.documentElement).getPropertyValue(propName).trim(); }
-globalThis.customizer.getProp = getProp;
-
-function hslToHex(h, s, l) {
+globalThis.customizer.hslToHex = function(h, s, l) {
     s /= 100;
     l /= 100;
 
@@ -37,22 +31,19 @@ function hslToHex(h, s, l) {
 
     return `#${r}${g}${b}`;
 }
-globalThis.customizer.hslToHex = hslToHex;
 
-function getHslValues() {
+globalThis.customizer.getHslValues = function() {
     return {
         h: globalThis.customizer.getProp('--pp-hue').replace(/deg$/, ''),
         s: globalThis.customizer.getProp('--pp-sat').replace(/%$/, ''),
         l: globalThis.customizer.getProp('--pp-lig').replace(/%$/, '')
     };
 }
-globalThis.customizer.getHslValues = getHslValues;
 
-function handleRange() {
+globalThis.customizer.colorPicker.handleRange = function() {
     const hsl = globalThis.customizer.getHslValues();
     const hex = globalThis.customizer.hslToHex(hsl.h, hsl.s, hsl.l);
 
     globalThis.customizer.setProp('--pp-color', hex);
     document.getElementById('color-picker').value = hex;
 }
-globalThis.customizer.colorPicker.handleRange = handleRange;

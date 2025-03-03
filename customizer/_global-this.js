@@ -1,30 +1,30 @@
-/* * */
-
 globalThis.customizer = globalThis.customizer ?? {};
 
-function setupPropListener(el, propName, unit) {
+globalThis.customizer.setProp = function(propName, propValue) { document.documentElement.style.setProperty(propName, propValue); }
+
+globalThis.customizer.getProp = function(propName) { return getComputedStyle(document.documentElement).getPropertyValue(propName).trim(); }
+
+/* used in customizer/index.html */
+globalThis.customizer.setupPropListener = function(el, propName, unit) {
     el.setAttribute ("oninput", `
         globalThis.customizer.setProp('${propName}', this.value + '${unit}');
         this.nextElementSibling.innerText = this.value + '${unit}';
     `);
 }
-globalThis.customizer.setupPropListener = setupPropListener;
 
-function setupAttListener(el, attName) {
+/* used in customizer/index.html */
+globalThis.customizer.setupAttListener = function(el, attName) {
     el.setAttribute ("oninput", globalThis.customizer.commonTemplate(attName) + `
         currentPlayer.shadowRoot.querySelector('.podcast-player').setAttribute('${attName}', this.value);
     `);
 }
-globalThis.customizer.setupAttListener = setupAttListener;
 
-/**/
-
-function setupContentListener(el, templateFunctionName, attName = "") {
-    globalThis.customizer[templateFunctionName](el, attName);
+/* used in customizer/index.html */
+globalThis.customizer.setupContentListener = function(el, templateFunctionName, attName = "") {
+    globalThis.customizer.setupContentListener[templateFunctionName](el, attName);
 }
-globalThis.customizer.setupContentListener = setupContentListener;
 
-function commonTemplate(attName, alsoPlayerAtt = false) {
+globalThis.customizer.commonTemplate = function(attName, alsoPlayerAtt = false) {
     return `
         currentPlayer = document.querySelector('podcast-player');
         currentPlayer.setAttribute('${attName}', this.value);
@@ -33,38 +33,26 @@ function commonTemplate(attName, alsoPlayerAtt = false) {
         : ""}
     `;
 }
-globalThis.customizer.commonTemplate = commonTemplate;
 
-function titleTemplate(el, attName) {
+globalThis.customizer.setupContentListener.titleTemplate = function(el, attName) {
     attName = attName || "data-title";
     el.setAttribute("oninput", globalThis.customizer.commonTemplate(attName, true) + `
         currentPlayer.shadowRoot.querySelector('h3').setAttribute('title', this.value);
         currentPlayer.shadowRoot.querySelector('h3').innerText = this.value;
     `);
 }
-globalThis.customizer.titleTemplate = titleTemplate;
 
-function thumbTemplate(el, attName) {
+globalThis.customizer.setupContentListener.thumbTemplate = function(el, attName) {
     attName = attName || "data-thumb";
     el.setAttribute("oninput", globalThis.customizer.commonTemplate(attName, true) + `
         currentPlayer.shadowRoot.querySelector('header').style.backgroundImage = 'url('+this.value+')';
     `);
 }
-globalThis.customizer.thumbTemplate = thumbTemplate;
 
-function srcTemplate(el, attName) {
+globalThis.customizer.setupContentListener.srcTemplate = function(el, attName) {
     attName = attName || "data-src";
     el.setAttribute("oninput", globalThis.customizer.commonTemplate(attName, true) + `
         currentPlayer.shadowRoot.querySelector('audio').src = this.value;
         currentPlayer.shadowRoot.querySelector('a')?.setAttribute('href', this.value);
     `);
 }
-globalThis.customizer.srcTemplate = srcTemplate;
-
-// Init the customizer
-
-// Trigger an input event once to update the oninput attributes
-const triggerableElements = document.querySelectorAll("fieldset [oninput]");
-triggerableElements.forEach(el => {
-    el.dispatchEvent(new Event("input", { bubbles: true }));
-});

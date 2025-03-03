@@ -1,5 +1,24 @@
-const setProp = globalThis.customizer.setProp.bind(globalThis.customizer);
-const getProp = globalThis.customizer.getProp.bind(globalThis.customizer);
+// const setProp = globalThis.customizer.setProp.bind(globalThis.customizer);
+// const getProp = globalThis.customizer.getProp.bind(globalThis.customizer);
+// Sometimes color-picker.js loads before _global-this.js
+function setProp(propName, propValue) { document.documentElement.style.setProperty(propName, propValue); }
+function getProp(propName) { return getComputedStyle(document.documentElement).getPropertyValue(propName).trim(); }
+
+// Render a control with a range input connected to a custom property
+function renderRangeCustomProp(id, propName, label, min, max, step, value, unit) {
+    return `
+    <label class="control" for="${id}">
+        <span>${label}</span>
+        <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${value}"
+        oninput="
+            this.nextElementSibling.innerText = this.value+'${unit}';
+            globalThis.customizer.setProp('${propName}', this.value+'${unit}');
+            globalThis.customizer.colorPicker.handleRange();
+        ">
+        <code>${value}${unit}</code>
+    </label>
+    `;
+}
 
 // Custom Element: color-picker
 class ColorPicker extends HTMLElement {
@@ -30,7 +49,7 @@ class ColorPicker extends HTMLElement {
 
     setColor() {
         setProp(this.propName, this.picker.value);
-        
+
         const hsl = hexToHsl(this.picker.value);
         setProp(this.hue, hsl.h + "deg");
         setProp(this.sat, hsl.s + "%");
@@ -47,23 +66,7 @@ class ColorPicker extends HTMLElement {
 }
 customElements.define("color-picker", ColorPicker);
 
-// Render a control with a range input connected to a custom property
-function renderRangeCustomProp(id, propName, label, min, max, step, value, unit) {
-    return `
-    <label class="control" for="${id}">
-        <span>${label}</span>
-        <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${value}"
-        oninput="
-            this.nextElementSibling.innerText = this.value+'${unit}';
-            globalThis.customizer.setProp('${propName}', this.value+'${unit}');
-            globalThis.customizer.colorPicker.handleRange();
-        ">
-        <code>${value}${unit}</code>
-    </label>
-    `;
-}
-
-// Local Helper Functions
+// Helper Function
 
 function hexToHsl(hex) {
     // Remove '#' if present

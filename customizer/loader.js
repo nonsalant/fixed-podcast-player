@@ -3,16 +3,20 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (!urlParams.has("customize")) return;
 
+    // Change the link
+    const link = document.getElementById("customizer-link");
+    const url = new URL(window.location); url.searchParams.delete("customize");
+    Object.assign(link, { href: url.toString(), textContent: "Close Customizer" });
+
     // Load customizer
     const response = await fetch("./customizer/index.html");
     const container = Object.assign(document.createElement("div"), { innerHTML: await response.text() });
     scriptTag.replaceWith(...container.childNodes);
 
-
-    // Load customizer scripts (css files are inside the HTML)
+    // Load customizer scripts (css files are referenced inside)
     const localScripts = [
-        "./fieldsets.js",
         "./_global-this.js",
+        "./fieldsets.js",
         "./_global-this-color-picker.js",
         "./color-picker.js",
     ];
@@ -24,12 +28,14 @@
         "https://cdn.jsdelivr.net/npm/@heppokofrontend/html-code-block-element/lib/html-code-block-element.common.min.js"
     ];
     await Promise.all(scripts.map(src => import(src)));
-    
-    // Change the link
-    const link = document.getElementById("customizer-link");
-    const url = new URL(window.location); url.searchParams.delete("customize");
-    Object.assign(link, { href: url.toString(), textContent: "Close Customizer" });
+
+    // Init the customizer: Trigger an input event once to update any oninput attributes
+    const triggerableElements = document.querySelectorAll("fieldset [oninput]");
+    triggerableElements.forEach(el => {
+        el.dispatchEvent(new Event("input", { bubbles: true }));
+    });
 
     // Scroll to the element before the <podcast-player>
     document.querySelector("*:has(+ podcast-player)").scrollIntoView({ behavior: "smooth" });
+
 })();
