@@ -1,12 +1,19 @@
-document.querySelector("fieldset#customize").addEventListener("input", () => {
-    processCustomize("#customize");
-});
-document.querySelector("fieldset#attributes").addEventListener("input", () => {
-    processAttributes("#attributes");
-});
+setupInputListener("#customize", codeTemplate1);
+setupInputListener("#attributes", codeTemplate2);
 
-function processCustomize(selector) {
-    const fieldset = document.querySelector("fieldset"+selector);
+function setupInputListener(selector, templateFunction) {
+    document.querySelector(selector).addEventListener("input", () => {
+        handleInput(selector, templateFunction);
+    });
+}
+
+function handleInput(selector, templateFunction) {
+    templateFunction(selector);
+}
+
+function codeTemplate1(selector) {
+    const fieldset = document.querySelector("fieldset" + selector);
+    
     const hue = fieldset.querySelector("#hue").value;
     const sat = fieldset.querySelector("#sat").value;
     const lig = fieldset.querySelector("#lig").value;
@@ -14,7 +21,7 @@ function processCustomize(selector) {
     const contentWidth = fieldset.querySelector("#content-width").value;
     const borderRadius = fieldset.querySelector("#border-radius").value;
 
-    document.querySelector("fieldset#customize code-block").innerHTML = `:root {
+    document.querySelector(`fieldset${selector} code-block`).innerHTML = `:root {
     --pp-hue: ${hue};
     --pp-sat: ${sat};
     --pp-lig: ${lig};
@@ -24,15 +31,16 @@ function processCustomize(selector) {
 }`;
 }
 
-function processAttributes(selector) {
-    const fieldset = document.querySelector("fieldset"+selector);
+function codeTemplate2(selector) {
+    const fieldset = document.querySelector("fieldset" + selector);
+    
     const variation = fieldset.querySelector("#variation").value;
     const position = fieldset.querySelector("#position").value;
     const title = fieldset.querySelector("#title").value;
     const thumb = fieldset.querySelector("#thumb").value;
     const src = fieldset.querySelector("#src").value;
     
-    document.querySelector("fieldset#attributes code-block").innerHTML = `&lt;podcast-player 
+    document.querySelector(`fieldset${selector} code-block`).innerHTML = `&lt;podcast-player 
     data-title="${title || "…"}"
     data-thumb="${thumb || "…"}"
     data-position="${position || ""}"
