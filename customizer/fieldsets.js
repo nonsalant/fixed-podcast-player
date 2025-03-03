@@ -3,12 +3,8 @@ setupInputListener("#attributes", codeTemplate2);
 
 function setupInputListener(selector, templateFunction) {
     document.querySelector(selector).addEventListener("input", () => {
-        handleInput(selector, templateFunction);
+        templateFunction(selector);
     });
-}
-
-function handleInput(selector, templateFunction) {
-    templateFunction(selector);
 }
 
 function codeTemplate1(selector) {
