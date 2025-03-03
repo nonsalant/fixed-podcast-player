@@ -12,7 +12,9 @@
     // Load customizer scripts (css files are inside the HTML)
     const localScripts = [
         "./fieldsets.js",
-        "./color-picker.js"
+        "./_global-this.js",
+        "./_global-this-color-picker.js",
+        "./color-picker.js",
     ];
     await Promise.all(localScripts.map(src => import(src)));
     

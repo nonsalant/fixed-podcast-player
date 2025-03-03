@@ -1,7 +1,7 @@
-setupInputListener("#customize", codeTemplate1);
-setupInputListener("#attributes", codeTemplate2);
+setupFieldsetListener("#customize", codeTemplate1);
+setupFieldsetListener("#attributes", codeTemplate2);
 
-function setupInputListener(selector, templateFunction) {
+function setupFieldsetListener(selector, templateFunction) {
     document.querySelector(selector).addEventListener("input", () => {
         templateFunction(selector);
     });
@@ -45,4 +45,3 @@ function codeTemplate2(selector) {
     &lt;a class="show-and-play" href="${src || "…"}"&gt;Play&lt;/a&gt;
 &lt;/podcast-player&gt;`;
 }
-

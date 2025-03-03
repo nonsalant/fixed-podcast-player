@@ -1,5 +1,7 @@
-// Custom Element: color-picker
+const setProp = globalThis.customizer.setProp.bind(globalThis.customizer);
+const getProp = globalThis.customizer.getProp.bind(globalThis.customizer);
 
+// Custom Element: color-picker
 class ColorPicker extends HTMLElement {
     constructor() {
         super();
@@ -42,18 +44,25 @@ class ColorPicker extends HTMLElement {
         `;
     }
 }
-
 customElements.define("color-picker", ColorPicker);
 
-function setProp(propName, propValue) {
-    document.documentElement.style.setProperty(propName, propValue);
+// Render a control with a range input connected to a custom property
+function renderRangeCustomProp(id, propName, label, min, max, step, value, unit) {
+    return `
+    <label class="control" for="${id}">
+        <span>${label}</span>
+        <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${value}"
+        oninput="
+            this.nextElementSibling.innerText = this.value+'${unit}';
+            globalThis.customizer.setProp('${propName}', this.value+'${unit}');
+            globalThis.customizer.colorPicker.handleRange();
+        ">
+        <code>${value}${unit}</code>
+    </label>
+    `;
 }
 
-function getProp(propName) {
-    return getComputedStyle(document.documentElement)
-        .getPropertyValue(propName)
-        .trim();
-}
+// Local Helper Functions
 
 function hexToHsl(hex) {
     // Remove '#' if present
@@ -91,59 +100,4 @@ function hexToHsl(hex) {
     }
 
     return { h, s: Math.round(s * 100), l: Math.round(l * 100) };
-}
-
-function hslToHex(h, s, l) {
-    s /= 100;
-    l /= 100;
-
-    let c = (1 - Math.abs(2 * l - 1)) * s;
-    let x = c * (1 - Math.abs((h / 60) % 2 - 1));
-    let m = l - c / 2;
-    let r = 0, g = 0, b = 0;
-
-    if (0 <= h && h < 60) {
-        r = c; g = x; b = 0;
-    } else if (60 <= h && h < 120) {
-        r = x; g = c; b = 0;
-    } else if (120 <= h && h < 180) {
-        r = 0; g = c; b = x;
-    } else if (180 <= h && h < 240) {
-        r = 0; g = x; b = c;
-    } else if (240 <= h && h < 300) {
-        r = x; g = 0; b = c;
-    } else if (300 <= h && h < 360) {
-        r = c; g = 0; b = x;
-    }
-
-    r = Math.round((r + m) * 255).toString(16).padStart(2, '0');
-    g = Math.round((g + m) * 255).toString(16).padStart(2, '0');
-    b = Math.round((b + m) * 255).toString(16).padStart(2, '0');
-
-    return `#${r}${g}${b}`;
-}
-globalThis.colorPicker_hslToHex = hslToHex;
-
-function renderRangeCustomProp(id, propName, label, min, max, step, value, unit) {
-    return `
-    <label class="control" for="${id}">
-        <span>${label}</span>
-        <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${value}"
-            oninput="
-                this.nextElementSibling.innerText = this.value+'${unit}';
-                document.documentElement.style.setProperty('${propName}', this.value+'${unit}');
-
-                const hex = globalThis.colorPicker_hslToHex(
-                    document.documentElement.style.getPropertyValue('--pp-hue').replace(/deg$/, ''),
-                    document.documentElement.style.getPropertyValue('--pp-sat').replace(/%$/, ''),
-                    document.documentElement.style.getPropertyValue('--pp-lig').replace(/%$/, '')
-                );
-
-                document.documentElement.style.setProperty('--pp-color', hex);
-                document.getElementById('color-picker').value = hex;
-            "
-        >
-        <code>${value}${unit}</code>
-    </label>
-    `;
 }

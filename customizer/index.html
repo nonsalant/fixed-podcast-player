@@ -26,27 +26,24 @@
     <label for="gradient-difference">
         <span>Gradient hue difference<br> (for player background)</span>
         <input type="range" id="gradient-difference" min="0" max="360" step="1" value="15"
-        oninput="document.documentElement.style.setProperty('--pp-gradient-hue-difference', this.value + 'deg');
-        this.nextElementSibling.innerText = this.value + 'deg';">
+        oninput="globalThis.customizer.setupPropListener(this, '--pp-gradient-hue-difference', 'deg');">
         <code>15deg</code>
     </label>
 
     <label for="content-width">
         <span>Player max-width<br> (on large screens)</span>
         <input type="range" id="content-width" min="200" max="2000" step="1" value="640"
-        oninput="document.documentElement.style.setProperty('--pp-content-width', this.value + 'px');
-        this.nextElementSibling.innerText = this.value + 'px';">
+        oninput="globalThis.customizer.setupPropListener(this, '--pp-content-width', 'px');">
         <code>640px</code>
     </label>
 
     <label for="border-radius">
         <span>Player border radius</span>
         <input type="range" id="border-radius" min="0" max="50" step="1" value="24"
-        oninput="document.documentElement.style.setProperty('--pp-radius', this.value + 'px');
-        this.nextElementSibling.innerText = this.value + 'px';">
+        oninput="globalThis.customizer.setupPropListener(this, '--pp-radius', 'px');">
         <code>24px</code>
     </label>
-
+this
     <section>
         <h3>overrides.css</h3>
         <copy-to-clipboard>
@@ -73,9 +70,7 @@
     <label for="variation">
         <span>Variation</span>
         <select id="variation" 
-            onchange="el = document.querySelector('podcast-player');
-            el.setAttribute('data-variation', this.value);
-            el.shadowRoot.querySelector('.podcast-player').setAttribute('data-variation', this.value);">
+        oninput="globalThis.customizer.setupAttListener(this, 'data-variation');">
             <option value="floating">Floating on large screens</option>
             <option value="">Fixed to the bottom or top on all screens</option>
         </select>
@@ -84,46 +79,33 @@
     <label for="position">
         <span>Default position</span>
         <select id="position" 
-            onchange="el = document.querySelector('podcast-player');
-            el.setAttribute('data-position', this.value);
-            el.shadowRoot.querySelector('.podcast-player').setAttribute('data-position', this.value);">
+        oninput="globalThis.customizer.setupAttListener(this, 'data-position');">
             <option value="bottom">Bottom of screen</option>
             <option value="top">Top of screen</option>
         </select>
     </label>
 
     <h3>Content</h3>
+
     <label for="title">
         <span>Episode title</span>
         <input id="title" 
-            value="A closer look at ironweeds, or Vernonia, with Mt. Cuba&#39;s Sam Hoadley"
-            oninput="currentPlayer = document.querySelector('podcast-player');
-                currentPlayer.setAttribute('data-title', this.value);
-                currentPlayer.shadowRoot.querySelector('.podcast-player').setAttribute('data-title', this.value);
-                currentPlayer.shadowRoot.querySelector('h3').setAttribute('title', this.value);
-                currentPlayer.shadowRoot.querySelector('h3').innerText = this.value;
-        ">
+        value="A closer look at ironweeds, or Vernonia, with Mt. Cuba&#39;s Sam Hoadley"
+        oninput="globalThis.customizer.setupContentListener(this, 'titleTemplate');">
     </label>
+
     <label for="thumb">
         <span>Thumbnail URL</span>
         <input id="thumb" 
-            value="https://picsum.photos/200"
-            oninput="currentPlayer = document.querySelector('podcast-player');
-                currentPlayer.setAttribute('data-thumb', this.value);
-                currentPlayer.shadowRoot.querySelector('.podcast-player').setAttribute('data-thumb', this.value);
-                currentPlayer.shadowRoot.querySelector('header').style.backgroundImage = `url(${this.value})`;
-        ">
+        value="https://picsum.photos/200"
+        oninput="globalThis.customizer.setupContentListener(this, 'thumbTemplate');">
     </label>
+
     <label for="src">
         <span>Audio URL</span>
         <input id="src" 
-            value="https://robinhoodradioondemand.com/podcast-player/40982/fat-houseplants-with-ken-druse-a-way-to-garden-with-margaret-roach-march-3-2025.mp3"
-            oninput="currentPlayer = document.querySelector('podcast-player');
-                // console.log(currentPlayer2.getAttribute('data-thumb'));
-                currentPlayer.shadowRoot.querySelector('.podcast-player').setAttribute('data-src', this.value);
-                currentPlayer.shadowRoot.querySelector('audio').src = this.value;
-                currentPlayer.shadowRoot.querySelector('a')?.setAttribute('href', this.value);
-        ">
+        value="https://robinhoodradioondemand.com/podcast-player/40982/fat-houseplants-with-ken-druse-a-way-to-garden-with-margaret-roach-march-3-2025.mp3"
+        oninput="globalThis.customizer.setupContentListener(this, 'srcTemplate');">
     </label>
 
     <section>
