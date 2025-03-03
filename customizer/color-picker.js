@@ -30,16 +30,17 @@ class ColorPicker extends HTMLElement {
 
     setColor() {
         setProp(this.propName, this.picker.value);
+        
         const hsl = hexToHsl(this.picker.value);
         setProp(this.hue, hsl.h + "deg");
         setProp(this.sat, hsl.s + "%");
         setProp(this.lig, hsl.l + "%");
-        // console.log(hsl);
+
         this.querySelector("output").innerHTML = `
         <ul>
-            <li>${renderRangeCustomProp('hue', '--pp-hue', 'hue',        0, 360, 1, 205, 'deg')}</li>
-            <li>${renderRangeCustomProp('sat', '--pp-sat', 'saturation', 0, 100, 1, 35, '%')}</li>
-            <li>${renderRangeCustomProp('lig', '--pp-lig', 'lightness',  0, 100, 1, 40, '%')}</li>
+            <li>${renderRangeCustomProp('hue', '--pp-hue', 'hue',        0, 360, 1, hsl.h, 'deg')}</li>
+            <li>${renderRangeCustomProp('sat', '--pp-sat', 'saturation', 0, 100, 1, hsl.s, '%')}</li>
+            <li>${renderRangeCustomProp('lig', '--pp-lig', 'lightness',  0, 100, 1, hsl.l, '%')}</li>
         </ul>
         `;
     }
