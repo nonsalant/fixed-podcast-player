@@ -1,3 +1,10 @@
+document.getElementById('customizer-link').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.startViewTransition(() => {
+        window.location.href = event.target.href;
+    });
+});
+
 (async () => {
     const scriptTag = document.getElementById("customizer-script");
     const urlParams = new URLSearchParams(window.location.search);
@@ -37,8 +44,7 @@
         el.dispatchEvent(new Event("input", { bubbles: true }));
     });
     /*  e.g: oninput="new globalThis.customizer.setupContentListener(this, 'data-variation');"
-    becomes: oninput="const pp = document.querySelector('podcast-player');
-            pp.setAttribute('data-variation', this.value);
+    becomes: oninput="const pp=document.querySelector('podcast-player'); pp.setAttribute('data-variation', this.value);
             pp.shadowRoot.querySelector('.podcast-player').setAttribute('data-variation', this.value);"
     */
     
