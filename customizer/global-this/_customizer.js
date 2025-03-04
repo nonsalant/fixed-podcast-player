@@ -17,54 +17,57 @@ globalThis.customizer.setupContentListener = class {
     constructor(el, attName) {
         const kebabToCamel = (str) => str.replace(/-./g, (match) => match.charAt(1).toUpperCase());
         const methodName = kebabToCamel(attName);
-        const simpleOptionAtts = ["data-variation", "data-position"];
-        const isSimple = simpleOptionAtts.includes(attName);
+        const attsOnDiv = ["data-variation", "data-position"];
+        const isAttOnDiv = attsOnDiv.includes(attName);
 
-        if (isSimple) {
-            new.target.setupAttListener(el, attName);
-        }
-        else {
-            new.target[methodName](el, attName);
-        }
+        this.commonCode = this.minDom + this.setMainAtt(attName);
+        
+        if (isAttOnDiv) { this.attributeOnDiv(el, attName); }
+        else { this[methodName](el, attName); }
     }
 
-    static commonCode(attName) {
-        return `
-            const pp = document.querySelector('podcast-player');
-            const $ = (sel) => pp.shadowRoot.querySelector(sel);
-            pp.setAttribute('${attName}', this.value);
-        `;
-    }
+    // Render fns for inline handlers (`oninput` attribute)
 
-    static setupAttListener(el, attName) {
-        el.setAttribute("oninput", this.commonCode(attName) + `
-            const div = $('.podcast-player');
-            div.setAttribute('${attName}', this.value);
+    attributeOnDiv(el, attName) {
+        el.setAttribute("oninput",  `
+            ${this.commonCode}
+            $('.podcast-player').attr('${attName}', this.value);
         `);
     }
 
-    static dataTitle(el, attName) {
-        el.setAttribute("oninput", this.commonCode(attName) + `
-            const h3 = $('h3');
-            h3.setAttribute('title', this.value);
-            h3.innerText = this.value;
+    dataTitle(el, attName) {
+        el.setAttribute("oninput",  `
+            ${this.commonCode}
+            $('h3').attr('title', this.value);
+            $('h3').innerText = this.value;
         `);
     }
 
-    static dataThumb(el, attName) {
-        el.setAttribute("oninput", this.commonCode(attName) + `
-            const header = $('header');
-            header.style.backgroundImage = 'url('+this.value+')';
+    dataThumb(el, attName) {
+        el.setAttribute("oninput",  `
+            ${this.commonCode}
+            $('header').style.backgroundImage = 'url('+this.value+')';
         `);
     }
 
-    static dataSrc(el, attName) {
-        el.setAttribute("oninput", this.commonCode(attName) + `
-            const audio = $('audio');
-            const a = $('a');
-            audio.src = this.value;
-            a?.setAttribute('href', this.value);
+    dataSrc(el, attName) {
+        el.setAttribute("oninput",  `
+            ${this.commonCode}
+            $('audio').src = this.value;
+            $('a')?.attr('href', this.value);
         `);
     }
-    
+
+    minDom = `
+        const pp = document.querySelector('podcast-player');
+        const $ = (sel) => pp.shadowRoot.querySelector(sel);
+        Element.prototype.attr = function(name, value) {
+            // define .attr() for getting and setting attributes
+            return value === undefined
+            ? this.getAttribute(name)
+            : this.setAttribute(name, value);
+        };
+    `;
+
+    setMainAtt(attName) { `pp.attr('${attName}', this.value);`; }
 }
