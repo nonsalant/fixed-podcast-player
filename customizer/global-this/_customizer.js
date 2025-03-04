@@ -28,46 +28,40 @@ globalThis.customizer.setupContentListener = class {
 
     // Render fns for inline handlers (`oninput` attribute)
 
-    attributeOnDiv(el, attName) {
-        el.setAttribute("oninput",  `
-            ${this.commonCode}
-            $('.podcast-player').attr('${attName}', this.value);
-        `);
-    }
+    attributeOnDiv(el, attName) {el.setAttribute("oninput",`
+        ${this.commonCode}
+        $('.podcast-player').setAttribute('${attName}', value);
+    `);}
 
-    dataTitle(el, attName) {
-        el.setAttribute("oninput",  `
-            ${this.commonCode}
-            $('h3').attr('title', this.value);
-            $('h3').innerText = this.value;
-        `);
-    }
+    dataTitle(el, attName) {el.setAttribute("oninput", `
+        ${this.commonCode}
+        $('h3').setAttribute('title', value);
+        $('h3').innerText = value;
+    `)}
 
-    dataThumb(el, attName) {
-        el.setAttribute("oninput",  `
-            ${this.commonCode}
-            $('header').style.backgroundImage = 'url('+this.value+')';
-        `);
-    }
+    dataThumb(el, attName) {el.setAttribute("oninput", `
+        ${this.commonCode}
+        $('header').style.backgroundImage = 'url('+value+')';
+    `)}
 
-    dataSrc(el, attName) {
-        el.setAttribute("oninput",  `
-            ${this.commonCode}
-            $('audio').src = this.value;
-            $('a')?.attr('href', this.value);
-        `);
-    }
+    dataSrc(el, attName) {el.setAttribute("oninput", `
+        ${this.commonCode}
+        $('audio').src = value;
+        $('a')?.setAttribute('href', value);
+    `)}
 
     minDom = `
         const pp = document.querySelector('podcast-player');
         const $ = (sel) => pp.shadowRoot.querySelector(sel);
-        Element.prototype.attr = function(name, value) {
+        Element.prototype.attr = function(name, val) {
             // define .attr() for getting and setting attributes
-            return value === undefined
+            return val === undefined
             ? this.getAttribute(name)
-            : this.setAttribute(name, value);
+            : this.setAttribute(name, val);
         };
     `;
 
-    setMainAtt(attName) { `pp.attr('${attName}', this.value);`; }
+    setMainAtt(attName) { return `
+        pp.attr('${attName}', value);
+    `}
 }
