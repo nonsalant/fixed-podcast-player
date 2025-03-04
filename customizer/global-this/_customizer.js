@@ -31,7 +31,7 @@ globalThis.customizer.setupContentListener = class {
     static commonCode(attName) {
         return `
             const pp = document.querySelector('podcast-player');
-            const $ = (sel) => pp.shadow.querySelector(sel);
+            const $ = (sel) => pp.shadowRoot.querySelector(sel);
             pp.setAttribute('${attName}', this.value);
         `;
     }
