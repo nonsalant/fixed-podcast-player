@@ -3,6 +3,8 @@ globalThis.customizer = globalThis.customizer ?? {};
 globalThis.customizer.setProp = function(propName, propValue) { document.documentElement.style.setProperty(propName, propValue); }
 globalThis.customizer.getProp = function(propName) { return getComputedStyle(document.documentElement).getPropertyValue(propName).trim(); }
 
+// Render fns for inline handlers (`oninput` attribute)
+
 /* used in customizer/customizer.html */
 globalThis.customizer.setupPropListener = function(el, propName, unit) {
     el.setAttribute ("oninput", `
@@ -13,55 +15,50 @@ globalThis.customizer.setupPropListener = function(el, propName, unit) {
 
 /* used in customizer/customizer.html */
 globalThis.customizer.setupContentListener = class {
-
+    
     constructor(el, attName) {
-        const kebabToCamel = (str) => str.replace(/-./g, (match) => match.charAt(1).toUpperCase());
-        const methodName = kebabToCamel(attName);
+        const methodName = this.kebabToCamel(attName);
         const attsOnDiv = ["data-variation", "data-position"];
         const isAttOnDiv = attsOnDiv.includes(attName);
 
         this.commonCode = this.minDom + this.setMainAtt(attName);
         
         if (isAttOnDiv) { this.attributeOnDiv(el, attName); }
-        else { this[methodName](el, attName); }
+        else { this["_"+methodName](el, attName); }
     }
 
-    // Render fns for inline handlers (`oninput` attribute)
-
-    attributeOnDiv(el, attName) {el.setAttribute("oninput",`
+    _dataTitle(el) {el.setAttribute("oninput", `
         ${this.commonCode}
-        $('.podcast-player').setAttribute('${attName}', value);
-    `);}
-
-    dataTitle(el, attName) {el.setAttribute("oninput", `
-        ${this.commonCode}
-        $('h3').setAttribute('title', value);
+        $('h3').title = value;
         $('h3').innerText = value;
     `)}
 
-    dataThumb(el, attName) {el.setAttribute("oninput", `
+    _dataThumb(el) {el.setAttribute("oninput", `
         ${this.commonCode}
         $('header').style.backgroundImage = 'url('+value+')';
     `)}
 
-    dataSrc(el, attName) {el.setAttribute("oninput", `
+    _dataSrc(el) {el.setAttribute("oninput", `
         ${this.commonCode}
         $('audio').src = value;
-        $('a')?.setAttribute('href', value);
+        lightDom('a')?.setAttribute('href', value);
     `)}
 
+    attributeOnDiv(el, attName) {el.setAttribute("oninput",`
+        ${this.commonCode}
+        $('.podcast-player').setAttribute('${attName}', value);
+    `)}
+    
     minDom = `
         const pp = document.querySelector('podcast-player');
+        const lightDom = (sel) => pp.querySelector(sel);
         const $ = (sel) => pp.shadowRoot.querySelector(sel);
-        Element.prototype.attr = function(name, val) {
-            // define .attr() for getting and setting attributes
-            return val === undefined
-            ? this.getAttribute(name)
-            : this.setAttribute(name, val);
-        };
     `;
 
     setMainAtt(attName) { return `
-        pp.attr('${attName}', value);
+        pp.setAttribute('${attName}', value);
     `}
+
+    kebabToCamel(str) { return str.replace(/-./g, (match) => match.charAt(1).toUpperCase()); }
+
 }
