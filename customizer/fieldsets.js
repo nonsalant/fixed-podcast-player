@@ -1,3 +1,8 @@
+globalThis.customizer = globalThis.customizer ?? {};
+
+globalThis.customizer.setProp = function(propName, propValue) { document.documentElement.style.setProperty(propName, propValue); }
+globalThis.customizer.getProp = function (propName) { return getComputedStyle(document.documentElement).getPropertyValue(propName).trim(); }
+
 setupFieldsetListener("#customize", codeTemplate1);
 setupFieldsetListener("#attributes", codeTemplate2);
 
@@ -10,12 +15,12 @@ function setupFieldsetListener(selector, templateFunction) {
 function codeTemplate1(selector) {
     const fieldset = document.querySelector("fieldset" + selector);
     
-    const hue = fieldset.querySelector("#hue").value;
-    const sat = fieldset.querySelector("#sat").value;
-    const lig = fieldset.querySelector("#lig").value;
-    const gradientDifference = fieldset.querySelector("#gradient-difference").value;
-    const contentWidth = fieldset.querySelector("#content-width").value;
-    const borderRadius = fieldset.querySelector("#border-radius").value;
+    const hue = globalThis.customizer.getProp("--pp-hue");
+    const sat = globalThis.customizer.getProp("--pp-sat");
+    const lig = globalThis.customizer.getProp("--pp-lig");
+    const gradientDifference = globalThis.customizer.getProp("--pp-gradient-hue-difference");
+    const contentWidth = globalThis.customizer.getProp("--pp-content-width");
+    const borderRadius = globalThis.customizer.getProp("--pp-radius");
 
     document.querySelector(`fieldset${selector} code-block`).innerHTML = `:root {
     --pp-hue: ${hue};
