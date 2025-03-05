@@ -13,7 +13,7 @@ function setupFieldsetListener(selector, templateFunction) {
 }
 
 function codeTemplate1(selector) {
-    const fieldset = document.querySelector("fieldset" + selector);
+    // const fieldset = document.querySelector("fieldset" + selector);
     
     const hue = globalThis.customizer.getProp("--pp-hue");
     const sat = globalThis.customizer.getProp("--pp-sat");
