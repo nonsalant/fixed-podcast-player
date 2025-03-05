@@ -43,6 +43,7 @@ fieldset {
         grid-template-columns: auto 1fr 5rem;
         width: 100%;
         min-width: 250px;
+        @media (width < 500px ) { grid-template-columns: 1fr; }
     }
     & > label {
         @media (width < 600px ) { grid-template-columns: 1fr; }
