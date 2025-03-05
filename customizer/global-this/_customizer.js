@@ -17,14 +17,18 @@ globalThis.customizer.setupPropListener = function(el, propName, unit) {
 globalThis.customizer.setupContentListener = class {
     
     constructor(el, attName) {
-        const methodName = this.kebabToCamel(attName);
         const attsOnDiv = ["data-variation", "data-position"];
         const isAttOnDiv = attsOnDiv.includes(attName);
 
         this.commonCode = this.minDom + this.setMainAtt(attName);
         
-        if (isAttOnDiv) { this.attributeOnDiv(el, attName); }
-        else { this["_"+methodName](el, attName); }
+        if (isAttOnDiv) { 
+            this.attributeOnDiv(el, attName); 
+        }
+        else {
+            const methodName = this.kebabToCamel(attName);
+            this["_"+methodName](el, attName);
+        }
     }
 
     _dataTitle(el) {el.setAttribute("oninput", `
