@@ -1,7 +1,7 @@
-globalThis.customizer = globalThis.customizer ?? {};
+// globalThis.customizer = globalThis.customizer ?? {};
 
-globalThis.customizer.setProp = function(propName, propValue) { document.documentElement.style.setProperty(propName, propValue); }
-globalThis.customizer.getProp = function (propName) { return getComputedStyle(document.documentElement).getPropertyValue(propName).trim(); }
+// globalThis.customizer.setProp = function(propName, propValue) { document.documentElement.style.setProperty(propName, propValue); }
+// globalThis.customizer.getProp = function (propName) { return getComputedStyle(document.documentElement).getPropertyValue(propName).trim(); }
 
 setupFieldsetListener("#customize", codeTemplate1);
 setupFieldsetListener("#attributes", codeTemplate2);
