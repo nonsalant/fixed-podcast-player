@@ -9,7 +9,7 @@ document.getElementById("customizer-link").addEventListener("click", function(e)
 // Continue only if the ?customize parameter is present in the URL
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has("customize")) {
-    // Change the link
+    // Change the link (to Close Customizer)
     const link = document.getElementById("customizer-link");
     const url = new URL(window.location); url.searchParams.delete("customize");
     Object.assign(link, { href: url.toString(), textContent: "Close Customizer" });
@@ -25,7 +25,7 @@ async function loadCustomizer() {
     const scriptTag = document.getElementById("customizer-script");
     scriptTag.replaceWith(...container.childNodes);
 
-    // Load customizer scripts
+    // Load Customizer scripts
     await import("./global-this/_customizer.js");
     await import("./fieldsets.js");
     await import("./global-this/_color-picker.js");
