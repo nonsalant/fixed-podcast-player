@@ -7,8 +7,30 @@
     <title>Fixed Podcast Player Demo</title>
     <meta name="description" content="Web Component for an audio player and a Play button. The player is revealed when the button is scrolled into view.">
     <!-- Demo Styles -->
-    <style> :root { color-scheme: light dark; } body { padding: 1lh; background: light-dark(whitesmoke, #111); }
+    <style> *, *:before, *:after { box-sizing: border-box; }
+        :root { color-scheme: light dark; } body { padding: 1lh; background: light-dark(whitesmoke, #111); }
         main { max-width: 55rem; margin-inline: auto; font-family: system-ui; text-wrap: pretty; }
+        a { text-decoration: none; }
+        .callout {
+            padding: .25lh .5lh; 
+            background: orange; 
+            color: #000;
+            max-width: fit-content; 
+            border-radius: .25lh;
+            font-size: 1rem;
+            margin-block:  .5lh;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .point-down {
+            display: inline-block;
+            animation: pointDown 1s ease-in-out 5;
+            font-size: 2rem;
+        }
+        @media not (prefers-reduced-motion: reduce) { @keyframes pointDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }}
     </style>
 
     <!-- Podcast Player Assets (CSS, JS, SVG) -->
@@ -29,10 +51,13 @@
 	    <h2>Web Component for a sticky audio player and its <em>Play</em> button</h2>
         <ul>
             <li>can be closed or moved to the top</li>
-            <li>position, vloume, and playback speed are preserved in <code>localStorage</code></li>
-            <li>styles are fully encapsulated using Declarative Shadow DOM</li>
+            <li>volume and playback speed are preserved in <code>localStorage</code></li>
+            <li>styles are fully encapsulated using using Shadow DOM</li>
         </ul>
-        <p><b>Scroll down 👇</b></p>
+        <p>
+            <a href="#before-player"><b class="callout">Scroll down</b></a>
+            <span class="point-down">👇</span>
+        </p>
     
         <!-- -->
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium explicabo voluptatem quos error itaque illum nihil, optio illo dicta maiores, deleniti nemo aperiam, doloribus nostrum quas reprehenderit exercitationem vitae esse.</p>
@@ -47,35 +72,33 @@
         <p>Cum dignissimos, modi explicabo repellat dolorum quam? Minima molestiae quae dolor doloribus asperiores non sint eum laudantium, fugit fuga vero provident commodi aliquam. Delectus, deserunt aliquid. Molestias ea repellat sapiente.</p>
         <p>Dolorum repellat eligendi praesentium quisquam dignissimos provident aliquid quis? Tenetur cumque quam dicta, exercitationem itaque odio! Consequuntur eligendi voluptatum inventore maiores aliquam cupiditate reiciendis quaerat atque similique, dignissimos nobis voluptatem.</p>
         <p>Sint vitae ipsa optio dolor nulla recusandae accusamus illum! Dolor in asperiores facere blanditiis obcaecati ad, laborum libero veritatis cupiditate pariatur delectus ducimus consectetur deleniti nostrum temporibus voluptatum beatae minus.</p>
-        <p>Nostrum repudiandae at, recusandae neque voluptate explicabo saepe laudantium voluptatem aliquam excepturi blanditiis veniam atque quod iusto dolore debitis voluptates suscipit mollitia minus quidem obcaecati architecto facere. Nisi, laborum ab.</p>
+        <p id="before-player">Nostrum repudiandae at, recusandae neque voluptate explicabo saepe laudantium voluptatem aliquam excepturi blanditiis veniam atque quod iusto dolore debitis voluptates suscipit mollitia minus quidem obcaecati architecto facere. Nisi, laborum ab.</p>
         <!-- -->
-
-        <!-- <podcast-player data-title="A closer look at ironweeds, or Vernonia, with Mt. Cuba&#39;s Sam Hoadley" data-src="https://robinhoodradioondemand.com/podcast-player/40848/ironweeds-with-sam-hoadley-a-way-to-garden-with-margaret-roach-feb-17-2025.mp3" data-thumb="https://awaytogarden.com/wp-content/uploads/2025/02/Fritillary-on-Vernonia-0A6A7837-1920x1012-1-240x180.jpg">
-            <button class="show-and-play" type="button">Play</button>
-        </podcast-player> -->
 
         <podcast-player data-title="A closer look at ironweeds, or Vernonia, with Mt. Cuba&#39;s Sam Hoadley" data-position="bottom" data-variation="floating" show-on="scroll" data-thumb="https://awaytogarden.com/wp-content/uploads/2025/02/Fritillary-on-Vernonia-0A6A7837-1920x1012-1-240x180.jpg">
             <a class="show-and-play" href="https://robinhoodradioondemand.com/podcast-player/40848/ironweeds-with-sam-hoadley-a-way-to-garden-with-margaret-roach-feb-17-2025.mp3">Play</a>
         </podcast-player>
-
-        <!-- <podcast-player data-title="A closer look at ironweeds, or Vernonia, with Mt. Cuba&#39;s Sam Hoadley" data-thumb="https://awaytogarden.com/wp-content/uploads/2025/02/Fritillary-on-Vernonia-0A6A7837-1920x1012-1-240x180.jpg">
-            <a class="show-and-play" href="https://robinhoodradioondemand.com/podcast-player/40848/ironweeds-with-sam-hoadley-a-way-to-garden-with-margaret-roach-feb-17-2025.mp3">
-                <div icon-name="play-circle-solid">Play</div>
-                <div icon-name="pause-circle">Pause</div>
-                <div icon-name="play-circle">Resume</div>
-            </a>
-        </podcast-player> -->
-    
-        <p>Ea corrupti consectetur inventore quibusdam, quisquam odio dolore provident fuga quod odit voluptatibus itaque asperiores facere eos eveniet, facilis nisi quae cumque praesentium esse sunt, quia dolorum sint laborum. Id?</p>
-        <p>Fuga libero minima minus necessitatibus, illo esse ad soluta distinctio officiis porro voluptatem consectetur recusandae deleniti eaque excepturi dicta quibusdam tempora cumque atque! Fugiat iusto officiis saepe nostrum soluta nesciunt.</p>
-        <p>Tempore totam quo cupiditate, ratione delectus sit eligendi aliquid quidem, velit iste itaque pariatur eius nostrum a dolores culpa voluptatem, minus accusantium asperiores. At nam doloribus est molestiae, provident explicabo?</p>
-        <p>Perspiciatis enim nostrum voluptatum consequatur, vitae earum itaque officiis dolores deleniti molestiae, id necessitatibus nam eius. Nostrum ratione incidunt, eaque provident accusamus earum, omnis velit similique nobis, eos vel nesciunt?</p>
-        <p>Illo facere recusandae ducimus maxime! Molestias ducimus asperiores vitae officia iure beatae praesentium expedita dolor repellat nisi, quibusdam fugit odio, obcaecati accusamus perferendis quaerat sit, dicta neque modi voluptatem porro?</p>
-        <p>Reprehenderit obcaecati vitae maxime illo in suscipit quo a molestiae veniam iusto eveniet temporibus, ullam nisi sit hic quas doloremque? Quam nam sed ab adipisci blanditiis perspiciatis fugiat beatae quod!</p>
+        
+        <!-- -->
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium explicabo voluptatem quos error itaque illum nihil, optio illo dicta maiores, deleniti nemo aperiam, doloribus nostrum quas reprehenderit exercitationem vitae esse.</p>
+        <p>Atque voluptates optio eaque sed asperiores delectus corrupti voluptas architecto recusandae quis perspiciatis ratione dignissimos cum praesentium, placeat est ea pariatur. Odio aspernatur quas blanditiis quia repellendus voluptatem totam harum?</p>
+        <p>Quas voluptatum beatae ullam nihil aspernatur debitis suscipit culpa sed molestias eius ipsum libero vitae incidunt consequatur architecto, fugit odio repudiandae rem? Libero, mollitia ipsam ducimus necessitatibus atque aliquam dicta.</p>
+        <p>Quos quaerat, esse quo architecto atque quasi ut blanditiis inventore alias harum nobis provident, dolorum odio odit aliquid itaque doloremque perspiciatis numquam qui, quae eaque delectus fugit aperiam. Voluptate, quaerat.</p>
+        <p>Eius amet, nulla, animi tenetur deleniti illum quod blanditiis iure repellat consectetur aperiam. Eligendi quos aperiam ex deleniti tenetur nulla molestiae magnam quasi fugit, voluptatem ut veritatis quia reiciendis mollitia!</p>
+        <p>Ut quos commodi explicabo praesentium quaerat modi cumque facilis hic at quam sunt voluptatum ipsa corporis necessitatibus eius minus nostrum, aperiam atque nobis excepturi sapiente quae tenetur officiis dolorem? Illo.</p>
+        <p>Iste atque tempora eligendi dicta commodi cum quis laboriosam aut culpa libero, debitis, doloremque laborum et excepturi mollitia optio tenetur nemo nulla quod! Ipsum repellat, provident earum beatae dolore assumenda.</p>
+        <p>Adipisci culpa laudantium est nostrum reprehenderit quaerat, sed hic accusantium! Aliquam, ut! Aut a optio fugiat provident accusamus, illo quibusdam hic fuga cupiditate porro amet, error soluta, corrupti natus architecto!</p>
+        <p>Temporibus possimus ipsa sit nihil sunt sint architecto placeat dolorum voluptates consequatur, dolore aperiam voluptatibus deserunt neque, aut eius laboriosam nulla et. Illum, facilis quasi omnis placeat quisquam necessitatibus quo.</p>
+        <p>Cum dignissimos, modi explicabo repellat dolorum quam? Minima molestiae quae dolor doloribus asperiores non sint eum laudantium, fugit fuga vero provident commodi aliquam. Delectus, deserunt aliquid. Molestias ea repellat sapiente.</p>
+        <p>Dolorum repellat eligendi praesentium quisquam dignissimos provident aliquid quis? Tenetur cumque quam dicta, exercitationem itaque odio! Consequuntur eligendi voluptatum inventore maiores aliquam cupiditate reiciendis quaerat atque similique, dignissimos nobis voluptatem.</p>
+        <p>Sint vitae ipsa optio dolor nulla recusandae accusamus illum! Dolor in asperiores facere blanditiis obcaecati ad, laborum libero veritatis cupiditate pariatur delectus ducimus consectetur deleniti nostrum temporibus voluptatum beatae minus.</p>
+        <p id="before-player">Nostrum repudiandae at, recusandae neque voluptate explicabo saepe laudantium voluptatem aliquam excepturi blanditiis veniam atque quod iusto dolore debitis voluptates suscipit mollitia minus quidem obcaecati architecto facere. Nisi, laborum ab.</p>
+        <!-- -->
 
         <hr>
+
         <p><a href="https://github.com/nonsalant/fixed-podcast-player/">View GitHub repo</a></p>
-        <p><a href="https://codepen.io/nonsalant/pen/pvoyRmZ" target="_blank">View on CodePen</a></p>
+
     </main>
 </body>
 </html>
