@@ -5,7 +5,7 @@
 Web Component for a sticky audio player and its *Play* button.
 
 ## Demo
-- **[Demo](https://fixed-podcast-player.netlify.app/)**
+- **[fixed-podcast-player.netlify.app](https://fixed-podcast-player.netlify.app/)**
 
 ## Usage
 
