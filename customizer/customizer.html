@@ -1,5 +1,5 @@
 <!-- code-block  CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/vs.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/vs.min.css"> -->
 
 <!-- fieldset styles -->
 <link rel="stylesheet" href="./customizer/fieldset.css">
@@ -29,14 +29,12 @@
         oninput="globalThis.customizer.setupPropListener(this, '--pp-gradient-hue-difference', 'deg');">
         <code>15deg</code>
     </label>
-
     <label for="content-width">
         <span>Player max-width<br> (on large screens)</span>
         <input type="range" id="content-width" min="200" max="2000" step="1" value="640"
         oninput="globalThis.customizer.setupPropListener(this, '--pp-content-width', 'px');">
         <code>640px</code>
     </label>
-
     <label for="border-radius">
         <span>Player border radius</span>
         <input type="range" id="border-radius" min="0" max="50" step="1" value="24"
@@ -66,7 +64,6 @@
     <legend>⚙️ Attributes &amp; Content</legend>
 
     <h3>Attributes</h3>
-
     <label for="variation">
         <span>Variation</span>
         <select id="variation" 
@@ -75,7 +72,6 @@
             <option value="">Fixed to the bottom or top on all screens</option>
         </select>
     </label>
-
     <label for="position">
         <span>Default position</span>
         <select id="position" 
@@ -86,21 +82,18 @@
     </label>
 
     <h3>Content</h3>
-
     <label for="title">
         <span>Episode title</span>
         <input id="title" 
         value="A closer look at ironweeds, or Vernonia, with Mt. Cuba&#39;s Sam Hoadley"
         oninput="new globalThis.customizer.setupContentListener(this, 'data-title');">
     </label>
-
     <label for="thumb">
         <span>Thumbnail URL</span>
         <input id="thumb" 
         value="https://picsum.photos/200"
         oninput="new globalThis.customizer.setupContentListener(this, 'data-thumb');">
     </label>
-
     <label for="src">
         <span>Audio URL</span>
         <input id="src" 
@@ -112,9 +105,9 @@
         <h3>index.html</h3>
         <copy-to-clipboard>
             <code-block language="html">
-                <pre><code>&lt;podcast-player data-title="…" data-thumb="…" data-variation="floating"&gt;
-    &lt;a class="show-and-play" href="…"&gt;Play&lt;/a&gt;
-&lt;/podcast-player&gt;</code></pre>
+                <pre><code>&lt;podcast-player data-title="…" data-thumb="…" data-variation="floating">
+                    &lt;a class="show-and-play" href="…">Play</a>
+                </podcast-player></code></pre>
             </code-block>
         </copy-to-clipboard>
     </section>

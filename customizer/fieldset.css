@@ -27,13 +27,12 @@ fieldset {
         white-space: pre-wrap;
         word-wrap: break-word;
     }
-    code-block {
-        /* ! this didn't work here: white-space: pre-wrap; word-wrap: break-word; */
+    /* code-block {
         max-width: 100%;
         display: block;
         overflow-x: auto;
         button { margin-block-start: 2em; }
-    }
+    } */
 
     & > label,
     .control { 

@@ -33,13 +33,13 @@ function renderHeader(thumb) {
 function renderFooter(svgBase) {
     return `
         <footer class="flex space-between">
-            <button title="Close player" class="invert | podcast-icon circle-small icon-close" id="icon-close">
-                <svg style="width: 1.5rem; height: 1.5rem; scale: .75;">
+            <button aria-label="Close player" type="button" class="invert | podcast-icon circle-small icon-close" id="icon-close">
+                <svg style="width: 1.5rem; height: 1.5rem;">
                     <use href="${svgBase}#close-icon"></use>
                 </svg>
             </button>
-            <button title="Change position" type="button" class="invert | podcast-icon circle-small icon-move">
-                <svg style="height:1.5rem; width:1.5rem; scale: .6;">
+            <button aria-label="Change position" type="button" class="invert | podcast-icon circle-small icon-move">
+                <svg style="height: 1.5rem; width: 1.5rem; scale: .75">
                     <use href="${svgBase}#move-icon"></use>
                 </svg>
             </button>
@@ -79,7 +79,7 @@ function renderMain(title, totalTime, svgBase) {
                     </div>
                 </button>
                 <div id="time-display-current" class="controls-surface flex">
-                    <time>00:00</time>
+                    <time aria-label="Current time">00:00</time>
                     <button type="button" title="Share with current timestamp" style="color: hsl(var(--clr-hue) var(--clr-sat) 12.5% / 100%); border-radius: 8px;" class="share-button | ghost icon-button">
                         <div class="bg-icon" style="background-image: url(${svgBase}#share-icon);">
                             <span class="visually-hidden">Share</span>
@@ -90,7 +90,9 @@ function renderMain(title, totalTime, svgBase) {
                     <span class="visually-hidden">Seek Bar</span>
                     <input type="range" id="scrubber" min="0" max="0" value="0">
                 </label>
-                <div id="time-display-end" class="controls-surface mr-small"><time>${totalTime || ' --&thinsp;:&thinsp;-- '}</time></div>
+                <div id="time-display-end" class="controls-surface mr-small">
+                    <time aria-label="Duration">${totalTime || ' --&thinsp;:&thinsp;-- '}</time>
+                </div>
             </section>
             <section>
                 <h3 class="audio-title" title="${title}">${title}</h3>

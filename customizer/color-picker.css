@@ -18,7 +18,7 @@ color-picker {
         padding: 0px;
         border-width: 3px;
         border-style: solid;
-        border-color rgb(220,220,220);
+        border-color: rgb(220,220,220);
     }
     #color-picker[type=color]::-webkit-color-swatch-wrapper { padding: 0px; }
     #color-picker[type=color]::-webkit-color-swatch { border-radius: 50%; }

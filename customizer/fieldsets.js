@@ -41,7 +41,7 @@ function codeTemplate2(selector) {
     const thumb = fieldset.querySelector("#thumb").value;
     const src = fieldset.querySelector("#src").value;
 
-    document.querySelector(`fieldset${selector} code-block`).innerHTML = `&lt;podcast-player data-title="${title || '…'}"  data-position="${position || ''}"  data-variation="${variation || ''}"  data-thumb="${thumb || '…'}"&gt;
-    &lt;a class="show-and-play" href="${src || "…"}"&gt;Play&lt;/a&gt;
-&lt;/podcast-player&gt;`;
+//     document.querySelector(`fieldset${selector} code-block`).innerHTML = `&lt;podcast-player data-title="${title || '…'}"  data-position="${position || ''}"  data-variation="${variation || ''}"  data-thumb="${thumb || '…'}"&gt;
+//     &lt;a class="show-and-play" href="${src || "…"}"&gt;Play&lt;/a&gt;
+// &lt;/podcast-player&gt;`;
 }
